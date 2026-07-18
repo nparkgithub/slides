@@ -448,50 +448,108 @@
             </section>
 
             <!-- Inference pipeline -->
-    <!-- Inference pipeline -->
+<!-- Inference pipeline -->
 <section>
     <h3>The Inference Pipeline at a Glance</h3>
 
-    <div class="pipeline" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px;">
+    <div style="
+        display:grid;
+        grid-template-columns: 280px 80px 280px;
+        grid-row-gap:35px;
+        grid-column-gap:25px;
+        justify-content:center;
+        align-items:center;
+        margin-top:40px;
+    ">
 
+        <!-- Row 1 -->
         <div class="pipe-box sys2 fragment"
-             style="min-width:180px; padding:14px 18px; white-space:nowrap;">
+             style="width:280px;height:90px;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    font-size:28px;
+                    text-align:center;
+                    padding:10px;
+                    box-sizing:border-box;">
             Camera Input
         </div>
 
-        <div class="pipe-arrow fragment">&rarr;</div>
+        <div class="pipe-arrow fragment"
+             style="font-size:60px;text-align:center;">
+            →
+        </div>
 
         <div class="pipe-box sys2 fragment"
-             style="min-width:180px; padding:14px 18px; white-space:nowrap;">
+             style="width:280px;height:90px;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    font-size:28px;
+                    text-align:center;
+                    padding:10px;
+                    box-sizing:border-box;">
             Language Instruction
         </div>
 
-        <div class="pipe-arrow fragment">&rarr;</div>
-
+        <!-- Row 2 -->
         <div class="pipe-box sys2 fragment"
-             style="min-width:180px; padding:14px 18px; white-space:nowrap;">
+             style="width:280px;height:90px;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    font-size:28px;
+                    text-align:center;
+                    padding:10px;
+                    box-sizing:border-box;">
             VLM Encoding
         </div>
 
-        <div class="pipe-arrow fragment">&rarr;</div>
+        <div class="pipe-arrow fragment"
+             style="font-size:60px;text-align:center;">
+            →
+        </div>
 
         <div class="pipe-box sys1 fragment"
-             style="min-width:220px; padding:14px 18px; white-space:nowrap;">
+             style="width:280px;height:90px;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    font-size:28px;
+                    text-align:center;
+                    padding:10px;
+                    box-sizing:border-box;">
             Diffusion Transformer
         </div>
 
-        <div class="pipe-arrow fragment">&rarr;</div>
+        <!-- Row 3 -->
+        <div></div>
+
+        <div class="pipe-arrow fragment"
+             style="font-size:60px;text-align:center;">
+            ↓
+        </div>
 
         <div class="pipe-box fragment"
-             style="min-width:220px; padding:14px 18px; border-color:#2ecc71; white-space:nowrap;">
+             style="width:280px;height:90px;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    font-size:28px;
+                    text-align:center;
+                    padding:10px;
+                    box-sizing:border-box;
+                    border-color:#2ecc71;">
             Joint Command Stream
         </div>
 
     </div>
 
-    <p class="fragment" style="margin-top:30px; font-size:0.7em;">
+    <p class="fragment"
+       style="margin-top:40px;font-size:0.7em;">
         With acceleration (e.g. TensorRT), real-time control at sub-100 ms latency becomes achievable.
     </p>
+
 </section>
 
             <!-- Fine-tuning workflow -->
