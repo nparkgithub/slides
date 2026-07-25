@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,14 +16,19 @@
             bottom: 20px;
             left: 20px;
             z-index: 1000;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             color: white;
         }
-        #demo-controls label { display: block; margin-bottom: 5px; }
+
+        #demo-controls label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
         #demo-controls select {
             width: 150px;
             padding: 5px;
@@ -33,22 +39,73 @@
             color: white;
         }
 
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+        #demo-controls button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 3px;
+            border: 1px solid #555;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
             font-size: 26pt !important;
         }
-        .reveal p, .reveal li, .reveal td, .reveal th, .reveal code, .reveal pre, .reveal ul, .reveal ol, .reveal dl, .reveal dd, .reveal dt {
+
+        .reveal p,
+        .reveal li,
+        .reveal td,
+        .reveal th,
+        .reveal code,
+        .reveal pre,
+        .reveal ul,
+        .reveal ol,
+        .reveal dl,
+        .reveal dd,
+        .reveal dt {
             font-size: 17pt !important;
         }
 
-        .highlight-sky { color: #3498db; }
-        .highlight-green { color: #2ecc71; }
-        .highlight-yellow { color: #f1c40f; }
-        .highlight-red { color: #e74c3c; }
-        .highlight-purple { color: #9b59b6; }
-        .highlight-orange { color: #e67e22; }
+        .highlight-sky {
+            color: #3498db;
+        }
+
+        .highlight-green {
+            color: #2ecc71;
+        }
+
+        .highlight-yellow {
+            color: #f1c40f;
+        }
+
+        .highlight-red {
+            color: #e74c3c;
+        }
+
+        .highlight-purple {
+            color: #9b59b6;
+        }
+
+        .highlight-orange {
+            color: #e67e22;
+        }
 
         /* System 1 / System 2 pipeline styling */
-        .pipeline { display: flex; justify-content: space-around; align-items: center; width: 100%; margin-top: 20px; }
+        .pipeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
         .pipe-box {
             border: 2px solid #555;
             padding: 18px 14px;
@@ -58,10 +115,26 @@
             flex: 1;
             margin: 0 8px;
         }
-        .pipe-box.sys2 { border-color: #3498db; background: rgba(52,152,219,0.12); }
-        .pipe-box.sys1 { border-color: #e74c3c; background: rgba(231,76,60,0.12); }
-        .pipe-box.active { transform: scale(1.08); box-shadow: 0 0 20px rgba(255,255,255,0.25); }
-        .pipe-arrow { font-size: 1.8em; color: #888; }
+
+        .pipe-box.sys2 {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.12);
+        }
+
+        .pipe-box.sys1 {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.12);
+        }
+
+        .pipe-box.active {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+        }
+
+        .pipe-arrow {
+            font-size: 1.8em;
+            color: #888;
+        }
 
         .badge {
             display: inline-block;
@@ -71,16 +144,25 @@
             font-weight: bold;
             margin: 0 4px;
         }
-        .badge-vlm { background: #3498db; color: white; }
-        .badge-dit { background: #e74c3c; color: white; }
+
+        .badge-vlm {
+            background: #3498db;
+            color: white;
+        }
+
+        .badge-dit {
+            background: #e74c3c;
+            color: white;
+        }
 
         .stat-card {
             border: 1px solid #555;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
         }
+
         .stat-num {
             font-size: 2em !important;
             font-weight: bold;
@@ -95,17 +177,48 @@
             text-align: center;
             transition: all 0.5s ease;
         }
-        .embodiment-icon.active { border-color: #2ecc71; border-style: solid; background: rgba(46,204,113,0.1); }
 
-        .color-palette { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
-        .color-swatch { width: 60px; height: 60px; border-radius: 8px; cursor: pointer; border: 3px solid white; transition: transform 0.2s; }
-        .color-swatch:hover { transform: scale(1.1); }
+        .embodiment-icon.active {
+            border-color: #2ecc71;
+            border-style: solid;
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid white;
+            transition: transform 0.2s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
 
         /* Architecture diagram styling */
-        .arch-svg-wrap { display: flex; justify-content: center; margin-top: 10px; }
-        .arch-svg-wrap svg { max-height: 560px; width: auto; }
+        .arch-svg-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .arch-svg-wrap svg {
+            max-height: 560px;
+            width: auto;
+        }
     </style>
 </head>
+
 <body>
     <div id="demo-controls">
         <label for="theme-selector">Change theme:</label>
@@ -130,6 +243,7 @@
             <option value="concave">Concave</option>
             <option value="none">None</option>
         </select>
+        <button id="play-notes-button">▶️ Play Notes (P)</button>
     </div>
 
     <div class="reveal">
@@ -145,6 +259,13 @@
                 <p style="color: #f1c40f; font-weight: bold; font-size: 1em; margin-top: 30px;">
                     Use arrow keys or spacebar to navigate &middot; Press F for fullscreen
                 </p>
+                <aside class="notes">
+                    - Welcome everyone. Today we're diving into NVIDIA's GR00T project, which stands for Generalist
+                    Robot 00 Technology.
+                    - This is a foundational model designed to bring general-purpose intelligence to humanoid robots.
+                    - We'll be dissecting its architecture, particularly its Vision-Language-Action capabilities and the
+                    clever dual-system design it employs.
+                </aside>
             </section>
 
             <!-- Agenda -->
@@ -159,6 +280,15 @@
                     <li class="fragment fade-up">The data pyramid: from web video to real robots</li>
                     <li class="fragment fade-up">Inference pipeline & deployment (Unitree G1 case)</li>
                 </ul>
+                <aside class="notes">
+                    - Here's a quick overview of our journey today.
+                    - We'll start with the "why" — the problem GR00T is designed to solve.
+                    - Then we'll get into the core architecture, breaking down the two "systems" that make it work.
+                    We'll spend some time on the detailed diagram.
+                    - We'll also cover key concepts like flow-matching for action generation, how it adapts to different
+                    robots, and the data strategy that gives it its power. Finally, we'll see how it all comes together
+                    in a real-world example.
+                </aside>
             </section>
 
             <!-- Problem framing -->
@@ -166,7 +296,15 @@
                 <section>
                     <h3>Why VLA Models Are Needed</h3>
                     <p>Traditional robot control required training a new policy for every single task.</p>
-                    <p class="fragment">GR00T aims to generalize across many tasks and many robot bodies using <span class="highlight-green">one foundation model</span>.</p>
+                    <p class="fragment">GR00T aims to generalize across many tasks and many robot bodies using <span
+                            class="highlight-green">one foundation model</span>.</p>
+                    <aside class="notes">
+                        - Let's set the stage. For decades, robotics has been highly specialized. If you wanted a robot
+                        to pick up a cup, you trained a model just for that. If you then wanted it to open a door, you
+                        had to start over.
+                        - This approach is brittle and doesn't scale. The goal of a generalist model like GR00T is to
+                        break out of this cycle.
+                    </aside>
                 </section>
                 <section data-auto-animate>
                     <h4>Traditional Approach</h4>
@@ -176,13 +314,24 @@
                         <div class="pipe-box">Policy for Task C</div>
                     </div>
                     <p style="margin-top:30px; font-size: 0.8em;">Trained separately per task &rarr; doesn't scale</p>
+                    <aside class="notes">
+                        - This is the old way: a siloed model for every task. It's inefficient and leads to a collection
+                        of narrow specialists.
+                    </aside>
                 </section>
                 <section data-auto-animate>
                     <h4>Foundation Model Approach</h4>
                     <div class="pipeline">
                         <div class="pipe-box sys2 active" style="flex: 2;">GR00T (one model)</div>
                     </div>
-                    <p style="margin-top:30px; font-size: 0.8em;">Change only the vision input and language instruction to perform different tasks; adapts to new robots with light fine-tuning</p>
+                    <p style="margin-top:30px; font-size: 0.8em;">Change only the vision input and language instruction
+                        to perform different tasks; adapts to new robots with light fine-tuning</p>
+                    <aside class="notes">
+                        - The foundation model approach is a paradigm shift. We train one large, powerful model that can
+                        be instructed to perform many different tasks.
+                        - Instead of retraining, you just change the prompt. This is the key to creating a truly
+                        general-purpose robot.
+                    </aside>
                 </section>
             </section>
 
@@ -203,7 +352,17 @@
                         <span style="font-size:0.8em;">Fast, reactive acting</span>
                     </div>
                 </div>
-                <p class="fragment" style="margin-top:40px; font-size:0.75em;">System 2 understands the scene and plans; System 1 generates joint commands in real time.</p>
+                <p class="fragment" style="margin-top:40px; font-size:0.75em;">System 2 understands the scene and plans;
+                    System 1 generates joint commands in real time.</p>
+                <aside class="notes">
+                    - The core innovation of GR00T is its dual-system architecture, inspired by how the human brain
+                    works. Think of Daniel Kahneman's "Thinking, Fast and Slow."
+                    - System 2 is the "slow thinking" part. It's a large Vision-Language Model that takes in the scene
+                    and the instruction, and understands *what* needs to be done.
+                    - It then passes a condensed understanding to System 1, the "fast thinking" part. This is a
+                    diffusion model that doesn't need to understand the whole world; it just needs to reactively and
+                    quickly generate the physical actions to execute the plan.
+                </aside>
             </section>
 
             <!-- ===================== DETAILED ARCHITECTURE DIAGRAM ===================== -->
@@ -212,118 +371,189 @@
                 <div class="arch-svg-wrap">
                     <svg viewBox="0 0 680 900" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                <path d="M2 1L8 5L2 9" fill="none" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6"
+                                orient="auto-start-reverse">
+                                <path d="M2 1L8 5L2 9" fill="none" stroke="#aaaaaa" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </marker>
                         </defs>
 
                         <!-- Inputs -->
                         <g>
-                            <rect x="50" y="30" width="150" height="52" rx="8" fill="rgba(52,152,219,0.12)" stroke="#3498db" stroke-width="1"/>
-                            <text x="125" y="50" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Camera Images</text>
-                            <text x="125" y="68" text-anchor="middle" fill="#bbbbbb" font-size="11">RGB observations</text>
+                            <rect x="50" y="30" width="150" height="52" rx="8" fill="rgba(52,152,219,0.12)"
+                                stroke="#3498db" stroke-width="1" />
+                            <text x="125" y="50" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Camera Images</text>
+                            <text x="125" y="68" text-anchor="middle" fill="#bbbbbb" font-size="11">RGB
+                                observations</text>
                         </g>
                         <g>
-                            <rect x="230" y="30" width="150" height="52" rx="8" fill="rgba(52,152,219,0.12)" stroke="#3498db" stroke-width="1"/>
-                            <text x="305" y="50" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Language Instruction</text>
-                            <text x="305" y="68" text-anchor="middle" fill="#bbbbbb" font-size="11">e.g. "pick up the cup"</text>
+                            <rect x="230" y="30" width="150" height="52" rx="8" fill="rgba(52,152,219,0.12)"
+                                stroke="#3498db" stroke-width="1" />
+                            <text x="305" y="50" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Language Instruction</text>
+                            <text x="305" y="68" text-anchor="middle" fill="#bbbbbb" font-size="11">e.g. "pick up the
+                                cup"</text>
                         </g>
                         <g>
-                            <rect x="410" y="30" width="150" height="52" rx="8" fill="rgba(52,152,219,0.12)" stroke="#3498db" stroke-width="1"/>
-                            <text x="485" y="50" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Proprioceptive State</text>
-                            <text x="485" y="68" text-anchor="middle" fill="#bbbbbb" font-size="11">Joint positions</text>
+                            <rect x="410" y="30" width="150" height="52" rx="8" fill="rgba(52,152,219,0.12)"
+                                stroke="#3498db" stroke-width="1" />
+                            <text x="485" y="50" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Proprioceptive State</text>
+                            <text x="485" y="68" text-anchor="middle" fill="#bbbbbb" font-size="11">Joint
+                                positions</text>
                         </g>
 
-                        <line x1="125" y1="82" x2="125" y2="110" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <line x1="305" y1="82" x2="305" y2="110" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <line x1="485" y1="82" x2="485" y2="110" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <line x1="125" y1="82" x2="125" y2="110" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <line x1="305" y1="82" x2="305" y2="110" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <line x1="485" y1="82" x2="485" y2="110" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
                         <!-- System 2 container -->
-                        <rect x="40" y="110" width="600" height="220" rx="20" fill="rgba(52,152,219,0.06)" stroke="#3498db" stroke-width="1"/>
-                        <text x="64" y="140" fill="#3498db" font-size="16" font-weight="700">System 2 &mdash; Vision-Language Model</text>
+                        <rect x="40" y="110" width="600" height="220" rx="20" fill="rgba(52,152,219,0.06)"
+                            stroke="#3498db" stroke-width="1" />
+                        <text x="64" y="140" fill="#3498db" font-size="16" font-weight="700">System 2 &mdash;
+                            Vision-Language Model</text>
                         <text x="64" y="158" fill="#9fc8ea" font-size="12">Slow, deliberate scene understanding</text>
 
                         <g>
-                            <rect x="70" y="180" width="160" height="56" rx="10" fill="rgba(52,152,219,0.15)" stroke="#3498db" stroke-width="1"/>
-                            <text x="150" y="200" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Vision Encoder</text>
-                            <text x="150" y="220" text-anchor="middle" fill="#bbbbbb" font-size="11">Image patch embeddings</text>
+                            <rect x="70" y="180" width="160" height="56" rx="10" fill="rgba(52,152,219,0.15)"
+                                stroke="#3498db" stroke-width="1" />
+                            <text x="150" y="200" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Vision Encoder</text>
+                            <text x="150" y="220" text-anchor="middle" fill="#bbbbbb" font-size="11">Image patch
+                                embeddings</text>
                         </g>
                         <g>
-                            <rect x="260" y="180" width="160" height="56" rx="10" fill="rgba(52,152,219,0.15)" stroke="#3498db" stroke-width="1"/>
-                            <text x="340" y="200" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Language Encoder</text>
-                            <text x="340" y="220" text-anchor="middle" fill="#bbbbbb" font-size="11">Text token embeddings</text>
+                            <rect x="260" y="180" width="160" height="56" rx="10" fill="rgba(52,152,219,0.15)"
+                                stroke="#3498db" stroke-width="1" />
+                            <text x="340" y="200" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Language Encoder</text>
+                            <text x="340" y="220" text-anchor="middle" fill="#bbbbbb" font-size="11">Text token
+                                embeddings</text>
                         </g>
                         <g>
-                            <rect x="450" y="180" width="160" height="56" rx="10" fill="rgba(52,152,219,0.15)" stroke="#3498db" stroke-width="1"/>
-                            <text x="530" y="200" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Pretrained VLM Backbone</text>
-                            <text x="530" y="220" text-anchor="middle" fill="#bbbbbb" font-size="11">Web-scale image-text</text>
+                            <rect x="450" y="180" width="160" height="56" rx="10" fill="rgba(52,152,219,0.15)"
+                                stroke="#3498db" stroke-width="1" />
+                            <text x="530" y="200" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Pretrained VLM Backbone</text>
+                            <text x="530" y="220" text-anchor="middle" fill="#bbbbbb" font-size="11">Web-scale
+                                image-text</text>
                         </g>
 
-                        <path d="M150 236 L150 250 L330 250 L330 265" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <path d="M340 236 L340 265" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <path d="M530 236 L530 250 L350 250 L350 265" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <path d="M150 236 L150 250 L330 250 L330 265" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <path d="M340 236 L340 265" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <path d="M530 236 L530 250 L350 250 L350 265" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
                         <g>
-                            <rect x="190" y="270" width="300" height="46" rx="10" fill="rgba(52,152,219,0.22)" stroke="#3498db" stroke-width="1.5"/>
-                            <text x="340" y="298" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Fused Scene Representation</text>
+                            <rect x="190" y="270" width="300" height="46" rx="10" fill="rgba(52,152,219,0.22)"
+                                stroke="#3498db" stroke-width="1.5" />
+                            <text x="340" y="298" text-anchor="middle" fill="#ffffff" font-size="14"
+                                font-weight="700">Fused Scene Representation</text>
                         </g>
 
-                        <line x1="340" y1="330" x2="340" y2="360" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <line x1="340" y1="330" x2="340" y2="360" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
                         <!-- System 1 container -->
-                        <rect x="40" y="360" width="600" height="330" rx="20" fill="rgba(231,76,60,0.06)" stroke="#e74c3c" stroke-width="1"/>
-                        <text x="64" y="390" fill="#e74c3c" font-size="16" font-weight="700">System 1 &mdash; Diffusion Transformer</text>
+                        <rect x="40" y="360" width="600" height="330" rx="20" fill="rgba(231,76,60,0.06)"
+                            stroke="#e74c3c" stroke-width="1" />
+                        <text x="64" y="390" fill="#e74c3c" font-size="16" font-weight="700">System 1 &mdash; Diffusion
+                            Transformer</text>
                         <text x="64" y="408" fill="#f0a89f" font-size="12">Fast, reactive action generation</text>
 
                         <g>
-                            <rect x="450" y="430" width="160" height="56" rx="10" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1"/>
-                            <text x="530" y="450" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Embodiment Action Head</text>
-                            <text x="530" y="470" text-anchor="middle" fill="#f0c4bd" font-size="11">Per-robot action space</text>
+                            <rect x="450" y="430" width="160" height="56" rx="10" fill="rgba(231,76,60,0.15)"
+                                stroke="#e74c3c" stroke-width="1" />
+                            <text x="530" y="450" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Embodiment Action Head</text>
+                            <text x="530" y="470" text-anchor="middle" fill="#f0c4bd" font-size="11">Per-robot action
+                                space</text>
                         </g>
                         <g>
-                            <rect x="70" y="430" width="160" height="56" rx="10" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1"/>
-                            <text x="150" y="450" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Random Noise</text>
-                            <text x="150" y="470" text-anchor="middle" fill="#f0c4bd" font-size="11">Initial action sample</text>
+                            <rect x="70" y="430" width="160" height="56" rx="10" fill="rgba(231,76,60,0.15)"
+                                stroke="#e74c3c" stroke-width="1" />
+                            <text x="150" y="450" text-anchor="middle" fill="#ffffff" font-size="13"
+                                font-weight="600">Random Noise</text>
+                            <text x="150" y="470" text-anchor="middle" fill="#f0c4bd" font-size="11">Initial action
+                                sample</text>
                         </g>
 
-                        <path d="M230 458 L280 458" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <path d="M450 458 L400 458" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <path d="M340 330 L340 340 L530 340 L530 428" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <path d="M230 458 L280 458" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <path d="M450 458 L400 458" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <path d="M340 330 L340 340 L530 340 L530 428" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
                         <g>
-                            <rect x="240" y="500" width="200" height="70" rx="10" fill="rgba(231,76,60,0.22)" stroke="#e74c3c" stroke-width="1.5"/>
-                            <text x="340" y="522" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Iterative Denoising</text>
-                            <text x="340" y="542" text-anchor="middle" fill="#f0c4bd" font-size="11">Flow-matching steps</text>
-                            <text x="340" y="558" text-anchor="middle" fill="#f0c4bd" font-size="11">Noise &rarr; action chunk</text>
+                            <rect x="240" y="500" width="200" height="70" rx="10" fill="rgba(231,76,60,0.22)"
+                                stroke="#e74c3c" stroke-width="1.5" />
+                            <text x="340" y="522" text-anchor="middle" fill="#ffffff" font-size="14"
+                                font-weight="700">Iterative Denoising</text>
+                            <text x="340" y="542" text-anchor="middle" fill="#f0c4bd" font-size="11">Flow-matching
+                                steps</text>
+                            <text x="340" y="558" text-anchor="middle" fill="#f0c4bd" font-size="11">Noise &rarr; action
+                                chunk</text>
                         </g>
 
-                        <path d="M150 486 L150 535 L238 535" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
-                        <path d="M530 486 L530 535 L442 535" fill="none" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <path d="M150 486 L150 535 L238 535" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
+                        <path d="M530 486 L530 535 L442 535" fill="none" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
-                        <line x1="340" y1="570" x2="340" y2="600" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <line x1="340" y1="570" x2="340" y2="600" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
                         <g>
-                            <rect x="190" y="605" width="300" height="46" rx="10" fill="rgba(231,76,60,0.22)" stroke="#e74c3c" stroke-width="1.5"/>
-                            <text x="340" y="633" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Action Chunk (short trajectory)</text>
+                            <rect x="190" y="605" width="300" height="46" rx="10" fill="rgba(231,76,60,0.22)"
+                                stroke="#e74c3c" stroke-width="1.5" />
+                            <text x="340" y="633" text-anchor="middle" fill="#ffffff" font-size="14"
+                                font-weight="700">Action Chunk (short trajectory)</text>
                         </g>
 
-                        <text x="340" y="670" text-anchor="middle" fill="#999999" font-size="11">Runs at high frequency for real-time reactive control</text>
+                        <text x="340" y="670" text-anchor="middle" fill="#999999" font-size="11">Runs at high frequency
+                            for real-time reactive control</text>
 
                         <!-- Output -->
-                        <line x1="340" y1="690" x2="340" y2="720" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <line x1="340" y1="690" x2="340" y2="720" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
                         <g>
-                            <rect x="190" y="725" width="300" height="60" rx="10" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="1"/>
-                            <text x="340" y="748" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Joint Commands</text>
-                            <text x="340" y="768" text-anchor="middle" fill="#a9e5c4" font-size="11">Low-level motor control signals</text>
+                            <rect x="190" y="725" width="300" height="60" rx="10" fill="rgba(46,204,113,0.15)"
+                                stroke="#2ecc71" stroke-width="1" />
+                            <text x="340" y="748" text-anchor="middle" fill="#ffffff" font-size="14"
+                                font-weight="700">Joint Commands</text>
+                            <text x="340" y="768" text-anchor="middle" fill="#a9e5c4" font-size="11">Low-level motor
+                                control signals</text>
                         </g>
 
-                        <line x1="340" y1="785" x2="340" y2="812" stroke="#aaaaaa" stroke-width="1" marker-end="url(#arrow)"/>
+                        <line x1="340" y1="785" x2="340" y2="812" stroke="#aaaaaa" stroke-width="1"
+                            marker-end="url(#arrow)" />
 
-                        <rect x="190" y="815" width="300" height="50" rx="10" fill="rgba(255,255,255,0.05)" stroke="#888888" stroke-width="1"/>
-                        <text x="340" y="845" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Robot (single arm, bimanual, humanoid)</text>
+                        <rect x="190" y="815" width="300" height="50" rx="10" fill="rgba(255,255,255,0.05)"
+                            stroke="#888888" stroke-width="1" />
+                        <text x="340" y="845" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Robot
+                            (single arm, bimanual, humanoid)</text>
                     </svg>
                 </div>
+                <aside class="notes">
+                    - Okay, let's walk through the complete data flow. This diagram looks complex, but we can break it
+                    down.
+                    - At the top, we have our inputs: what the robot sees, what we tell it to do, and its own body
+                    state.
+                    - This information flows into System 2, the VLM, which processes and fuses it into a single "scene
+                    representation." This is the understanding phase.
+                    - That representation then conditions System 1, the Diffusion Transformer. This is the action phase.
+                    It takes the plan and, starting from random noise, iteratively refines it into a concrete set of
+                    joint commands.
+                    - Finally, those commands are sent to the robot's motors. We'll break these stages down next.
+                </aside>
             </section>
 
             <!-- Architecture walkthrough - stage by stage -->
@@ -336,6 +566,11 @@
                         <div data-id="lang" class="pipe-box sys2">Language instruction</div>
                         <div data-id="state" class="pipe-box sys2">Proprioceptive state</div>
                     </div>
+                    <aside class="notes">
+                        - It all starts with three data streams. First, the raw pixels from the robot's cameras. Second,
+                        the natural language command from a human. And third, the robot's own internal sense of its
+                        body—where its joints are, etc. This is called proprioception.
+                    </aside>
                 </section>
                 <section data-auto-animate>
                     <h3>Stage 2 &mdash; System 2 Encoding</h3>
@@ -347,29 +582,51 @@
                         <div class="pipe-arrow">&rarr;</div>
                         <div class="pipe-box sys2 active" style="flex:1.5;">Fused scene representation</div>
                     </div>
-                    <p class="fragment" style="margin-top:30px; font-size:0.75em;">The VLM backbone is pretrained on web-scale image, video, and text data, giving it strong general visual and linguistic understanding before it ever sees robot data.</p>
+                    <p class="fragment" style="margin-top:30px; font-size:0.75em;">The VLM backbone is pretrained on
+                        web-scale image, video, and text data, giving it strong general visual and linguistic
+                        understanding before it ever sees robot data.</p>
+                    <aside class="notes">
+                        - System 2 takes these three streams and encodes them. The images and text are converted into
+                        mathematical representations.
+                        - Crucially, the VLM part of this is pre-trained on a massive dataset from the internet. This is
+                        where it gets its "common sense" understanding of the world—what a cup is, what "pick up"
+                        means—before it's ever fine-tuned on specific robot actions.
+                        - These are all fused into a single, rich representation of the current scene and the goal.
+                    </aside>
                 </section>
                 <section data-auto-animate>
                     <h3>Stage 3 &mdash; System 1 Action Generation</h3>
-                    <p>The scene representation conditions a diffusion transformer that denoises random noise into an action chunk.</p>
+                    <p>The scene representation conditions a diffusion transformer that denoises random noise into an
+                        action chunk.</p>
                     <div class="pipeline">
                         <div data-id="state" class="pipe-box sys2" style="flex:0.8;">Scene representation</div>
                         <div class="pipe-arrow">&rarr;</div>
-                        <div class="pipe-box sys1 active" style="flex:1.5;">Diffusion Transformer<br><span style="font-size:0.7em;">iterative denoising</span></div>
+                        <div class="pipe-box sys1 active" style="flex:1.5;">Diffusion Transformer<br><span
+                                style="font-size:0.7em;">iterative denoising</span></div>
                         <div class="pipe-arrow">&rarr;</div>
                         <div class="pipe-box" style="flex:0.8; border-color:#2ecc71;">Joint commands</div>
                     </div>
+                    <aside class="notes">
+                        - Now for System 1. It takes that fused scene representation from System 2 as its guide.
+                        - It uses a diffusion transformer, which is a generative model. Its job is to take random noise
+                        and, guided by the scene representation, iteratively "denoise" it into a valid sequence of robot
+                        actions.
+                        - This process is extremely fast, allowing for the kind of reactive control needed for
+                        real-world interaction. The output is a stream of commands for the robot's joints.
+                    </aside>
                 </section>
             </section>
 
             <!-- Flow matching visual: noise to action -->
             <section>
                 <h3>Flow-Matching: From Noise to Action</h3>
-                <p>Starting from pure noise, a small number of denoising steps converge to an executable action trajectory.</p>
+                <p>Starting from pure noise, a small number of denoising steps converge to an executable action
+                    trajectory.</p>
                 <div style="display:flex; justify-content:space-around; align-items:center; margin-top:30px;">
                     <div class="fragment" data-fragment-index="1" style="text-align:center;">
                         <svg width="90" height="90" viewBox="0 0 90 90">
-                            <rect x="5" y="5" width="80" height="80" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,3"/>
+                            <rect x="5" y="5" width="80" height="80" fill="none" stroke="#e74c3c" stroke-width="2"
+                                stroke-dasharray="4,3" />
                             <text x="45" y="50" text-anchor="middle" fill="#e74c3c" font-size="12">Noise</text>
                         </svg>
                         <p style="font-size:14pt;">t = 0</p>
@@ -377,7 +634,8 @@
                     <div class="pipe-arrow fragment" data-fragment-index="1">&rarr;</div>
                     <div class="fragment" data-fragment-index="2" style="text-align:center;">
                         <svg width="90" height="90" viewBox="0 0 90 90">
-                            <path d="M10,70 Q30,20 45,45 T80,20" fill="none" stroke="#f1c40f" stroke-width="3" opacity="0.6"/>
+                            <path d="M10,70 Q30,20 45,45 T80,20" fill="none" stroke="#f1c40f" stroke-width="3"
+                                opacity="0.6" />
                             <text x="45" y="85" text-anchor="middle" fill="#f1c40f" font-size="12">Intermediate</text>
                         </svg>
                         <p style="font-size:14pt;">t = 0.5</p>
@@ -385,19 +643,32 @@
                     <div class="pipe-arrow fragment" data-fragment-index="2">&rarr;</div>
                     <div class="fragment" data-fragment-index="3" style="text-align:center;">
                         <svg width="90" height="90" viewBox="0 0 90 90">
-                            <path d="M10,70 Q30,20 45,45 T80,20" fill="none" stroke="#2ecc71" stroke-width="4"/>
-                            <text x="45" y="85" text-anchor="middle" fill="#2ecc71" font-size="12">Action trajectory</text>
+                            <path d="M10,70 Q30,20 45,45 T80,20" fill="none" stroke="#2ecc71" stroke-width="4" />
+                            <text x="45" y="85" text-anchor="middle" fill="#2ecc71" font-size="12">Action
+                                trajectory</text>
                         </svg>
                         <p style="font-size:14pt;">t = 1</p>
                     </div>
                 </div>
-                <p class="fragment" style="margin-top:30px; font-size:0.7em;">Unlike a full diffusion model, flow-matching converges in far fewer steps &rarr; enables <span class="highlight-green">near real-time (sub-100ms) inference</span>.</p>
+                <p class="fragment" style="margin-top:30px; font-size:0.7em;">Unlike a full diffusion model,
+                    flow-matching converges in far fewer steps &rarr; enables <span class="highlight-green">near
+                        real-time (sub-100ms) inference</span>.</p>
+                <aside class="notes">
+                    - Let's visualize that denoising process. System 1 starts with pure random noise—a meaningless
+                    vector of numbers.
+                    - Through a process called flow-matching, which is a more efficient variant of diffusion, it refines
+                    this noise over just a few steps.
+                    - It quickly converges from chaos to a structured, executable trajectory of actions. The key here is
+                    speed. Traditional diffusion can be slow, but flow-matching allows GR00T to generate actions in
+                    under 100 milliseconds, which is fast enough for real-time control.
+                </aside>
             </section>
 
             <!-- Cross-embodiment -->
             <section>
                 <h3>Cross-Embodiment: One Model, Many Robots</h3>
-                <p>The action head is configured per <code>embodiment ID</code>, letting the same backbone drive different robot bodies.</p>
+                <p>The action head is configured per <code>embodiment ID</code>, letting the same backbone drive
+                    different robot bodies.</p>
                 <div style="display:flex; justify-content:space-around; margin-top:40px;">
                     <div class="embodiment-icon fragment" data-fragment-index="1">
                         <div style="font-size:2em;">🦾</div>
@@ -412,7 +683,17 @@
                         <p style="font-size:14pt;">Full humanoid</p>
                     </div>
                 </div>
-                <p class="fragment" data-fragment-index="4" style="margin-top:30px; font-size:0.75em;">Example: the <span class="highlight-green">UNITREE_G1_SONIC</span> embodiment tag has a whole-body controller decode the VLA's predicted latent action tokens into coordinated leg, arm, and hand commands.</p>
+                <p class="fragment" data-fragment-index="4" style="margin-top:30px; font-size:0.75em;">Example: the
+                    <span class="highlight-green">UNITREE_G1_SONIC</span> embodiment tag has a whole-body controller
+                    decode the VLA's predicted latent action tokens into coordinated leg, arm, and hand commands.
+                </p>
+                <aside class="notes">
+                    - A major goal is generalization not just across tasks, but across different robot bodies.
+                    - The core model remains the same, but there's a small, swappable "action head" for each type of
+                    robot, or "embodiment."
+                    - This means the same GR00T brain can learn to control a simple robot arm, a complex bimanual
+                    system, or a full humanoid. You just tell it which body it's "inhabiting" via an embodiment ID.
+                </aside>
             </section>
 
             <!-- Data pyramid -->
@@ -420,11 +701,30 @@
                 <h3>The Data Pyramid</h3>
                 <p>Layers of data at different scale and quality are stacked to build generalization.</p>
                 <div style="display:flex; flex-direction:column; align-items:center; margin-top:20px; gap:8px;">
-                    <div class="fragment fade-up" style="background:#c0392b; padding:10px 20px; border-radius:6px; width:40%; text-align:center;">Real robot data<br><span style="font-size:12pt;">(least volume, most precise)</span></div>
-                    <div class="fragment fade-up" style="background:#e67e22; padding:10px 20px; border-radius:6px; width:60%; text-align:center;">Simulated / synthetic trajectories<br><span style="font-size:12pt;">(Isaac Sim, DreamGen, etc.)</span></div>
-                    <div class="fragment fade-up" style="background:#f1c40f; color:#222; padding:10px 20px; border-radius:6px; width:80%; text-align:center;">Human demonstration video</div>
-                    <div class="fragment fade-up" style="background:#2ecc71; color:#222; padding:10px 20px; border-radius:6px; width:100%; text-align:center;">Web-scale images, video, text<br><span style="font-size:12pt;">(highest volume, provides general knowledge)</span></div>
+                    <div class="fragment fade-up"
+                        style="background:#c0392b; padding:10px 20px; border-radius:6px; width:40%; text-align:center;">
+                        Real robot data<br><span style="font-size:12pt;">(least volume, most precise)</span></div>
+                    <div class="fragment fade-up"
+                        style="background:#e67e22; padding:10px 20px; border-radius:6px; width:60%; text-align:center;">
+                        Simulated / synthetic trajectories<br><span style="font-size:12pt;">(Isaac Sim, DreamGen,
+                            etc.)</span></div>
+                    <div class="fragment fade-up"
+                        style="background:#f1c40f; color:#222; padding:10px 20px; border-radius:6px; width:80%; text-align:center;">
+                        Human demonstration video</div>
+                    <div class="fragment fade-up"
+                        style="background:#2ecc71; color:#222; padding:10px 20px; border-radius:6px; width:100%; text-align:center;">
+                        Web-scale images, video, text<br><span style="font-size:12pt;">(highest volume, provides general
+                            knowledge)</span></div>
                 </div>
+                <aside class="notes">
+                    - So where does the model learn all this? From a pyramid of data.
+                    - At the base, you have massive amounts of general web data. This teaches the model about the world
+                    in general.
+                    - The next layers are more specific: videos of humans doing tasks, then vast amounts of simulated
+                    robot data, and finally, at the very top, a smaller amount of highly valuable data from real robots.
+                    - This layered approach allows the model to build a broad base of knowledge and then refine it for
+                    the specific task of robot control.
+                </aside>
             </section>
 
             <!-- Data pyramid stats -->
@@ -444,15 +744,24 @@
                         Speedup vs. traditional collection
                     </div>
                 </div>
-                <p class="fragment" style="margin-top:30px; font-size:0.7em;">Isaac Sim-based synthetic data generation blueprints let teams rapidly amass large-scale robot demonstration data.</p>
+                <p class="fragment" style="margin-top:30px; font-size:0.7em;">Isaac Sim-based synthetic data generation
+                    blueprints let teams rapidly amass large-scale robot demonstration data.</p>
+                <aside class="notes">
+                    - Collecting real-world robot data is slow and expensive. This is where simulation becomes a
+                    superpower.
+                    - Using tools like NVIDIA's Isaac Sim, they can generate hundreds of thousands of robot trajectories
+                    in a matter of hours.
+                    - This is a thousand times faster than physical data collection and is absolutely critical for
+                    training a data-hungry foundation model like GR00T.
+                </aside>
             </section>
 
             <!-- Inference pipeline -->
-<!-- Inference pipeline -->
-<section>
-    <h3>The Inference Pipeline at a Glance</h3>
+            <!-- Inference pipeline -->
+            <section>
+                <h3>The Inference Pipeline at a Glance</h3>
 
-    <div style="
+                <div style="
         display:grid;
         grid-template-columns: 280px 80px 280px;
         grid-row-gap:35px;
@@ -462,9 +771,8 @@
         margin-top:40px;
     ">
 
-        <!-- Row 1 -->
-        <div class="pipe-box sys2 fragment"
-             style="width:280px;height:90px;
+                    <!-- Row 1 -->
+                    <div class="pipe-box sys2 fragment" style="width:280px;height:90px;
                     display:flex;
                     justify-content:center;
                     align-items:center;
@@ -472,16 +780,14 @@
                     text-align:center;
                     padding:10px;
                     box-sizing:border-box;">
-            Camera Input
-        </div>
+                        Camera Input
+                    </div>
 
-        <div class="pipe-arrow fragment"
-             style="font-size:60px;text-align:center;">
-            →
-        </div>
+                    <div class="pipe-arrow fragment" style="font-size:60px;text-align:center;">
+                        →
+                    </div>
 
-        <div class="pipe-box sys2 fragment"
-             style="width:280px;height:90px;
+                    <div class="pipe-box sys2 fragment" style="width:280px;height:90px;
                     display:flex;
                     justify-content:center;
                     align-items:center;
@@ -489,12 +795,11 @@
                     text-align:center;
                     padding:10px;
                     box-sizing:border-box;">
-            Language Instruction
-        </div>
+                        Language Instruction
+                    </div>
 
-        <!-- Row 2 -->
-        <div class="pipe-box sys2 fragment"
-             style="width:280px;height:90px;
+                    <!-- Row 2 -->
+                    <div class="pipe-box sys2 fragment" style="width:280px;height:90px;
                     display:flex;
                     justify-content:center;
                     align-items:center;
@@ -502,16 +807,14 @@
                     text-align:center;
                     padding:10px;
                     box-sizing:border-box;">
-            VLM Encoding
-        </div>
+                        VLM Encoding
+                    </div>
 
-        <div class="pipe-arrow fragment"
-             style="font-size:60px;text-align:center;">
-            →
-        </div>
+                    <div class="pipe-arrow fragment" style="font-size:60px;text-align:center;">
+                        →
+                    </div>
 
-        <div class="pipe-box sys1 fragment"
-             style="width:280px;height:90px;
+                    <div class="pipe-box sys1 fragment" style="width:280px;height:90px;
                     display:flex;
                     justify-content:center;
                     align-items:center;
@@ -519,19 +822,17 @@
                     text-align:center;
                     padding:10px;
                     box-sizing:border-box;">
-            Diffusion Transformer
-        </div>
+                        Diffusion Transformer
+                    </div>
 
-        <!-- Row 3 -->
-        <div></div>
+                    <!-- Row 3 -->
+                    <div></div>
 
-        <div class="pipe-arrow fragment"
-             style="font-size:60px;text-align:center;">
-            ↓
-        </div>
+                    <div class="pipe-arrow fragment" style="font-size:60px;text-align:center;">
+                        ↓
+                    </div>
 
-        <div class="pipe-box fragment"
-             style="width:280px;height:90px;
+                    <div class="pipe-box fragment" style="width:280px;height:90px;
                     display:flex;
                     justify-content:center;
                     align-items:center;
@@ -540,36 +841,65 @@
                     padding:10px;
                     box-sizing:border-box;
                     border-color:#2ecc71;">
-            Joint Command Stream
-        </div>
+                        Joint Command Stream
+                    </div>
 
-    </div>
+                </div>
 
-    <p class="fragment"
-       style="margin-top:40px;font-size:0.7em;">
-        With acceleration (e.g. TensorRT), real-time control at sub-100 ms latency becomes achievable.
-    </p>
+                <p class="fragment" style="margin-top:40px;font-size:0.7em;">
+                    With acceleration (e.g. TensorRT), real-time control at sub-100 ms latency becomes achievable.
+                </p>
+                <aside class="notes">
+                    - So, to recap the inference pipeline at runtime: Camera and Language inputs are encoded by the VLM.
+                    - That understanding guides the Diffusion Transformer, which generates an action. That action is
+                    then sent to the robot's controller. This entire loop needs to be incredibly fast. By using tools
+                    like TensorRT for optimization, this whole process can be executed in under 100 milliseconds,
+                    enabling smooth, reactive control.
+                    </p>
 
-</section>
+            </section>
 
             <!-- Fine-tuning workflow -->
             <section>
                 <h3>Fine-Tuning & Deployment Workflow</h3>
                 <ol>
-                    <li class="fragment fade-up">Prepare data &mdash; collect robot demonstrations (video, state, action) in LeRobot format</li>
-                    <li class="fragment fade-up">Zero-shot inference &mdash; validate the base model on pretrained embodiments</li>
-                    <li class="fragment fade-up">Fine-tune &mdash; adapt to your own robot and modality configuration</li>
-                    <li class="fragment fade-up">Evaluate &mdash; open-loop evaluation, then simulation or real hardware testing</li>
-                    <li class="fragment fade-up">Deploy &mdash; connect via the policy API to your robot controller, accelerate with TensorRT</li>
+                    <li class="fragment fade-up">Prepare data &mdash; collect robot demonstrations (video, state,
+                        action) in LeRobot format</li>
+                    <li class="fragment fade-up">Zero-shot inference &mdash; validate the base model on pretrained
+                        embodiments</li>
+                    <li class="fragment fade-up">Fine-tune &mdash; adapt to your own robot and modality configuration
+                    </li>
+                    <li class="fragment fade-up">Evaluate &mdash; open-loop evaluation, then simulation or real hardware
+                        testing</li>
+                    <li class="fragment fade-up">Deploy &mdash; connect via the policy API to your robot controller,
+                        accelerate with TensorRT</li>
                 </ol>
+                <aside class="notes">
+                    - For developers looking to use GR00T, NVIDIA provides a clear workflow.
+                    - You start by preparing your own data in a standardized format. You can test the base model, then
+                    fine-tune it on your specific robot and tasks.
+                    - After evaluation in simulation and on hardware, you can deploy the optimized model using a
+                    provided API. It's designed to be an end-to-end platform.
+                </aside>
             </section>
 
             <!-- Unitree G1 tie-in -->
             <section data-background-gradient="linear-gradient(to right, #134e5e, #71b280)">
                 <h3>Real-World Case: Unitree G1</h3>
-                <p>GR00T supports whole-body humanoid control through the <span class="highlight-yellow">UNITREE_G1_SONIC</span> embodiment tag and the GEAR-SONIC controller.</p>
-                <p class="fragment">VR teleoperation for demo collection &rarr; VLA fine-tuning &rarr; real-time deployment via PolicyServer + SONIC decoder, all in one connected pipeline.</p>
-                <p class="fragment" style="font-size:0.7em; margin-top:20px;">A single policy performs language-conditioned manipulation and locomotion together, end to end.</p>
+                <p>GR00T supports whole-body humanoid control through the <span
+                        class="highlight-yellow">UNITREE_G1_SONIC</span> embodiment tag and the GEAR-SONIC controller.
+                </p>
+                <p class="fragment">VR teleoperation for demo collection &rarr; VLA fine-tuning &rarr; real-time
+                    deployment via PolicyServer + SONIC decoder, all in one connected pipeline.</p>
+                <p class="fragment" style="font-size:0.7em; margin-top:20px;">A single policy performs
+                    language-conditioned manipulation and locomotion together, end to end.</p>
+                <aside class="notes">
+                    - This isn't just theoretical. It's being applied to real-world humanoid robots like the Unitree G1.
+                    - The entire pipeline, from collecting data via VR teleoperation to deploying a fine-tuned model
+                    that controls the robot's hands and legs simultaneously, is supported.
+                    - This is a key demonstration of the model's ability to handle the complexity of a full humanoid
+                    body, not just a simple arm.
+                </aside>
             </section>
 
             <!-- Model evolution table -->
@@ -577,59 +907,112 @@
                 <h3>Model Version Timeline</h3>
                 <table style="margin: 0 auto;">
                     <thead>
-                        <tr><th>Version</th><th>Highlights</th></tr>
+                        <tr>
+                            <th>Version</th>
+                            <th>Highlights</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr class="fragment"><td>N1</td><td>First open foundation VLA, introduced the dual-system design</td></tr>
-                        <tr class="fragment"><td>N1.5</td><td>Stronger generalization via synthetic data (DreamGen, etc.)</td></tr>
-                        <tr class="fragment"><td>N1.6</td><td>State regularization, DAgger, RTC for improved robustness</td></tr>
-                        <tr class="fragment"><td>N1.7</td><td>New VLM backbone, whole-body G1 control (SONIC) support</td></tr>
+                        <tr class="fragment">
+                            <td>N1</td>
+                            <td>First open foundation VLA, introduced the dual-system design</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>N1.5</td>
+                            <td>Stronger generalization via synthetic data (DreamGen, etc.)</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>N1.6</td>
+                            <td>State regularization, DAgger, RTC for improved robustness</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>N1.7</td>
+                            <td>New VLM backbone, whole-body G1 control (SONIC) support</td>
+                        </tr>
                     </tbody>
                 </table>
-                <p style="font-size:14pt; margin-top:20px; color:#aaa;">Note: this is a fast-moving space &mdash; check the latest release notes for version specifics.</p>
+                <p style="font-size:14pt; margin-top:20px; color:#aaa;">Note: this is a fast-moving space &mdash; check
+                    the latest release notes for version specifics.</p>
+                <aside class="notes">
+                    - GR00T is evolving rapidly. The team is constantly iterating, improving the backbone model, adding
+                    more and better data, and enhancing the control algorithms. This table gives a rough idea of the
+                    progression, with each version building on the last to improve generalization and robustness.
+                </aside>
             </section>
 
             <!-- Key takeaways -->
             <section>
                 <h3>Key Takeaways</h3>
                 <ul>
-                    <li class="fragment fade-up">GR00T uses a dual architecture: <strong class="highlight-sky">System 2 (VLM)</strong> + <strong class="highlight-red">System 1 (Diffusion Transformer)</strong></li>
-                    <li class="fragment fade-up"><strong>Flow-matching</strong> generates continuous actions from noise in near real time</li>
-                    <li class="fragment fade-up"><strong>Embodiment-conditioned action heads</strong> let one model support multiple robot bodies</li>
-                    <li class="fragment fade-up">The <strong>data pyramid</strong> (web &rarr; simulation &rarr; real robot) drives generalization</li>
-                    <li class="fragment fade-up">Fine-tuning and deployment are supported end to end on real humanoids like the Unitree G1</li>
+                    <li class="fragment fade-up">GR00T uses a dual architecture: <strong class="highlight-sky">System 2
+                            (VLM)</strong> + <strong class="highlight-red">System 1 (Diffusion Transformer)</strong>
+                    </li>
+                    <li class="fragment fade-up"><strong>Flow-matching</strong> generates continuous actions from noise
+                        in near real time</li>
+                    <li class="fragment fade-up"><strong>Embodiment-conditioned action heads</strong> let one model
+                        support multiple robot bodies</li>
+                    <li class="fragment fade-up">The <strong>data pyramid</strong> (web &rarr; simulation &rarr; real
+                        robot) drives generalization</li>
+                    <li class="fragment fade-up">Fine-tuning and deployment are supported end to end on real humanoids
+                        like the Unitree G1</li>
                 </ul>
+                <aside class="notes">
+                    - So, let's summarize the key takeaways.
+                    - Remember the dual-system architecture: a "thinking" VLM and a "doing" Diffusion Transformer.
+                    - Remember flow-matching, the key to fast, real-time action generation.
+                    - Remember that one model can control many different robots through embodiment conditioning.
+                    - And remember that this is all built on a pyramid of data, from general web knowledge to specific
+                    robot actions.
+                </aside>
             </section>
 
             <!-- Sources -->
             <section>
                 <h3>References</h3>
                 <ul style="font-size: 14pt;">
-                    <li><a href="https://arxiv.org/abs/2503.14734" target="_blank">GR00T N1 paper (arXiv 2503.14734)</a></li>
-                    <li><a href="https://github.com/Nvidia/Isaac-GR00T" target="_blank">Isaac-GR00T GitHub repository</a></li>
-                    <li><a href="https://research.nvidia.com/labs/gear/gr00t-n1_6" target="_blank">GR00T N1.6 research notes</a></li>
-                    <li><a href="https://developer.nvidia.com/blog/pretrained-to-imagine-fine-tuned-to-act-the-rise-of-world-action-models/" target="_blank">NVIDIA developer blog: World-Action Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2503.14734" target="_blank">GR00T N1 paper (arXiv 2503.14734)</a>
+                    </li>
+                    <li><a href="https://github.com/Nvidia/Isaac-GR00T" target="_blank">Isaac-GR00T GitHub
+                            repository</a></li>
+                    <li><a href="https://research.nvidia.com/labs/gear/gr00t-n1_6" target="_blank">GR00T N1.6 research
+                            notes</a></li>
+                    <li><a href="https://developer.nvidia.com/blog/pretrained-to-imagine-fine-tuned-to-act-the-rise-of-world-action-models/"
+                            target="_blank">NVIDIA developer blog: World-Action Models</a></li>
                 </ul>
-                <p style="font-size:12pt; margin-top:30px; color:#888;">This presentation is based on publicly available material as of July 2026. This is a fast-moving field &mdash; check the latest release notes.</p>
+                <p style="font-size:12pt; margin-top:30px; color:#888;">This presentation is based on publicly available
+                    material as of July 2026. This is a fast-moving field &mdash; check the latest release notes.</p>
+                <aside class="notes">
+                    - For those who want to dive deeper, these are the primary sources for the information presented
+                    today. The GitHub repository has the code, and the research papers and blogs provide more technical
+                    detail.
+                </aside>
             </section>
 
             <!-- Q&A -->
             <section>
                 <h2>Q &amp; A</h2>
                 <p>Any questions?</p>
-                <p><a href="https://github.com/Nvidia/Isaac-GR00T" target="_blank" class="highlight-sky">github.com/Nvidia/Isaac-GR00T</a> for the code.</p>
+                <p><a href="https://github.com/Nvidia/Isaac-GR00T" target="_blank"
+                        class="highlight-sky">github.com/Nvidia/Isaac-GR00T</a> for the code.</p>
+                <aside class="notes">
+                    - That concludes the overview. I'd be happy to take any questions you might have.
+                </aside>
             </section>
 
             <!-- Thank you -->
             <section>
                 <h1 class="r-fit-text">Thank You</h1>
+                <aside class="notes">
+                    - Thank you for your time and attention.
+                </aside>
             </section>
 
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js" crossorigin="anonymous"></script>
 
     <script>
@@ -638,21 +1021,92 @@
             hash: true,
             transition: 'slide',
             slideNumber: 'c/t',
-            plugins: [ RevealHighlight, RevealNotes ],
+            plugins: [RevealHighlight, RevealNotes],
             highlight: { theme: 'monokai' },
         });
 
         const themeStyleLink = document.getElementById('theme-style');
         const themeSelector = document.getElementById('theme-selector');
-        themeSelector.addEventListener('change', function(event) {
+        themeSelector.addEventListener('change', function (event) {
             const theme = event.target.value;
             themeStyleLink.setAttribute('href', `https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/${theme}.css`);
         });
 
         const transitionSelector = document.getElementById('transition-selector');
-        transitionSelector.addEventListener('change', function(event) {
+        transitionSelector.addEventListener('change', function (event) {
             Reveal.configure({ transition: event.target.value });
         });
+
+        // --- Text-to-Speech for Speaker Notes ---
+
+        if ('speechSynthesis' in window) {
+            console.log("Speech Synthesis is supported.");
+            const playNotesButton = document.getElementById('play-notes-button');
+            let bestVoice = null;
+
+            const findBestVoice = () => {
+                const voices = window.speechSynthesis.getVoices();
+                if (voices.length === 0) {
+                    console.log("No voices available yet.");
+                    return;
+                }
+
+                // --- Voice Selection Logic ---
+                // 1. Prefer official Google/Microsoft voices in US English.
+                // 2. Fallback to any other US English voice.
+                // 3. Fallback to any English voice.
+                // 4. Finally, use the first available voice.
+                const isUS_EN = (v) => v.lang === 'en-US';
+                bestVoice =
+                    voices.find(v => isUS_EN(v) && v.name.includes('Google')) ||
+                    voices.find(v => isUS_EN(v) && v.name.includes('Microsoft')) ||
+                    voices.find(v => isUS_EN(v) && v.localService) || // Prefer local high-quality voices
+                    voices.find(isUS_EN) ||
+                    voices.find(v => v.lang.startsWith('en')) ||
+                    voices[0];
+
+                console.log("Selected TTS voice:", bestVoice.name, `(${bestVoice.lang})`);
+            };
+
+            // Voices are loaded asynchronously. We need to wait for them.
+            window.speechSynthesis.onvoiceschanged = findBestVoice;
+            findBestVoice(); // Initial attempt
+
+            const speakNotes = () => {
+                const notes = Reveal.getSlideNotes();
+
+                if (notes && notes.trim().length > 0) {
+                    if (window.speechSynthesis.speaking) {
+                        window.speechSynthesis.cancel();
+                        return;
+                    }
+                    const utterance = new SpeechSynthesisUtterance(notes);
+
+                    // --- Apply the better voice and settings ---
+                    if (bestVoice) {
+                        utterance.voice = bestVoice;
+                    }
+                    utterance.pitch = 1.0; // Range: 0 to 2. 1 is normal.
+                    utterance.rate = 1.0;  // Range: 0.1 to 10. 1 is normal.
+
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    console.log("No speaker notes on this slide to play.");
+                }
+            };
+
+            playNotesButton.addEventListener('click', speakNotes);
+            Reveal.addKeyBinding({ keyCode: 80, key: 'P', description: 'Play/Stop speaker notes audio' }, speakNotes);
+            Reveal.on('slidechanged', () => {
+                window.speechSynthesis.cancel();
+            });
+
+        } else {
+            console.error("Speech Synthesis not supported in this browser.");
+            playNotesButton.style.display = 'none'; // Hide the button if not supported
+        }
+
     </script>
 </body>
+
 </html>
