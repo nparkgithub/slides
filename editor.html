@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reveal.js Editor</title>
+    <style>
+        :root {
+            --bg-color: #282a36;
+            --fg-color: #f8f8f2;
+            --panel-bg: #44475a;
+            --border-color: #6272a4;
+            --button-bg: #50fa7b;
+            --button-text: #282a36;
+            --input-bg: #20222b;
+            --highlight-bg: #f1c40f;
+            --syntax-punctuation: #ff79c6;
+            --syntax-tag: #8be9fd;
+            --syntax-attribute: #50fa7b;
+            --syntax-value: #f1fa8c;
+            --syntax-comment: #6272a4;
+            --fragment-end-bg: #6b3b4a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--fg-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: var(--panel-bg);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        header>* {
+            margin-right: 20px;
+        }
+
+        button,
+        input[type="file"] {
+            font-size: 14px;
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .editor-panel {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-right: 2px solid var(--border-color);
+            min-height: 0;
+        }
+
+        .preview-panel {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .editor-box {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            margin-bottom: 10px;
+            min-height: 0;
+        }
+
+        .editor-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .editor-box label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .editor-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            min-height: 0;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: var(--input-bg);
+            color: var(--fg-color);
+            border: none;
+            border-radius: 5px;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 14px;
+            padding: 10px;
+            resize: none;
+            overflow: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparent;
+            caret-color: var(--fg-color);
+        }
+
+        #content-editor {
+            color: transparent;
+        }
+
+        #content-editor::selection {
+            color: var(--fg-color);
+            background-color: rgba(139, 233, 253, 0.35);
+        }
+
+        .editor-highlight-backdrop {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: var(--input-bg);
+            color: var(--fg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 14px;
+            padding: 10px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .editor-highlight-backdrop mark {
+            background-color: var(--highlight-bg);
+            color: inherit;
+            border-radius: 2px;
+        }
+
+        .syntax-punctuation { color: var(--syntax-punctuation); }
+        .syntax-tag { color: var(--syntax-tag); }
+        .syntax-attribute { color: var(--syntax-attribute); }
+        .syntax-value { color: var(--syntax-value); }
+        .syntax-comment { color: var(--syntax-comment); }
+
+        #preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fff;
+        }
+
+        .preview-navigation {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 46px);
+            grid-template-areas:
+                ". up ."
+                "left . right"
+                ". down .";
+            gap: 8px;
+            transform: translateY(-50%);
+        }
+
+        .preview-navigation button {
+            width: 46px;
+            height: 46px;
+            padding: 0;
+            border: 1px solid rgba(248, 248, 242, 0.5);
+            border-radius: 50%;
+            background-color: rgba(40, 42, 54, 0.88);
+            color: var(--fg-color);
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .preview-navigation button:hover:not(:disabled),
+        .preview-navigation button:focus-visible:not(:disabled) {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            outline: 2px solid var(--fg-color);
+            outline-offset: 2px;
+        }
+
+        #preview-prev-page { grid-area: left; }
+        #preview-next-page { grid-area: right; }
+        #preview-prev-fragment { grid-area: up; }
+        #preview-next-fragment { grid-area: down; }
+
+        #preview-prev-fragment:disabled,
+        #preview-next-fragment:disabled {
+            background-color: var(--fragment-end-bg);
+            color: #d7b4bc;
+        }
+
+        #slide-nav {
+            font-weight: bold;
+        }
+
+        #file-name {
+            font-style: italic;
+            color: #ccc;
+        }
+
+        #grammar-status {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        #writing-results {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1001;
+            display: none;
+            width: min(420px, calc(100vw - 40px));
+            max-height: min(55vh, 520px);
+            overflow: auto;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--panel-bg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .writing-results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .writing-results-header:active {
+            cursor: grabbing;
+        }
+
+        #writing-results h3 {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        #writing-results .close-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 3px;
+        }
+
+        .writing-issue {
+            margin-top: 8px;
+            padding: 9px;
+            border-left: 3px solid #ffb86c;
+            background: rgba(0, 0, 0, 0.14);
+            font-size: 13px;
+            line-height: 1.35;
+        }
+
+        .writing-issue strong,
+        .writing-issue code {
+            color: #f1fa8c;
+        }
+
+        #find-replace-panel {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            z-index: 1001;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            width: 300px;
+        }
+
+        #find-replace-panel h3 {
+            margin-top: 0;
+            font-size: 1em;
+        }
+
+        #find-replace-panel input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--fg-color);
+            border-radius: 4px;
+        }
+
+        #find-replace-panel .find-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        #find-replace-panel .find-controls button {
+            flex-grow: 1;
+        }
+
+        #find-replace-panel .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Reveal.js Editor</h1>
+        <button id="load-button">Load File</button>
+        <input type="file" id="file-input" accept=".html" style="display: none;">
+        <span id="file-name">No file loaded</span>
+        <div id="navigation-controls" style="display: none;">
+            <button id="prev-slide">◀ Prev</button>
+            <span id="slide-nav">Slide 0 / 0</span>
+            <button id="next-slide">Next ▶</button>
+        </div>
+        <button id="find-button">Find (Ctrl+F)</button>
+        <button id="spellcheck-button" type="button">Spell: On</button>
+        <button id="grammar-button" type="button" disabled>Grammar Check</button>
+        <span id="grammar-status" aria-live="polite"></span>
+        <button id="save-button" disabled>Save & Download</button>
+    </header>
+
+    <div id="find-replace-panel">
+        <button class="close-btn" id="close-find-panel">×</button>
+        <h3>Find & Replace</h3>
+        <input type="text" id="find-input" placeholder="Find...">
+        <input type="text" id="replace-input" placeholder="Replace with...">
+        <div class="find-controls">
+            <button id="replace-btn">Replace</button>
+            <button id="replace-all-btn">Replace All</button>
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; text-align: center;" id="find-results">0 matches</div>
+    </div>
+
+    <div id="writing-results" role="status" aria-live="polite">
+        <div class="writing-results-header" id="writing-results-handle">
+            <h3>Writing suggestions</h3>
+            <button class="close-btn" id="close-writing-results" aria-label="Close writing results">×</button>
+        </div>
+        <div id="writing-results-list"></div>
+    </div>
+
+    <div class="main-container">
+        <div class="editor-panel">
+            <div class="editor-box" style="flex-basis: 65%;">
+                <label for="content-editor">Slide Content (HTML)</label>
+                <div class="editor-wrapper">
+                    <div id="content-backdrop" class="editor-highlight-backdrop"></div>
+                    <textarea id="content-editor" disabled spellcheck="true"></textarea>
+                </div>
+            </div>
+            <div class="editor-box" style="flex-basis: 35%;">
+                <label for="notes-editor">Speaker Notes</label>
+                <div class="editor-wrapper">
+                    <div id="notes-backdrop" class="editor-highlight-backdrop"></div>
+                    <textarea id="notes-editor" disabled spellcheck="true"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="preview-panel">
+            <iframe id="preview-frame" title="Slide Preview" sandbox="allow-scripts"></iframe>
+            <div class="preview-navigation" aria-label="Content navigation">
+                <button id="preview-prev-page" type="button" title="Previous slide" aria-label="Previous slide">←</button>
+                <button id="preview-next-page" type="button" title="Next slide" aria-label="Next slide">→</button>
+                <button id="preview-prev-fragment" type="button" title="Hide previous content" aria-label="Hide previous content">↑</button>
+                <button id="preview-next-fragment" type="button" title="Show next content" aria-label="Show next content">↓</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Note: For the best experience (native save dialog in the correct folder), use a browser that supports the File System Access API, like Chrome or Edge.
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileInput = document.getElementById('file-input');
+            const fileNameDisplay = document.getElementById('file-name');
+            const navControls = document.getElementById('navigation-controls');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            const previewPrevPageBtn = document.getElementById('preview-prev-page');
+            const previewNextPageBtn = document.getElementById('preview-next-page');
+            const previewPrevFragmentBtn = document.getElementById('preview-prev-fragment');
+            const previewNextFragmentBtn = document.getElementById('preview-next-fragment');
+            const slideNavDisplay = document.getElementById('slide-nav');
+            const saveBtn = document.getElementById('save-button');
+            const contentEditor = document.getElementById('content-editor');
+            const notesEditor = document.getElementById('notes-editor');
+            const previewFrame = document.getElementById('preview-frame');
+            const loadButton = document.getElementById('load-button');
+            const findButton = document.getElementById('find-button');
+            const findPanel = document.getElementById('find-replace-panel');
+            const closeFindPanelBtn = document.getElementById('close-find-panel');
+            const findInput = document.getElementById('find-input');
+            const replaceInput = document.getElementById('replace-input');
+            const replaceBtn = document.getElementById('replace-btn');
+            const replaceAllBtn = document.getElementById('replace-all-btn');
+            const findResultsDisplay = document.getElementById('find-results');
+            const spellcheckButton = document.getElementById('spellcheck-button');
+            const grammarButton = document.getElementById('grammar-button');
+            const grammarStatus = document.getElementById('grammar-status');
+            const writingResults = document.getElementById('writing-results');
+            const writingResultsList = document.getElementById('writing-results-list');
+            const closeWritingResultsBtn = document.getElementById('close-writing-results');
+            const writingResultsHandle = document.getElementById('writing-results-handle');
+
+            let originalFileName = 'presentation.html';
+            let presentationDoc = null;
+            let slideElements = [];
+            let currentSlideIndex = 0;
+            let scriptHTML = ''; // <-- Moved to a higher scope
+            let currentFileHandle = null; // For File System Access API
+            let lastFocusedEditor = null; // To track which editor is active for find/replace
+            let previewUpdateTimer = null;
+            let spellcheckEnabled = true;
+
+            const contentBackdrop = document.getElementById('content-backdrop');
+            const notesBackdrop = document.getElementById('notes-backdrop');
+            const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+            const voidElements = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
+
+            function selectedHtmlElementIndex(text, caretPosition) {
+                const tagPattern = /<!--[\s\S]*?-->|<\/?[A-Za-z][^>]*>/g;
+                const openElements = [];
+                let elementIndex = -1;
+                let tagMatch;
+
+                while ((tagMatch = tagPattern.exec(text)) !== null) {
+                    const tag = tagMatch[0];
+                    const tagStart = tagMatch.index;
+                    const tagEnd = tagStart + tag.length;
+                    if (tagStart > caretPosition) break;
+                    if (tag.startsWith('<!--')) continue;
+
+                    const nameMatch = /^<\s*(\/?)\s*([A-Za-z][\w:-]*)/.exec(tag);
+                    if (!nameMatch) continue;
+                    const isClosingTag = Boolean(nameMatch[1]);
+                    const tagName = nameMatch[2].toLowerCase();
+
+                    if (isClosingTag) {
+                        if (caretPosition <= tagEnd) return openElements.at(-1)?.index ?? null;
+                        for (let index = openElements.length - 1; index >= 0; index -= 1) {
+                            if (openElements[index].name === tagName) {
+                                openElements.splice(index, 1);
+                                break;
+                            }
+                        }
+                        continue;
+                    }
+
+                    elementIndex += 1;
+                    const isVoidElement = voidElements.has(tagName) || /\/\s*>$/.test(tag);
+                    if (caretPosition <= tagEnd) return elementIndex;
+                    if (!isVoidElement) openElements.push({ name: tagName, index: elementIndex });
+                }
+
+                return openElements.at(-1)?.index ?? null;
+            }
+
+            function showSelectedElementInPreview() {
+                if (!presentationDoc || document.activeElement !== contentEditor) return;
+                const nodeIndex = selectedHtmlElementIndex(contentEditor.value, contentEditor.selectionStart);
+                previewFrame.contentWindow?.postMessage({ type: 'editor-selection', nodeIndex }, '*');
+            }
+
+            function movePreviewFragment(direction) {
+                previewFrame.contentWindow?.postMessage({ type: 'preview-fragment', direction }, '*');
+            }
+
+            const escapeHTML = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            function setSpellcheck(enabled) {
+                spellcheckEnabled = enabled;
+                contentEditor.spellcheck = enabled;
+                notesEditor.spellcheck = enabled;
+                spellcheckButton.textContent = `Spell: ${enabled ? 'On' : 'Off'}`;
+            }
+
+            function visibleHtmlText(html) {
+                const documentFragment = new DOMParser().parseFromString(html, 'text/html');
+                documentFragment.querySelectorAll('script, style, aside.notes').forEach((element) => element.remove());
+                return documentFragment.body.textContent.replace(/\s+/g, ' ').trim();
+            }
+
+            function renderWritingResults(issues) {
+                writingResultsList.innerHTML = issues.length
+                    ? issues.map(({ area, match }) => {
+                        const suggestion = match.replacements[0]?.value;
+                        return `<div class="writing-issue"><strong>${escapeHTML(area)}</strong>: ${escapeHTML(match.message)}<br><code>${escapeHTML(match.context?.text || '')}</code>${suggestion ? `<br>Suggestion: <strong>${escapeHTML(suggestion)}</strong>` : ''}</div>`;
+                    }).join('')
+                    : '<p>No spelling or grammar suggestions found for this slide.</p>';
+                writingResults.style.display = 'block';
+            }
+
+            function startWritingResultsDrag(event) {
+                if (event.target.closest('button')) return;
+                const dialogBounds = writingResults.getBoundingClientRect();
+                const offsetX = event.clientX - dialogBounds.left;
+                const offsetY = event.clientY - dialogBounds.top;
+                writingResults.style.left = `${dialogBounds.left}px`;
+                writingResults.style.top = `${dialogBounds.top}px`;
+                writingResults.style.right = 'auto';
+                event.preventDefault();
+
+                const drag = (moveEvent) => {
+                    const maxLeft = Math.max(8, window.innerWidth - dialogBounds.width - 8);
+                    const maxTop = Math.max(8, window.innerHeight - dialogBounds.height - 8);
+                    writingResults.style.left = `${Math.min(Math.max(8, moveEvent.clientX - offsetX), maxLeft)}px`;
+                    writingResults.style.top = `${Math.min(Math.max(8, moveEvent.clientY - offsetY), maxTop)}px`;
+                };
+                const stopDragging = () => {
+                    document.removeEventListener('pointermove', drag);
+                    document.removeEventListener('pointerup', stopDragging);
+                };
+                document.addEventListener('pointermove', drag);
+                document.addEventListener('pointerup', stopDragging, { once: true });
+            }
+
+            async function checkGrammar() {
+                if (!presentationDoc) return;
+                const sources = [
+                    { area: 'Slide content', text: visibleHtmlText(contentEditor.value) },
+                    { area: 'Speaker notes', text: notesEditor.value.trim() },
+                ].filter(({ text }) => text);
+
+                grammarButton.disabled = true;
+                grammarStatus.textContent = 'Checking with LanguageTool…';
+                try {
+                    const results = await Promise.all(sources.map(async ({ area, text }) => {
+                        const response = await fetch('https://api.languagetool.org/v2/check', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: new URLSearchParams({ text, language: 'auto' }),
+                        });
+                        if (!response.ok) throw new Error(`LanguageTool returned ${response.status}`);
+                        const data = await response.json();
+                        return data.matches.map((match) => ({ area, match }));
+                    }));
+                    const issues = results.flat();
+                    renderWritingResults(issues);
+                    grammarStatus.textContent = `${issues.length} suggestion${issues.length === 1 ? '' : 's'}`;
+                } catch (error) {
+                    writingResultsList.textContent = 'Grammar checking is unavailable. Check your internet connection and try again.';
+                    writingResults.style.display = 'block';
+                    grammarStatus.textContent = 'Grammar check unavailable';
+                    console.error('Grammar check failed:', error);
+                } finally {
+                    grammarButton.disabled = false;
+                }
+            }
+
+            window.addEventListener('message', (event) => {
+                if (event.data?.type !== 'fragment-state') return;
+                previewPrevFragmentBtn.disabled = !event.data.canPrevious;
+                previewNextFragmentBtn.disabled = !event.data.canNext;
+            });
+
+            const state = {
+                enable: () => {
+                    saveBtn.disabled = false;
+                    grammarButton.disabled = false;
+                    contentEditor.disabled = false;
+                    notesEditor.disabled = false;
+                    previewPrevPageBtn.disabled = false;
+                    previewNextPageBtn.disabled = false;
+                    previewPrevFragmentBtn.disabled = false;
+                    previewNextFragmentBtn.disabled = false;
+                    navControls.style.display = 'block';
+                    grammarStatus.textContent = 'Grammar checks send text to LanguageTool.';
+                },
+                disable: () => {
+                    saveBtn.disabled = true;
+                    grammarButton.disabled = true;
+                    contentEditor.disabled = true;
+                    notesEditor.disabled = true;
+                    navControls.style.display = 'none';
+                    contentEditor.value = '';
+                    contentBackdrop.textContent = '';
+                    notesEditor.value = '';
+                    slideNavDisplay.textContent = 'Slide 0 / 0';
+                    previewPrevPageBtn.disabled = true;
+                    previewNextPageBtn.disabled = true;
+                    previewPrevFragmentBtn.disabled = true;
+                    previewNextFragmentBtn.disabled = true;
+                    grammarStatus.textContent = '';
+                }
+            };
+
+            const loadFile = (file) => {
+                if (!file) return;
+
+                originalFileName = file.name;
+                fileNameDisplay.textContent = originalFileName;
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    const content = e.target.result;
+                    const parser = new DOMParser();
+                    presentationDoc = parser.parseFromString(content, 'text/html');
+                    // Reveal supports vertical slides as direct child sections of a
+                    // horizontal section. Flatten them so each slide can be edited
+                    // and navigated independently.
+                    slideElements = Array.from(presentationDoc.querySelectorAll('.slides > section'))
+                        .flatMap(horizontalSlide => {
+                            const verticalSlides = Array.from(horizontalSlide.children)
+                                .filter(child => child.matches('section'));
+                            return verticalSlides.length ? verticalSlides : [horizontalSlide];
+                        });
+
+                    // Find all reveal.js related scripts to inject into the preview
+                    const scriptTags = Array.from(presentationDoc.querySelectorAll('script[src*="reveal.js"], script[src*="plugin"]'));
+                    scriptHTML = scriptTags.map(s => s.outerHTML).join('\n');
+
+                    if (slideElements.length > 0) {
+                        currentSlideIndex = 0;
+                        state.enable();
+                        renderSlide(currentSlideIndex);
+                    } else {
+                        alert('Could not find any slides (<section> tags) in this file.');
+                        state.disable();
+                    }
+                };
+
+                reader.readAsText(file);
+            };
+
+            loadButton.addEventListener('click', async () => {
+                if ('showOpenFilePicker' in window) {
+                    try {
+                        const [handle] = await window.showOpenFilePicker({
+                            types: [{ description: 'HTML Files', accept: { 'text/html': ['.html'] } }],
+                        });
+                        currentFileHandle = handle;
+                        const file = await handle.getFile();
+                        loadFile(file);
+                    } catch (err) {
+                        if (err.name !== 'AbortError') console.error('Error opening file:', err);
+                    }
+                } else {
+                    // Fallback for browsers without the API
+                    fileInput.click();
+                }
+            });
+
+            fileInput.addEventListener('change', (event) => {
+                loadFile(event.target.files[0]);
+            });
+
+            function buildPreviewDoc(currentSlide) {
+                // Scripts already present in <head> would otherwise run twice: once
+                // from the copied head and once from scriptHTML below.
+                const previewHead = presentationDoc.head.cloneNode(true);
+                previewHead.querySelectorAll('script').forEach(script => script.remove());
+                const previewSlide = currentSlide.cloneNode(true);
+                previewSlide.querySelectorAll('*').forEach((element, index) => {
+                    element.dataset.editorNode = index;
+                });
+
+                return `<html style="background-color: #000;">
+                    <head>${previewHead.innerHTML}</head>
+                    <body>
+                        <style>
+                            .editor-active-element {
+                                outline: 3px solid #ff79c6 !important;
+                                outline-offset: 5px;
+                            }
+                        </style>
+                        <div class="reveal">
+                            <div class="slides" style="display: block;">${previewSlide.outerHTML}</div>
+                        </div>
+                        ${scriptHTML}
+                        <script>
+                            const updateFragmentNavigation = () => {
+                                if (typeof Reveal === 'undefined') return;
+                                const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment');
+                                const fragmentIndex = Reveal.getIndices().f;
+                                parent.postMessage({
+                                    type: 'fragment-state',
+                                    canPrevious: fragmentIndex >= 0,
+                                    canNext: fragmentIndex < fragments.length - 1,
+                                }, '*');
+                            };
+                            window.addEventListener('message', (event) => {
+                                if (event.data?.type === 'editor-selection') {
+                                    document.querySelectorAll('.editor-active-element').forEach((element) => {
+                                        element.classList.remove('editor-active-element');
+                                    });
+                                    const nodeIndex = event.data.nodeIndex;
+                                    if (nodeIndex === null || nodeIndex === undefined) return;
+                                    const selectedElement = document.querySelector('[data-editor-node="' + nodeIndex + '"]');
+                                    selectedElement?.classList.add('editor-active-element');
+                                }
+                                if (event.data?.type === 'preview-fragment' && typeof Reveal !== 'undefined') {
+                                    if (event.data.direction === 'next') Reveal.next();
+                                    if (event.data.direction === 'previous') Reveal.prev();
+                                    window.setTimeout(updateFragmentNavigation, 0);
+                                }
+                            });
+                            if (typeof Reveal !== 'undefined') {
+                                const plugins = [];
+                                if (typeof RevealNotes !== 'undefined') plugins.push(RevealNotes);
+                                if (typeof RevealHighlight !== 'undefined') plugins.push(RevealHighlight);
+                                Reveal.initialize({ controls: false, progress: false, autoPlayMedia: false, plugins }).then(updateFragmentNavigation);
+                                Reveal.on('ready', updateFragmentNavigation);
+                                Reveal.on('fragmentshown', updateFragmentNavigation);
+                                Reveal.on('fragmenthidden', updateFragmentNavigation);
+                            }
+                        <\/script>
+                    </body>
+                </html>`;
+            }
+
+            function renderSlide(index) {
+                if (index < 0 || index >= slideElements.length) return;
+                currentSlideIndex = index;
+                clearTimeout(previewUpdateTimer);
+
+                // 1. Update editors
+                const currentSlide = slideElements[index];
+
+                // To avoid showing the speaker notes in the main content editor, we'll build the content string manually.
+                let slideContent = '';
+                currentSlide.childNodes.forEach(child => {
+                    if (child.nodeName.toLowerCase() === 'aside' && child.classList.contains('notes')) {
+                        // Skip notes
+                    } else {
+                        slideContent += child.outerHTML || child.textContent;
+                    }
+                });
+                contentEditor.value = slideContent.trim();
+
+                const notesEl = currentSlide.querySelector('aside.notes');
+                notesEditor.value = notesEl ? notesEl.innerHTML.trim() : '';
+
+                updateHighlights();
+
+                // 2. Update navigation
+                slideNavDisplay.textContent = `Slide ${index + 1} / ${slideElements.length}`;
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === slideElements.length - 1;
+                previewPrevPageBtn.disabled = index === 0;
+                previewNextPageBtn.disabled = index === slideElements.length - 1;
+                previewPrevFragmentBtn.disabled = true;
+                previewNextFragmentBtn.disabled = true;
+
+                previewFrame.srcdoc = buildPreviewDoc(currentSlide);
+            }
+
+            function updateAndPreview({ previewImmediately = false } = {}) {
+                if (!presentationDoc || slideElements.length === 0) return;
+
+                const currentSlide = slideElements[currentSlideIndex];
+                const notesValue = notesEditor.value.trim();
+                let notesEl = currentSlide.querySelector('aside.notes');
+
+                // Reconstruct the slide's innerHTML from the two text areas
+                if (notesValue) {
+                    if (!notesEl) {
+                        notesEl = presentationDoc.createElement('aside');
+                        notesEl.className = 'notes';
+                    }
+                    notesEl.innerHTML = `\n                    ${notesValue}\n                `;
+                    currentSlide.innerHTML = contentEditor.value + notesEl.outerHTML;
+                } else {
+                    currentSlide.innerHTML = contentEditor.value;
+                    if (notesEl) notesEl.remove();
+                }
+
+                updateHighlights();
+
+                // Recreating an iframe on every keystroke is expensive and resets
+                // animations/media. Keep editing responsive and refresh on a pause.
+                clearTimeout(previewUpdateTimer);
+                const renderPreview = () => {
+                    previewFrame.srcdoc = buildPreviewDoc(currentSlide);
+                    previewUpdateTimer = null;
+                };
+                if (previewImmediately) {
+                    renderPreview();
+                } else {
+                    previewUpdateTimer = setTimeout(renderPreview, 250);
+                }
+            }
+
+            saveBtn.addEventListener('click', async () => {
+                if (!presentationDoc) return;
+
+                // Ensure the latest edits are captured before saving.
+                updateAndPreview({ previewImmediately: true });
+
+                const fullHtml = '<!DOCTYPE html>\n' + presentationDoc.documentElement.outerHTML;
+                const blob = new Blob([fullHtml], { type: 'text/html' });
+
+                // Use the modern File System Access API if available (Chrome, Edge)
+                if ('showSaveFilePicker' in window) {
+                    try {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: originalFileName,
+                            startIn: currentFileHandle || 'downloads', // Start in the same directory if handle is available
+                            types: [{
+                                description: 'HTML Files',
+                                accept: { 'text/html': ['.html'] },
+                            }],
+                        });
+                        const writable = await handle.createWritable();
+                        await writable.write(blob);
+                        await writable.close();
+
+                        // After successful save, automatically load the new file into the editor.
+                        // This makes "Save As" workflows feel natural.
+                        currentFileHandle = handle;
+                        const file = await handle.getFile();
+                        loadFile(file);
+                    } catch (err) {
+                        // Handle cases where the user cancels the save dialog
+                        if (err.name !== 'AbortError') {
+                            console.error('Error saving file:', err);
+                        }
+                    }
+                } else {
+                    // Fallback for other browsers (Firefox, Safari)
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `edited_${originalFileName}`;
+                    link.click();
+                    URL.revokeObjectURL(link.href);
+                }
+            });
+
+            contentEditor.addEventListener('input', updateAndPreview);
+            notesEditor.addEventListener('input', updateAndPreview);
+            contentEditor.addEventListener('click', showSelectedElementInPreview);
+            contentEditor.addEventListener('keyup', showSelectedElementInPreview);
+            contentEditor.addEventListener('select', showSelectedElementInPreview);
+            previewFrame.addEventListener('load', showSelectedElementInPreview);
+
+            // Sync scrolling for highlighters
+            const syncBackdropScroll = (editor, backdrop) => {
+                backdrop.scrollTop = editor.scrollTop;
+                backdrop.scrollLeft = editor.scrollLeft;
+            };
+            contentEditor.addEventListener('scroll', () => syncBackdropScroll(contentEditor, contentBackdrop));
+            notesEditor.addEventListener('scroll', () => syncBackdropScroll(notesEditor, notesBackdrop));
+
+            // Track last focused editor for replace functionality
+            contentEditor.addEventListener('focus', () => lastFocusedEditor = contentEditor);
+            notesEditor.addEventListener('focus', () => lastFocusedEditor = notesEditor);
+
+            prevBtn.addEventListener('click', () => renderSlide(currentSlideIndex - 1));
+            nextBtn.addEventListener('click', () => renderSlide(currentSlideIndex + 1));
+            previewPrevPageBtn.addEventListener('click', () => renderSlide(currentSlideIndex - 1));
+            previewNextPageBtn.addEventListener('click', () => renderSlide(currentSlideIndex + 1));
+            previewPrevFragmentBtn.addEventListener('click', () => movePreviewFragment('previous'));
+            previewNextFragmentBtn.addEventListener('click', () => movePreviewFragment('next'));
+
+            // --- Find and Replace Logic ---
+            const toggleFindPanel = () => {
+                if (findPanel.style.display === 'block') {
+                    findPanel.style.display = 'none';
+                } else {
+                    findPanel.style.display = 'block';
+                    findInput.focus();
+                    findInput.select();
+                }
+            };
+
+            findButton.addEventListener('click', toggleFindPanel);
+            closeFindPanelBtn.addEventListener('click', () => findPanel.style.display = 'none');
+            spellcheckButton.addEventListener('click', () => setSpellcheck(!spellcheckEnabled));
+            grammarButton.addEventListener('click', checkGrammar);
+            closeWritingResultsBtn.addEventListener('click', () => writingResults.style.display = 'none');
+            writingResultsHandle.addEventListener('pointerdown', startWritingResultsDrag);
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    toggleFindPanel();
+                }
+                if (e.key === 'Escape' && findPanel.style.display === 'block') {
+                    findPanel.style.display = 'none';
+                }
+            });
+
+            function updateHighlights() {
+                const searchTerm = findInput.value;
+                const regex = searchTerm ? new RegExp(escapeRegExp(searchTerm), 'gi') : null;
+                let totalMatches = 0;
+
+                const escapeHTML = (str) => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+                const getHtmlSyntax = (text) => {
+                    const syntax = Array(text.length).fill('');
+                    const applySyntax = (start, end, className) => {
+                        for (let index = start; index < end; index += 1) syntax[index] = className;
+                    };
+                    const tagPattern = /<!--[\s\S]*?-->|<\/?[A-Za-z][^>]*>/g;
+                    let tagMatch;
+
+                    while ((tagMatch = tagPattern.exec(text)) !== null) {
+                        const tag = tagMatch[0];
+                        const start = tagMatch.index;
+                        const end = start + tag.length;
+
+                        if (tag.startsWith('<!--')) {
+                            applySyntax(start, end, 'syntax-comment');
+                            continue;
+                        }
+
+                        applySyntax(start, start + 1, 'syntax-punctuation');
+                        applySyntax(end - 1, end, 'syntax-punctuation');
+                        if (tag.endsWith('/>')) applySyntax(end - 2, end - 1, 'syntax-punctuation');
+                        const tagNameMatch = /^<\s*(\/?)\s*([A-Za-z][\w:-]*)/.exec(tag);
+                        if (!tagNameMatch) continue;
+
+                        const nameStart = start + tagNameMatch[0].lastIndexOf(tagNameMatch[2]);
+                        applySyntax(nameStart, nameStart + tagNameMatch[2].length, 'syntax-tag');
+                        if (tagNameMatch[1]) applySyntax(start + tag.indexOf('/'), start + tag.indexOf('/') + 1, 'syntax-punctuation');
+
+                        const attributesStart = tagNameMatch[0].length;
+                        const attributes = tag.slice(attributesStart, -1);
+                        const attributePattern = /([:@A-Za-z_][\w:.-]*)(\s*=\s*)("[^"]*"|'[^']*'|[^\s"'=<>`]+)/g;
+                        let attributeMatch;
+                        while ((attributeMatch = attributePattern.exec(attributes)) !== null) {
+                            const attributeStart = start + attributesStart + attributeMatch.index;
+                            applySyntax(attributeStart, attributeStart + attributeMatch[1].length, 'syntax-attribute');
+                            const valueStart = attributeStart + attributeMatch[1].length + attributeMatch[2].length;
+                            applySyntax(valueStart, valueStart + attributeMatch[3].length, 'syntax-value');
+                        }
+                    }
+
+                    return syntax;
+                };
+
+                const highlight = (text, useHtmlSyntax = false) => {
+                    if (!text) return '';
+                    const syntax = useHtmlSyntax ? getHtmlSyntax(text) : Array(text.length).fill('');
+                    const matches = Array(text.length).fill(false);
+                    let match;
+                    if (regex) {
+                        while ((match = regex.exec(text)) !== null) {
+                            for (let index = match.index; index < match.index + match[0].length; index += 1) matches[index] = true;
+                            totalMatches += 1;
+                        }
+                    }
+
+                    let result = '';
+                    let runStart = 0;
+                    for (let index = 1; index <= text.length; index += 1) {
+                        if (index === text.length || syntax[index] !== syntax[runStart] || matches[index] !== matches[runStart]) {
+                            const escapedText = escapeHTML(text.slice(runStart, index));
+                            const coloredText = syntax[runStart] ? `<span class="${syntax[runStart]}">${escapedText}</span>` : escapedText;
+                            result += matches[runStart] ? `<mark>${coloredText}</mark>` : coloredText;
+                            runStart = index;
+                        }
+                    }
+                    return result;
+                };
+
+                contentBackdrop.innerHTML = highlight(contentEditor.value, true);
+                notesBackdrop.innerHTML = highlight(notesEditor.value);
+                findResultsDisplay.textContent = `${totalMatches} match${totalMatches !== 1 ? 'es' : ''}`;
+            }
+
+            findInput.addEventListener('input', updateHighlights);
+
+            replaceAllBtn.addEventListener('click', () => {
+                const find = findInput.value;
+                const replace = replaceInput.value;
+                if (!find) return;
+
+                const regex = new RegExp(escapeRegExp(find), 'gi');
+                contentEditor.value = contentEditor.value.replace(regex, () => replace);
+                notesEditor.value = notesEditor.value.replace(regex, () => replace);
+
+                updateAndPreview();
+            });
+
+            replaceBtn.addEventListener('click', () => {
+                const find = findInput.value;
+                const replace = replaceInput.value;
+                if (!find) return;
+
+                const activeEditor = lastFocusedEditor;
+                if (!activeEditor || activeEditor.tagName !== 'TEXTAREA') {
+                    alert('Please click inside the "Slide Content" or "Speaker Notes" editor first.');
+                    return;
+                }
+
+                const text = activeEditor.value;
+                const selectionStart = activeEditor.selectionStart;
+                const selectionEnd = activeEditor.selectionEnd;
+                const selectedText = text.substring(selectionStart, selectionEnd);
+
+                // If the selected text matches the find term, replace it and find the next one.
+                if (selectedText.toLocaleLowerCase() === find.toLocaleLowerCase()) {
+                    const newText = text.substring(0, selectionStart) + replace + text.substring(selectionEnd);
+                    activeEditor.value = newText;
+                    updateAndPreview();
+
+                    // After replacing, find and select the next occurrence.
+                    const nextMatch = activeEditor.value.substring(selectionStart + replace.length).search(new RegExp(escapeRegExp(find), 'i'));
+                    if (nextMatch !== -1) {
+                        const nextStart = selectionStart + replace.length + nextMatch;
+                        activeEditor.setSelectionRange(nextStart, nextStart + find.length);
+                        activeEditor.focus(); // Bring focus back to the editor
+                    }
+                } else {
+                    // If no text is selected, or the selection doesn't match, find the next occurrence.
+                    // Start search from the beginning of the text to be more intuitive.
+                    let nextMatch = text.search(new RegExp(escapeRegExp(find), 'i'));
+
+                    // If a match is found, select it.
+                    if (nextMatch !== -1) {
+                        activeEditor.setSelectionRange(nextMatch, nextMatch + find.length);
+                        activeEditor.focus(); // Bring focus back to the editor
+                    } else {
+                        // If no matches are found from the beginning, then there are truly no matches.
+                        alert('No more matches found on this slide.');
+                    }
+                }
+            });
+
+            state.disable();
+        });
+    </script>
+</body>
+
+</html>
