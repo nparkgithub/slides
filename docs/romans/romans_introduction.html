@@ -61,16 +61,49 @@
     .voice strong { display: block; color: #f8f8f2; font-size: 1.18em; margin-bottom: 4px; }
     .voice .verse { display: block; color: #ffb86c; font-weight: 700; margin-top: 7px; }
     .core-message { margin: 17px 0 0; padding-top: 13px; border-top: 2px solid rgba(255, 184, 108, .75); text-align: center; font-size: .66em; font-weight: 700; }
+    .takeaway-slide { font-size: .76em; }
+    .takeaway-slide h2 { margin: .3em 0 .55em; }
+    .takeaway-slide .takeaway-layout { gap: 24px; }
+    .takeaway-slide .ring-analogy svg { max-width: 330px; }
+    .takeaway-slide .voices { gap: 9px; margin-top: 10px; }
+    .takeaway-slide .voice { padding-top: 7px; font-size: .43em; }
+    .takeaway-slide .core-message { margin-top: 10px; padding-top: 9px; }
+    .takeaway-slide .source { position: static; margin: 9px 0 0; font-size: .38em; }
+    .reference-slide { text-align: center !important; }
+    .reference-slide h2 { margin-bottom: .25em; }
+    .reference-intro { margin-top: 0; color: #b9b6c8; font-size: .7em; }
+    .reference-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; margin-top: 28px; }
+    .reference-card { display: block; overflow: hidden; border: 1px solid rgba(139,233,253,.45); border-radius: 12px; background: rgba(255,255,255,.045); color: #f8f8f2; text-align: left; text-decoration: none; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+    .reference-card:hover, .reference-card:focus-visible { border-color: #50fa7b; box-shadow: 0 0 0 3px rgba(80,250,123,.24); outline: none; transform: translateY(-4px); }
+    .reference-image { height: 210px; overflow: hidden; background: #171426; }
+    .reference-image img { display: block; width: 200%; max-width: none; height: 100%; object-fit: cover; }
+    .reference-card.book .reference-image { display: flex; align-items: center; justify-content: center; }
+    .reference-card.book .reference-image img { width: auto; max-width: 100%; height: 100%; object-fit: contain; }
+    .reference-card-copy { padding: 18px 20px 20px; }
+    .reference-card-copy h3 { margin: 0 0 9px; color: #8be9fd; font-size: .92em; }
+    .reference-card-copy p { margin: 0; color: #d8d5e5; font-size: .57em; line-height: 1.42; }
+    .reference-card-copy .reference-action { display: block; margin-top: 13px; color: #50fa7b; font-size: .56em; font-weight: 700; }
     #voice-controls { position: fixed; left: 20px; bottom: 20px; z-index: 1000; }
     #play-notes-button { appearance: none; border: 1px solid rgba(139,233,253,.65); border-radius: 7px; background: rgba(40,35,63,.94); color: #f8f8f2; padding: 9px 13px; font: 600 14px/1 "Inter", sans-serif; cursor: pointer; box-shadow: 0 5px 18px rgba(0,0,0,.22); }
     #play-notes-button:hover, #play-notes-button:focus-visible { background: #44406a; outline: 2px solid #8be9fd; outline-offset: 2px; }
     #play-notes-button.is-speaking { border-color: #ff79c6; color: #ff79c6; }
+    #presenter-navigation { position: fixed; right: 18px; bottom: 62px; z-index: 1000; display: grid; grid-template-columns: repeat(3, 42px); grid-template-areas: ". up ." "left . right" ". down ."; gap: 6px; }
+    #presenter-navigation button { width: 42px; height: 42px; padding: 0; border: 1px solid rgba(40,35,63,.55); border-radius: 50%; background: #50fa7b; color: #282a36; font: 700 22px/1 Arial, sans-serif; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
+    #presenter-navigation button:hover:not(:disabled), #presenter-navigation button:focus-visible:not(:disabled) { background: #8be9fd; outline: 2px solid #f8f8f2; outline-offset: 2px; }
+    #presenter-navigation button:disabled { background: #6272a4; color: #c3c6d6; cursor: not-allowed; box-shadow: none; }
+    #presenter-left { grid-area: left; } #presenter-right { grid-area: right; } #presenter-up { grid-area: up; } #presenter-down { grid-area: down; }
   </style>
 </head>
 <body>
   <div id="voice-controls">
     <button id="play-notes-button" type="button" aria-pressed="false" title="Play or stop speaker notes (P)">▶ Play notes <span aria-hidden="true">(P)</span></button>
   </div>
+  <nav id="presenter-navigation" aria-label="Presentation navigation">
+    <button id="presenter-left" type="button" aria-label="Previous slide" title="Previous slide">←</button>
+    <button id="presenter-right" type="button" aria-label="Next slide" title="Next slide">→</button>
+    <button id="presenter-up" type="button" aria-label="Hide previous fragment" title="Hide previous content">↑</button>
+    <button id="presenter-down" type="button" aria-label="Show next fragment" title="Show next content">↓</button>
+  </nav>
   <div class="reveal"><div class="slides">
 
     <section class="center" data-background-gradient="linear-gradient(135deg, #19162a 0%, #28233f 55%, #1d1b2c 100%)"><p class="eyebrow">An introduction to Paul’s letter</p>
@@ -78,10 +111,12 @@
       <hr class="title-rule">
       <p style="font-size:1.12em">The gospel: God’s righteousness<br>revealed, received, and lived.</p>
       <p class="muted small">by Daniel Park</p><aside class="notes">
-                    - Romans is not merely a theological reference book; it is a pastoral, missionary letter.
-        - It addresses the deepest human need and announces God’s decisive answer in Christ.
-        - This introduction gives us a map before we begin the journey.
-                </aside></section>
+        - Welcome everyone and explain that this is an orientation session. We are not trying to answer every question in Romans today; we are gaining a map for reading the letter well.
+        - Romans is both carefully reasoned theology and a real pastoral letter. Paul writes to believers he has not yet met because he wants to strengthen them and partner with them in mission.
+        - The central claim of the letter is that God’s righteousness is revealed in the gospel. That righteousness is not achieved by human effort; it is received through faith in Christ.
+        - Invite listeners to keep three movements in mind: our need, God’s gift, and the transformed life that follows.
+        - The aim is not merely to become more informed about Romans, but to become more humble, hopeful, and faithful as the gospel takes root in us.
+      </aside></section>
 
     <section>
       <p class="eyebrow">The big idea</p>
@@ -95,8 +130,11 @@
         <li class="fragment">It traces the gospel into a transformed life, a reconciled people, and a renewed hope.</li>
       </ul>
       <aside class="notes">
-        - Romans moves from ruin to redemption, and from doctrine to daily life.
-        - The governing question is not simply, “How can people be better?” but “How can God be just and justify the ungodly?”
+        - Read the quotation slowly. Romans is Paul’s fullest sustained explanation of the gospel, but it never treats the gospel as a merely abstract idea.
+        - On the first point, emphasize the honesty of Romans: it begins with the universal problem of sin. Paul levels every human claim to superiority, whether religious, moral, or cultural.
+        - On the second point, emphasize gift. God does not ignore evil; he acts in Christ so that he remains just while justifying the ungodly.
+        - On the third point, show the destination of the letter. Grace produces a new way of life, a reconciled people, and a durable hope in the midst of suffering.
+        - The governing question is not simply, “How can people be better?” but, “How can God be just and justify the ungodly?” Romans answers that question through Jesus Christ.
       </aside>
     </section>
 
@@ -127,8 +165,11 @@
       </div>
       <p class="source">Source for historical framing: Thomas L. Constable, <em>Notes on Romans</em>, 2026 edition.</p>
       <aside class="notes">
-        - Paul is not writing from Rome and has not yet visited the Roman believers.
-        - He writes at a transition point: he is preparing to take a collection to Jerusalem, then hopes to travel west.
+        - Paul introduces himself in Romans 1:1, but the setting adds important color. He writes from Corinth, likely during the winter of A.D. 56–57, near the close of his third missionary journey.
+        - He is not writing from Rome and has not yet visited the Roman believers. That makes the letter unusually deliberate: he must introduce his gospel and his ministry through writing.
+        - Point out the timeline. Paul’s ministry has already moved from Damascus through several missionary journeys; Romans comes at a mature and consequential moment.
+        - His immediate concern is a collection for needy believers in Jerusalem. His future hope is to travel through Rome and continue west toward Spain.
+        - This setting helps us hear Romans as a letter written between completed work and an uncertain future, with mission, danger, fellowship, and trust in God all in view.
       </aside>
     </section>
 
@@ -151,10 +192,11 @@
         </div>
       </div>
       <aside class="notes">
-        - This map connects the dates and places in Paul’s ministry.
-        - Romans is written from Corinth in Achaia. Paul is about to travel east toward Jerusalem, not west toward Rome.
-        - Yet Rome is already central to his plans: he wants fellowship with the believers there and hopes for their help as he continues to Spain.
-        - The letter is born out of movement, mission, and a desire for partnership in the gospel.
+        - Use the map to make the geography concrete. Corinth is the likely place of writing; Jerusalem is Paul’s immediate destination; Rome is the church he longs to visit; Spain is the future horizon beyond the map.
+        - Notice the surprising direction of travel. Paul is about to go east to Jerusalem, not west to Rome. Yet Rome already occupies his prayers and plans.
+        - Paul does not treat the Roman church simply as a stopover. He wants mutual encouragement, fellowship, and partnership in taking the gospel farther west.
+        - The map reminds us that Romans was born out of movement and mission. Theology in this letter serves worship, unity, courage, and gospel advance.
+        - Transition by asking: what kind of church was Paul writing to, and why did its composition matter so much?
       </aside>
     </section>
 
@@ -168,8 +210,11 @@
       </div>
       <p class="fragment" style="margin-top:35px"><span class="accent">The pastoral pressure point:</span> How can diverse believers live as one people under the same Lord?</p>
       <aside class="notes">
-        - The Roman church was probably begun by early Jewish and Gentile believers, rather than by Paul.
-        - Tensions between Jewish and Gentile Christians help explain why chapters 9–11 and 14–15 matter so much.
+        - Paul did not found this church. It was likely formed by early Jewish and Gentile believers, perhaps including people connected with Pentecost and later travel between Rome and the eastern Mediterranean.
+        - The first card highlights their public reputation: Paul thanks God because their faith is known throughout the world. Begin with encouragement, not deficiency.
+        - The second card reminds us that this was probably a network of house churches, not one centralized gathering. That means unity had to be practiced across several communities.
+        - The third card identifies a major pastoral challenge: Jewish and Gentile believers brought different histories, customs, and instincts into one family in Christ.
+        - This tension helps explain why Romans 9–11 and 14–15 matter so much. The gospel does not erase every difference, but it creates one people who welcome one another under the same Lord.
       </aside>
     </section>
 
@@ -182,8 +227,11 @@
         <div class="card fragment"><h3>Apologetic</h3><p>Set out a careful, durable account of the gospel Paul proclaimed.</p></div>
       </div>
       <aside class="notes">
-        - These are not competing explanations. Romans is simultaneously missionary, pastoral, and explanatory.
-        - Paul wants Rome to understand the gospel deeply enough to live it together and send it onward.
+        - These three purposes belong together rather than competing with one another.
+        - Missionary: Paul hopes that Rome will become a place of fellowship and support as he takes the gospel to places where Christ has not yet been named, especially toward Spain.
+        - Pastoral: a healthy church still needs strengthening. Romans addresses divisions, conscience questions, suffering, obedience, and life together.
+        - Apologetic or explanatory: Paul gives a careful, durable account of the gospel he preaches so the church can recognize truth and resist distortion.
+        - Paul wants Rome to understand the gospel deeply enough to live it together and send it onward. Good doctrine serves love, mission, and perseverance.
       </aside>
     </section>
 
@@ -197,9 +245,12 @@
         <li class="fragment"><span class="highlight">God gives righteousness:</span> received by faith, not earned by performance.</li>
         <li class="fragment"><span class="highlight">God forms a righteous people:</span> the gospel bears fruit in embodied obedience.</li>
       </ul><aside class="notes">
-                    - These verses function as the thesis for the letter.
-        - In Romans, righteousness is not an abstract concept. It is God acting faithfully to rescue and restore.
-                </aside></section>
+        - Treat Romans 1:16–17 as the thesis statement for the whole letter. Paul is not ashamed because the gospel is God’s power, not merely good advice.
+        - Explain “righteousness of God” carefully. It includes God’s own holy and faithful character, his just action against sin, and the right standing he gives to those who trust Christ.
+        - The first point keeps God at the center: he is holy, faithful, and just. The gospel does not lower God’s standards.
+        - The second point keeps grace at the center: righteousness is received by faith, not achieved by performance, heritage, or moral comparison.
+        - The third point keeps transformation at the center: the gift of righteousness creates a people whose embodied obedience displays God’s mercy in the world.
+      </aside></section>
 
     <section>
       <p class="eyebrow">A map of the letter</p>
@@ -213,8 +264,11 @@
       </div>
       <p class="center muted small" style="margin-top:32px">The message does not end with forgiveness; it moves toward a renewed people who offer themselves to God.</p>
       <aside class="notes">
-        - The structure lets us see Paul’s logic: diagnosis, rescue, assurance, God’s faithfulness, and transformed practice.
-        - Chapters 9–11 are not a detour; they answer whether God’s promises can be trusted.
+        - Walk through the arc one section at a time. Romans 1:1–17 introduces Paul, his gospel, and the letter’s central theme.
+        - Romans 1:18–3:20 gives the diagnosis: Gentile and Jew alike stand under sin. Paul removes every basis for boasting before he announces grace.
+        - Romans 3:21–8:39 announces rescue and assurance: justification by faith, union with Christ, freedom from sin’s dominion, life in the Spirit, and hope in suffering.
+        - Chapters 9–11 are not a detour. They ask whether God’s promises can be trusted in light of Israel’s unbelief, and they display God’s faithfulness and mercy.
+        - Chapters 12–16 show the lived result: worship, love, humility, submission, welcome, and mission. The letter moves from what God has done to what a renewed people become.
       </aside>
     </section>
 
@@ -230,8 +284,11 @@
         </tbody>
       </table>
       <aside class="notes">
-        - Romans is wide in scope: individual salvation, the people of God, Israel and the nations, creation and future glory.
-        - Notice how often Paul moves from what God has done to who we are becoming.
+        - Use the three columns to show that Romans is not only about private salvation. It addresses humanity, God’s character and action, and the shape of life in Christ.
+        - First row: sin is universal, so no one can boast. God is both just and the justifier, and faith receives what cannot be earned.
+        - Second row: Adam’s fall and Christ’s grace show two representative heads. Union with Christ changes our relationship to sin and opens the way to new obedience.
+        - Third row: Paul’s hope is as large as creation itself. The Spirit assures believers in present weakness while God remains faithful to every promise.
+        - Notice the repeated movement throughout Romans: what God has done creates who we are becoming. Christian ethics grows from grace; it does not compete with grace.
       </aside>
     </section>
 
@@ -245,8 +302,11 @@
         <li class="fragment">Let the <span class="highlight">doxology</span> set the horizon: “to the only wise God be glory forevermore” (16:27).</li>
       </ul>
       <aside class="notes">
-        - Romans can feel dense, so we will move patiently and observe its connections.
-        - The goal is not simply to master Romans, but for Romans to master us—to deepen faith, humility, worship, and love.
+        - Romans can feel dense because Paul builds an argument over many chapters. Encourage the group to read slowly and pay attention to connecting words such as “therefore,” “for,” “but now,” and “so that.”
+        - Keep the whole letter in view. We should not isolate justification from sanctification, grace from obedience, or personal faith from the church’s shared life.
+        - Listen for the community dimension. Paul repeatedly teaches believers how to welcome one another, use freedom in love, and live humbly across differences.
+        - Let the doxology set the horizon. The goal of careful study is worship: glory to the only wise God through Jesus Christ.
+        - Invite a simple prayerful posture: ask God not only to help us understand Romans, but to let Romans deepen faith, humility, hope, and love.
       </aside>
     </section>
 
@@ -256,35 +316,42 @@
       <p class="highlight">Where we begin</p>
       <p class="muted small">Next: Romans 1:1–7 — the gospel promised beforehand</p>
       <aside class="notes">
-        - Invite the group to listen for this theme throughout the study: the power of God, the righteousness of God, and faith.
-        - Transition into the opening salutation, where Paul introduces himself and the gospel before he introduces the Roman believers.
+        - Pause here and let Romans 1:16–17 settle in. This is the banner over the entire study: the gospel is God’s power for salvation to everyone who believes.
+        - Emphasize that Paul is not ashamed because the gospel accomplishes what human effort and religious achievement cannot accomplish.
+        - Invite the group to listen for three recurring words and ideas throughout the letter: God’s power, God’s righteousness, and faith.
+        - Salvation is not narrowed to escape from judgment; it includes God’s rescuing and restoring work, creating a people who live under his mercy.
+        - Transition to Romans 1:1–7. Paul begins not with the Roman believers’ situation, but with his identity as a servant of Christ and the gospel promised beforehand.
       </aside>
     </section>
 
-    <section data-background-gradient="radial-gradient(circle at 18% 25%, #393054 0%, #201c31 52%, #15121f 100%)">
-      <p class="eyebrow">Takeaways</p>
+    <section class="takeaway-slide" data-background-gradient="radial-gradient(circle at 18% 25%, #393054 0%, #201c31 52%, #15121f 100%)"><p class="eyebrow">Takeaways</p>
       <h2>Romans: the gospel at the center</h2>
       <div class="takeaway-layout">
         <figure class="ring-analogy fragment">
           <svg viewBox="0 0 430 340" role="img" aria-label="A golden ring representing Scripture, with a diamond representing the book of Romans at its center.">
             <defs>
-              <linearGradient id="gold-band" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff0a8"/><stop offset=".26" stop-color="#dba83c"/><stop offset=".55" stop-color="#825617"/><stop offset=".78" stop-color="#f4cc62"/><stop offset="1" stop-color="#9a691d"/></linearGradient>
-              <linearGradient id="diamond-face" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffffff"/><stop offset=".32" stop-color="#8be9fd"/><stop offset=".7" stop-color="#bd93f9"/><stop offset="1" stop-color="#6950a1"/></linearGradient>
-              <filter id="diamond-glow"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <linearGradient id="gold-band" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff0a8"></stop><stop offset=".26" stop-color="#dba83c"></stop><stop offset=".55" stop-color="#825617"></stop><stop offset=".78" stop-color="#f4cc62"></stop><stop offset="1" stop-color="#9a691d"></stop></linearGradient>
+              <linearGradient id="diamond-face" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffffff"></stop><stop offset=".32" stop-color="#8be9fd"></stop><stop offset=".7" stop-color="#bd93f9"></stop><stop offset="1" stop-color="#6950a1"></stop></linearGradient>
+              <filter id="diamond-glow"><feGaussianBlur stdDeviation="7" result="blur"></feGaussianBlur><feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
             </defs>
-            <ellipse cx="215" cy="218" rx="133" ry="76" fill="none" stroke="url(#gold-band)" stroke-width="35"/>
-            <path d="M136 172 L161 118 L269 118 L294 172 L215 250 Z" fill="#ad7925" stroke="#ffe7a0" stroke-width="4"/>
-            <path d="M151 165 L174 125 L256 125 L279 165 L215 234 Z" fill="url(#diamond-face)" stroke="#e9fbff" stroke-width="4" filter="url(#diamond-glow)"/>
-            <path d="M174 125 L215 165 L256 125 M151 165 L215 165 L279 165 M215 165 L215 234" fill="none" stroke="#ffffff" stroke-opacity=".75" stroke-width="3"/>
+            <ellipse cx="215" cy="218" rx="133" ry="76" fill="none" stroke="url(#gold-band)" stroke-width="35"></ellipse>
+            <path d="M136 172 L161 118 L269 118 L294 172 L215 250 Z" fill="#ad7925" stroke="#ffe7a0" stroke-width="4"></path>
+            <path d="M151 165 L174 125 L256 125 L279 165 L215 234 Z" fill="url(#diamond-face)" stroke="#e9fbff" stroke-width="4" filter="url(#diamond-glow)"></path>
+            <path d="M174 125 L215 165 L256 125 M151 165 L215 165 L279 165 M215 165 L215 234" fill="none" stroke="#ffffff" stroke-opacity=".75" stroke-width="3"></path>
             <text x="215" y="151" text-anchor="middle" fill="#19162a" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">ROMANS</text>
             <text x="215" y="321" text-anchor="middle" fill="#f8f8f2" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4">SCRIPTURE</text>
           </svg>
           <figcaption>Illustration: Scripture is the ring; Romans is a precious diamond that brings the gospel into vivid focus.</figcaption>
         </figure>
         <div>
-          <blockquote class="takeaway-quote fragment">
-            Human beings are sinful and cannot establish their own righteousness before God. But through Jesus Christ, God graciously provides the righteousness we need. This righteousness is received by faith, not earned by human effort. And when we truly understand and experience this gospel, it transforms both our relationship with God and the way we live.
-          </blockquote>
+         <blockquote class="takeaway-quote fragment">
+  <ul>
+    <li><strong>Saved by Grace Through Faith:</strong> Salvation comes entirely by faith through God's grace, not by personal performance or good deeds.</li>
+    <li><strong>Ongoing Struggle with Sin:</strong> Being saved does not make us immune to daily battles with recurring sin and human weakness.</li>
+    <li><strong>Purpose in Suffering:</strong> Enduring trials builds perseverance, refined character, and an unshakable hope.</li>
+    <li><strong>Inseparable Love of God:</strong> Absolutely nothing—including personal failures, missteps, or sin—can separate us from God's love.</li>
+  </ul>
+</blockquote>
           <p class="fragment" style="margin-top:24px"><span class="highlight">Carry this with you:</span> Romans brings us from our need, to God’s gift, to a life remade by grace.</p>
         </div>
       </div>
@@ -295,12 +362,43 @@
         <div class="voice fragment"><strong>John Stott <span class="muted">(1921–2011)</span></strong><em>“Paul’s devastating exposure of universal human sin and guilt …”</em><span class="verse">Romans 1:18–3:20</span></div>
       </div>
       <p class="core-message fragment">Core message: God gives righteousness through Christ, received by faith, producing a changed life.</p>
-      <p class="source">Diamond-ring analogy adapted from a traditional illustration attributed to Philipp Jakob Spener: Scripture as a ring, Romans as its precious stone, and Romans 8 as its sparkle.</p>
+      <p class="source">Diamond-ring analogy adapted from a traditional illustration attributed to Philipp Jakob Spener: Scripture as a ring, Romans as its precious stone, and Romans 8 as its sparkle.</p><aside class="notes">
+        - Introduce the ring-and-diamond illustration as a helpful picture, not a ranking system for Scripture. Every part of God’s Word is valuable; the image highlights Romans as an especially concentrated presentation of the gospel.
+        - As the first panel appears, explain the image: Scripture is the ring, Romans is a precious stone within it, and Romans 8 is often treasured as a particularly bright expression of gospel assurance.
+        - As the summary list appears, name the major takeaways: salvation is by grace through faith; believers still face a real struggle with sin; suffering is not meaningless; and nothing can separate God’s people from his love in Christ.
+        - As the historical voices appear, use them briefly. Romans has repeatedly clarified the gospel for believers across centuries, including Augustine, Luther, Calvin, and Stott.
+        - End with the core message. We cannot establish our own righteousness. God provides righteousness through Jesus Christ; faith receives it; and grace transforms how we live.
+        - This is a good place to invite reflection: which part of Romans’ message most challenges or comforts you as we begin?
+      </aside></section>
+
+    <section class="reference-slide" data-background-gradient="radial-gradient(circle at 50% 20%, #343050 0%, #201c31 56%, #15121f 100%)">
+      <p class="eyebrow">Keep exploring</p>
+      <h2>References &amp; further study</h2>
+      <p class="reference-intro">Select a card to open the resource in a new tab.</p>
+      <div class="reference-grid">
+        <a class="reference-card" href="https://soniclight.com/tcon/notes/html/romans/romans.htm" target="_blank" rel="noopener noreferrer">
+          <div class="reference-image"><img src="assets/reference-resources.png" alt="An open annotated book under a reading lamp."></div>
+          <div class="reference-card-copy">
+            <h3>Constable’s Notes on Romans</h3>
+            <p>Dr. Thomas L. Constable’s 2026 edition: historical background, outline, exposition, and study notes for Romans.</p>
+            <span class="reference-action">Open study notes ↗</span>
+          </div>
+        </a>
+        <a class="reference-card book" href="https://share.google/UQ5avg7e6fHKd978i" target="_blank" rel="noopener noreferrer">
+          <div class="reference-image"><img src="assets/tim-keller-book.png" alt="An illustrated hardback theology book."></div>
+          <div class="reference-card-copy">
+            <h3>Tim Keller book resource</h3>
+            <p>Open the accompanying Tim Keller book resource for further reflection and study.</p>
+            <span class="reference-action">Open Tim Keller resource ↗</span>
+          </div>
+        </a>
+      </div>
       <aside class="notes">
-        - A traditional illustration pictures Scripture as a ring, Romans as its precious stone, and Romans 8 as the sparkle of that jewel.
-        - The image is not meant to minimize any part of Scripture. It helps us appreciate Romans as a particularly concentrated, clear presentation of the gospel.
-        - As we begin this study, remember the movement: we cannot establish our own righteousness; God provides righteousness through Jesus Christ; faith receives it; and grace transforms how we live.
-        - Across the centuries, Romans has helped shape Augustine’s conversion, Luther’s understanding of justification, Calvin’s view of Scripture’s riches, and Stott’s gospel proclamation.
+        - Close by pointing out that these resources are for continued study, not substitutes for reading Romans itself in the context of the whole Bible.
+        - Constable’s Notes on Romans were used for the historical framing in this introduction and can help with background, outline, and detailed exposition.
+        - The Tim Keller resource is included for additional reflection and accessible engagement with gospel themes.
+        - Invite listeners to use resources wisely: read Scripture first, test every secondary source carefully, and discuss difficult questions in community.
+        - Thank the group and preview the next session: Romans 1:1–7, where Paul introduces himself as a servant of Christ and introduces the gospel promised beforehand.
       </aside>
     </section>
 
@@ -308,7 +406,44 @@
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
   <script>
-    Reveal.initialize({ hash: true, slideNumber: 'c/t', controls: true, progress: true, center: true, transition: 'fade', plugins: [RevealNotes] });
+    const revealReady = Reveal.initialize({ hash: true, slideNumber: 'c/t', controls: false, progress: true, center: true, transition: 'fade', plugins: [RevealNotes] });
+
+    const presenterButtons = {
+      left: document.getElementById('presenter-left'),
+      right: document.getElementById('presenter-right'),
+      up: document.getElementById('presenter-up'),
+      down: document.getElementById('presenter-down'),
+    };
+
+    const updatePresenterNavigation = () => {
+      const { h, f } = Reveal.getIndices();
+      const horizontalSlides = document.querySelectorAll('.slides > section');
+      const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment');
+      const fragmentIndex = Number.isInteger(f) ? f : -1;
+      presenterButtons.left.disabled = h === 0;
+      presenterButtons.right.disabled = h >= horizontalSlides.length - 1;
+      presenterButtons.up.disabled = fragmentIndex < 0;
+      presenterButtons.down.disabled = fragmentIndex >= fragments.length - 1;
+    };
+
+    presenterButtons.left.addEventListener('click', () => {
+      const { h } = Reveal.getIndices();
+      if (!presenterButtons.left.disabled) Reveal.slide(h - 1, 0, -1);
+    });
+    presenterButtons.right.addEventListener('click', () => {
+      const { h } = Reveal.getIndices();
+      if (!presenterButtons.right.disabled) Reveal.slide(h + 1, 0, -1);
+    });
+    presenterButtons.up.addEventListener('click', () => {
+      if (!presenterButtons.up.disabled) Reveal.prev();
+    });
+    presenterButtons.down.addEventListener('click', () => {
+      if (!presenterButtons.down.disabled) Reveal.next();
+    });
+    revealReady.then(updatePresenterNavigation);
+    Reveal.on('slidechanged', updatePresenterNavigation);
+    Reveal.on('fragmentshown', updatePresenterNavigation);
+    Reveal.on('fragmenthidden', updatePresenterNavigation);
 
     // Text-to-speech for the current slide's <aside class="notes"> content.
     const playNotesButton = document.getElementById('play-notes-button');
@@ -369,6 +504,7 @@
       document.getElementById('voice-controls').hidden = true;
     }
   </script>
+
 
 
 
