@@ -1,8 +1,20 @@
 # Romans — Introduction
 
+[![HTML](https://img.shields.io/badge/HTML-5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![Reveal.js](https://img.shields.io/badge/presentations-Reveal.js-222?logo=reveal.js&logoColor=white)](https://revealjs.com/)
+[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/nparkgithub/slides/static.yml?label=GitHub%20Pages&logo=github)](https://github.com/nparkgithub/slides/actions/workflows/static.yml)
+
 Open the updated deck here:
 
 [https://nparkgithub.github.io/slides/romans/romans_introduction.html](https://nparkgithub.github.io/slides/romans/romans_introduction.html)
+
+## Study Sessions
+
+| Session | Topic | Presentation |
+| --- | --- | --- |
+| Introduction | Background, theme, structure, and key movements in Romans | [Open deck](https://nparkgithub.github.io/slides/romans/romans_introduction.html) |
+| Chapter 1 | Romans 1:1–7 — the gospel promised beforehand | Coming soon |
+| Later chapters | Continued study through Romans | Coming soon |
 
 ## Overview
 
