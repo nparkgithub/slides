@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antioch and Jerusalem — One Family in the Messiah</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/dracula.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --r-main-font-size: 27px; --r-heading-font: "Inter", "Segoe UI", Arial, sans-serif; --r-body-font: "Inter", "Segoe UI", Arial, sans-serif; --r-heading-text-transform: none; --r-link-color: #8be9fd; }
+    .reveal { font-family: var(--r-body-font); }
+    .reveal section { text-align: left; }
+    .reveal h1 { font-family: "Playfair Display", Georgia, serif; font-size: 2.3em; letter-spacing: .01em; }
+    .reveal h2 { font-size: 1.48em; }
+    .reveal h3 { margin-top: 0; color: #bd93f9; font-size: 1em; }
+    .center { text-align: center !important; }
+    .small { font-size: .72em; }
+    .muted { color: #b9b6c8; }
+    .highlight { color: #50fa7b; font-weight: 700; }
+    .accent { color: #ff79c6; font-weight: 700; }
+    .eyebrow { color: #8be9fd; text-transform: uppercase; letter-spacing: .18em; font-size: .5em; font-weight: 700; }
+    .title-rule { width: 115px; height: 4px; margin: 28px auto; border: 0; background: #ff79c6; }
+    .title-copy { max-width: 850px; margin: 0 auto; text-align: center; }
+    .question { max-width: 800px; margin: 25px auto 0; padding: 18px 24px; border: 1px solid rgba(139,233,253,.4); border-radius: 12px; background: rgba(255,255,255,.045); font-size: .86em; line-height: 1.4; }
+    .map-layout { display: grid; grid-template-columns: minmax(260px, .82fr) 1.18fr; gap: 34px; align-items: center; }
+    .map-figure { margin: 0; }
+    .map-figure img { display: block; width: 100%; max-height: 540px; object-fit: contain; border: 2px solid rgba(248,248,242,.7); background: #f8f8f2; }
+    .map-figure figcaption { margin-top: 7px; color: #b9b6c8; font-size: .42em; text-align: center; }
+    .movement-timeline { position: relative; display: grid; gap: 15px; padding: 8px 0; }
+    .movement-timeline::before { content: ""; position: absolute; top: 17px; bottom: 17px; left: 28px; width: 3px; background: linear-gradient(#50fa7b, #ff79c6); }
+    .movement { position: relative; display: grid; grid-template-columns: 58px 1fr; gap: 13px; align-items: center; }
+    .movement-arrow { position: relative; z-index: 1; display: flex; width: 58px; height: 58px; align-items: center; justify-content: center; border: 2px solid #50fa7b; border-radius: 50%; background: #28233f; color: #50fa7b; font-size: 1.6em; font-weight: 700; }
+    .movement:nth-child(even) .movement-arrow { border-color: #ff79c6; color: #ff79c6; }
+    .movement-copy { padding: 11px 14px; border: 1px solid rgba(139,233,253,.3); border-radius: 9px; background: rgba(255,255,255,.04); font-size: .6em; line-height: 1.35; }
+    .movement-copy strong { display: block; margin-bottom: 4px; color: #8be9fd; font-size: 1.1em; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { min-height: 135px; padding: 17px; border: 1px solid rgba(139,233,253,.35); border-radius: 10px; background: rgba(255,255,255,.035); }
+    .card p, .card li { font-size: .62em; line-height: 1.35; }
+    .card ul, .list { margin: 0; padding-left: 1.1em; }
+    .route { padding: 20px; border: 1px solid rgba(189,147,249,.45); border-radius: 12px; background: linear-gradient(145deg, rgba(189,147,249,.16), rgba(80,250,123,.05)); }
+    .route div { padding: 10px 0; border-bottom: 1px solid rgba(248,248,242,.18); font-size: .72em; }
+    .route div:last-child { border-bottom: 0; }
+    .route strong { display: inline-block; width: 110px; color: #8be9fd; }
+    .wall { display: grid; grid-template-columns: 1fr 70px 1fr; gap: 15px; align-items: stretch; text-align: center; }
+    .wall-side { padding: 20px 14px; border-radius: 10px; background: rgba(255,255,255,.045); }
+    .wall-side p { margin: 10px 0 0; font-size: .63em; line-height: 1.45; }
+    .wall-divider { display: flex; align-items: center; justify-content: center; color: #ff79c6; font-size: 2.2em; font-weight: 700; }
+    .statement { margin: 20px 0 0; padding: 14px 18px; border-left: 5px solid #bd93f9; background: rgba(0,0,0,.13); font-size: .7em; line-height: 1.4; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+    .step { padding: 13px; border-top: 3px solid #50fa7b; background: rgba(255,255,255,.04); font-size: .55em; line-height: 1.35; }
+    .step strong { display: block; margin-bottom: 6px; color: #ffb86c; font-size: 1.16em; }
+    .people { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 26px; }
+    .person { padding: 11px 14px; border-left: 3px solid #8be9fd; background: rgba(255,255,255,.04); font-size: .63em; line-height: 1.3; }
+    .person strong { color: #ffb86c; }
+    .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 25px; }
+    .timeline div { padding: 15px 12px; border-top: 3px solid #ff79c6; background: rgba(255,255,255,.04); font-size: .58em; line-height: 1.35; }
+    .timeline strong { display: block; margin-bottom: 8px; color: #8be9fd; font-size: 1.15em; }
+    .letter { padding: 20px 24px; border: 1px solid rgba(255,184,108,.55); border-radius: 4px; background: #f7edcf; color: #28233f; transform: rotate(-1deg); box-shadow: 0 12px 25px rgba(0,0,0,.22); }
+    .letter h3 { color: #8d4566; }
+    .letter li { font-size: .64em; line-height: 1.35; margin: 7px 0; }
+    .takeaway { max-width: 860px; margin: 0 auto; text-align: center; }
+    .takeaway p { font-size: .82em; line-height: 1.45; }
+    .source { margin-top: 25px; color: #8b879d; font-size: .42em !important; }
+    #voice-controls { position: fixed; bottom: 20px; left: 20px; z-index: 1000; }
+    #play-notes-button { padding: 9px 13px; border: 1px solid rgba(139,233,253,.65); border-radius: 7px; background: rgba(40,35,63,.94); color: #f8f8f2; font: 600 14px/1 "Inter", sans-serif; cursor: pointer; }
+    #play-notes-button.is-speaking { border-color: #ff79c6; color: #ff79c6; }
+    #presenter-navigation { position: fixed; right: 18px; bottom: 62px; z-index: 1000; display: grid; grid-template-columns: repeat(3, 42px); grid-template-areas: ". up ." "left . right" ". down ."; gap: 6px; }
+    #presenter-navigation button { width: 42px; height: 42px; padding: 0; border: 1px solid rgba(40,35,63,.55); border-radius: 50%; background: #50fa7b; color: #282a36; font: 700 22px/1 Arial, sans-serif; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
+    #presenter-navigation button:hover:not(:disabled), #presenter-navigation button:focus-visible:not(:disabled) { background: #8be9fd; outline: 2px solid #f8f8f2; outline-offset: 2px; }
+    #presenter-navigation button:disabled { background: #6272a4; color: #c3c6d6; cursor: not-allowed; box-shadow: none; }
+    #presenter-left { grid-area: left; } #presenter-right { grid-area: right; } #presenter-up { grid-area: up; } #presenter-down { grid-area: down; }
+    @media (max-width: 760px) { .two-col, .three-col, .people, .timeline, .steps { grid-template-columns: 1fr 1fr; } .wall { grid-template-columns: 1fr; } .wall-divider { display: none; } }
+    @media (max-width: 760px) { .map-layout { grid-template-columns: 1fr; gap: 15px; } .map-figure img { max-height: 310px; } }
+  </style>
+</head>
+<body>
+  <div id="voice-controls"><button id="play-notes-button" type="button" aria-pressed="false" title="Play or stop speaker notes (P)">▶ Play notes <span aria-hidden="true">(P)</span></button></div>
+  <nav id="presenter-navigation" aria-label="Presentation navigation">
+    <button id="presenter-left" type="button" aria-label="Previous slide" title="Previous slide">←</button>
+    <button id="presenter-right" type="button" aria-label="Next slide" title="Next slide">→</button>
+    <button id="presenter-up" type="button" aria-label="Hide previous fragment" title="Hide previous content">↑</button>
+    <button id="presenter-down" type="button" aria-label="Show next fragment" title="Show next content">↓</button>
+  </nav>
+  <div class="reveal"><div class="slides">
+    <section class="center" data-background-gradient="linear-gradient(135deg, #19162a 0%, #28233f 55%, #1d1b2c 100%)">
+      <div class="title-copy"><p class="eyebrow">A crisis of belonging</p><h1>Antioch and Jerusalem</h1><hr class="title-rule"><p style="font-size:1.1em">One family <span class="highlight">in the Messiah</span>.</p><div class="question">Must Gentiles become Jews to belong to God’s people?</div><p class="muted small">Paul’s vision of shared life across an old boundary</p></div>
+      <aside class="notes">This presentation follows the supplied chapter material and its reconstruction of the relationship between Antioch, Jerusalem, and Galatia. The central question is not simply whether Gentiles may hear the message about Jesus. It is whether they may belong fully without becoming Jewish. The answer changes how the early communities understand faith, identity, fellowship, and the meaning of Jesus’s death and resurrection.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The geography of the conflict</p><h2>Two centers, one movement</h2>
+      <div class="map-layout"><figure class="map-figure"><img src="assets/Antioch-Jerusalem.png" alt="Map showing travel routes between Antioch and Jerusalem along the eastern Mediterranean coast."><figcaption>Antioch ↕ Jerusalem — the road where questions of belonging traveled</figcaption></figure><div class="movement-timeline"><div class="movement"><div class="movement-arrow" aria-hidden="true">↑</div><div class="movement-copy"><strong>Jerusalem → Antioch</strong>Barnabas travels north to investigate the growing Gentile community and recognizes God’s grace.</div></div><div class="movement fragment"><div class="movement-arrow" aria-hidden="true">↓</div><div class="movement-copy"><strong>Antioch → Jerusalem</strong>Paul and Barnabas carry famine relief; Titus becomes a test case for full Gentile belonging.</div></div><div class="movement fragment"><div class="movement-arrow" aria-hidden="true">↑</div><div class="movement-copy"><strong>Jerusalem → Antioch</strong>Trusted messengers carry the decision back to the church, bringing news that is received with joy.</div></div><div class="movement fragment"><div class="movement-arrow" aria-hidden="true">↕</div><div class="movement-copy"><strong>Movement between centers</strong>People, money, testimony, and Scripture move along the road—and the relationship between the churches is tested.</div></div></div></div>
+      <aside class="notes">The geography helps us see why the story keeps moving between Antioch and Jerusalem. Jerusalem remains the symbolic center of the Jesus movement, while Antioch becomes the international community where Jewish and Gentile believers share life. The movement described here brings together related episodes from Galatians 2, Acts 11, and Acts 15; it should be presented as the chapter author’s reconstruction rather than as one single uninterrupted journey.
+
+        Barnabas was a Jewish believer from Cyprus who was trusted by the Jerusalem community. He was sent north to Antioch when news arrived that non-Jews were responding to Jesus. Instead of rejecting the new believers, he recognized God’s grace and later brought Saul, also called Paul, from Tarsus to help teach the growing church. Paul became the leading advocate for Gentile inclusion and the missionary whose authority was contested by some opponents.
+
+        The map’s journey from Antioch to Jerusalem refers especially to Paul and Barnabas carrying famine relief and reporting on their mission. Titus traveled with Paul as a Greek, uncircumcised believer. He is not one of the Jerusalem leaders; he is the concrete test case for the question, “Must a Gentile become Jewish to belong fully?” Galatians says that some people pressed for his circumcision, but Paul refused to let Titus’s status be redefined by that demand.
+
+        Peter, also called Cephas, was one of the principal Jerusalem apostles, but in this episode he was physically in Antioch. He had previously seen God give the Holy Spirit to Gentiles, and at Antioch he initially ate with Gentile believers. While Peter was in Antioch, a different group of visitors traveled south from Jerusalem to Antioch. Paul calls them “certain men from James”; this identifies their association with James’s circle, but does not prove that James personally authorized their pressure. When these visitors arrived, Peter withdrew from the shared meals. Paul publicly challenged him because his behavior suggested that Gentiles were second-class members. James was the brother of Jesus and a leading figure in Jerusalem, but the source carefully distinguishes James himself from people who claimed or carried an association with him.
+
+        In the Acts 15 scene, the trusted messengers who carry the Jerusalem decision back to Antioch are Judas Barsabbas and Silas, sent with Paul and Barnabas by the apostles, elders, and the whole church. They are not the same people as the visitors who caused the earlier dispute at Antioch. James, Peter, Barnabas, Paul, the apostles, elders, and the gathered church all belong to the later deliberation, while circumcision advocates represent the demand being considered. The road therefore carries not only people but also relief money, testimony, Scripture, letters, and competing understandings of the gospel.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The setting</p><h2>Why belonging became a crisis</h2>
+      <div class="three-col"><div class="card"><h3>Jerusalem</h3><p>Circumcision and Torah observance expressed covenant loyalty under Roman rule. The city remained the movement’s symbolic center.</p></div><div class="card fragment"><h3>Antioch</h3><p>Jewish and Gentile believers shared life in a diverse international city where meals made belonging visible.</p></div><div class="card fragment"><h3>Galatia</h3><p>Gentile converts had abandoned pagan worship, but some teachers pressed them toward circumcision and Jewish identity.</p></div></div>
+      <p class="statement fragment">Paul’s mission challenged familiar boundaries of religious identity. <span class="accent">Understanding the fears behind the conflict matters.</span></p>
+      <aside class="notes">Jerusalem, Antioch, and Galatia faced related but different pressures. Jerusalem was still the symbolic center of the Jesus movement. James, Peter, and John were respected as “pillars,” and the community understood itself as the fulfillment of Israel’s hope while remaining thoroughly Jewish in identity and practice.
+
+        The source places that identity inside the pressure of Roman rule. Jerusalem was full of competing Jewish groups, teachers, prophetic movements, and hopes for God’s liberation of Israel. Loyalty was a public question: were people uncompromisingly faithful to the One God and Torah, or were they accommodating pagan society? The Jerusalem believers were not simply being narrow-minded; they were trying to remain faithful in a dangerous political and religious environment.
+
+        Jewish communities in the Diaspora faced a somewhat different situation. In cities such as Antioch, Jews often maintained Torah observance while finding a workable relationship with Roman civic life. Antioch’s Jesus-community therefore had to decide whether Jewish and Gentile believers could share not only worship but also ordinary meals and responsibility for one another.
+
+        In Galatia, Gentiles had abandoned pagan worship and confessed Jesus as Lord, yet some teachers told them that trust in Jesus was not enough for full membership. Peter’s earlier visit to Cornelius had already shown that God could give the Spirit to Gentiles, but the source suggests that this precedent had not yet been fully worked through theologically. Paul’s message challenged both religious identity and social arrangements. These were arguments about loyalty and faithfulness, not merely personal preferences.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The people</p><h2>Leading believers at the center</h2>
+      <div class="people"><div class="person"><strong>Paul</strong> defends full Gentile membership through the Messiah.</div><div class="person"><strong>Peter / Cephas</strong> eats with Gentiles, then withdraws when Jerusalem visitors arrive.</div><div class="person fragment"><strong>Barnabas</strong> is Paul’s partner and is drawn into the withdrawal at Antioch.</div><div class="person fragment"><strong>James</strong> represents Jerusalem’s scriptural and communal authority.</div><div class="person fragment"><strong>Circumcision advocates</strong> insist that Gentiles adopt circumcision and Torah observance.</div><div class="person fragment"><strong>Titus</strong> becomes a concrete test case for Gentile belonging.</div></div>
+      <p class="statement fragment">Respected leaders still need <span class="highlight">discernment and accountability</span>.</p>
+      <aside class="notes">The conflict is carried by people, not abstractions. Paul, originally Saul of Tarsus, had been a zealous Jewish opponent of the Jesus movement. The source presents his later mission as a transformation of loyalty, not as Paul abandoning the Jewish world for a new religion. He continued to believe in Israel’s One God and Israel’s Scriptures, but he now believed that God’s purpose had been unveiled through the crucified and risen Messiah.
+
+        Peter, or Cephas, was one of the principal Jerusalem apostles and a witness to the inclusion of Cornelius. His actions at Antioch show how difficult it was to translate that experience into a consistent pattern of shared life. James, the brother of Jesus, was the acknowledged leader of the Jerusalem community and was respected for his prayer and scriptural seriousness. James, Peter, and John were remembered as “pillars,” though Jerusalem itself was not a community without disagreement.
+
+        Barnabas was a Jewish believer from Cyprus and a trusted bridge between Jerusalem and Antioch. He investigated the Gentile response in Antioch, recognized God’s grace, brought Paul into the teaching ministry, and later became caught in the pressure surrounding the shared meals. The circumcision advocates should be presented as sincere Torah-loyal believers who feared that abandoning covenant markers would compromise faithfulness to God.
+
+        Titus makes the dispute concrete. He was a Greek, uncircumcised believer who traveled with Paul. He was not a Jerusalem leader. His presence forced the question: could a Gentile be received as a full member without becoming Jewish? The source uses Titus to show that the dispute concerned the shape of the whole family, not simply one individual’s private practice.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">Galatians 2:11–14</p><h2>The broken fellowship at Antioch</h2>
+      <div class="wall"><div class="wall-side"><h3>Shared table</h3><p>Peter eats with Gentile believers.<br>Barnabas and other Jewish believers participate.<br>One community becomes visible.</p></div><div class="wall-divider">│</div><div class="wall-side"><h3>Separate tables</h3><p>Visitors arrive from Jerusalem.<br>Peter withdraws.<br>Gentiles are made to feel like outsiders.</p></div></div>
+      <div class="steps"><div class="step"><strong>1 · Welcome</strong>Peter shares meals with Gentile believers.</div><div class="step fragment"><strong>2 · Pressure</strong>Visitors associated with James arrive.</div><div class="step fragment"><strong>3 · Withdrawal</strong>Peter, others, and Barnabas separate.</div><div class="step fragment"><strong>4 · Challenge</strong>Paul confronts the contradiction publicly.</div></div>
+      <p class="statement fragment">Our behavior can deny the welcome our words proclaim.</p>
+      <aside class="notes">At Antioch, the table becomes the theological battleground. Peter is already in Antioch and has been eating with Gentile believers. That action is important because meals were not casual social events in this setting. To share a table was to signal acceptance, partnership, and a common life. Peter’s presence suggested that Jewish and Gentile followers of Jesus belonged together.
+
+        Then a different group—visitors associated with James and coming from Jerusalem—arrives in Antioch. The text does not say that James personally sent them or approved their pressure. “From James” may describe their connection with James’s circle or their claim to carry Jerusalem authority. Peter withdraws, and other Jewish believers, including Barnabas, follow him.
+
+        Paul sees this as more than awkward diplomacy. If Peter will eat with Gentiles only until Jerusalem visitors arrive, the practical message is that Gentiles are acceptable only conditionally. They may belong socially when no one important is watching, but they are not treated as equal members when Jewish authority is present. Separate tables therefore rebuild the wall that the Messiah was supposed to have removed.
+
+        Paul’s confrontation is a defense of the gospel as a public way of life. He argues that Peter’s conduct contradicts what Peter himself had already accepted: that Gentiles could receive God’s Spirit and share the family without first becoming Jewish. The issue is not whether Jewish believers may continue Jewish practices. The issue is whether those practices can be imposed as the condition for table fellowship and covenant membership.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The argument spreads</p><h2>Galatia and Paul’s response</h2>
+      <div class="two-col"><div><p>Teachers insisted that Gentile believers needed <span class="highlight">circumcision</span>.</p><p class="fragment">They questioned Paul’s authority and the completeness of his message.</p><p class="fragment">Paul wrote Galatians to defend his mission and the believers’ standing.</p></div><div class="route"><div><strong>Problem</strong>Who counts as a member of God’s covenant family?</div><div><strong>Paul’s answer</strong>Membership is recognized through the Messiah’s faithfulness.</div><div><strong>Consequence</strong>No human requirement may rebuild the wall Jesus has removed.</div></div></div>
+      <p class="statement fragment">Justification, in this argument, concerns recognition as members of God’s family—not an extra barrier around belonging.</p>
+      <aside class="notes">The dispute in Antioch is connected to the crisis in Galatia. Paul’s opponents questioned both Gentile status and Paul’s authority to announce their inclusion. They appear to have believed that Gentiles could follow Jesus, but that full covenant membership required circumcision and Torah observance. For them, this was a way of protecting the holiness and distinctiveness of God’s people.
+
+        The source emphasizes that Paul’s argument about justification concerns recognition as members of the covenant family. “Justification” is not being presented as an abstract religious feeling or as a claim that human conduct does not matter. It is the question of how a community knows who belongs. Paul rejects the claim that Torah observance and circumcision are prerequisites for Gentiles to be received.
+
+        Paul’s authority is also part of the conflict. He had not been one of Jesus’s companions during Jesus’s public ministry, and he had once persecuted the Jesus movement. The Jerusalem believers could therefore regard him as an upstart former zealot who was presuming to reinterpret Israel’s Scriptures. Paul, however, understood his call to the nations as God’s own commission.
+
+        The source’s central question is whether the Messiah’s faithfulness creates a family in which Jew and Gentile stand together. Paul does not deny sin, salvation, holiness, or the need for transformed life. He denies that an additional ethnic and ritual boundary can be placed around the welcome created by Jesus.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">Paul’s theology</p><h2>A new creation, not a repaired wall</h2>
+      <div class="steps"><div class="step"><strong>New creation</strong>God’s promised renewal has begun through Jesus.</div><div class="step fragment"><strong>Abraham’s family</strong>Jews and Gentiles share the promised inheritance.</div><div class="step fragment"><strong>New Exodus</strong>God frees people from slavery and gives them the Spirit.</div><div class="step fragment"><strong>Faithfulness</strong>The Messiah unites the family through loyal trust.</div></div>
+      <p class="statement fragment">Through death and resurrection, Jesus reshapes how Paul understands the people of God.</p>
+      <aside class="notes">Paul’s argument is larger than a debate about one ritual. The source gathers several themes into one argument about what God has done through Jesus.
+
+        First, new creation has begun. Jesus’s death and resurrection are not simply events that provide private forgiveness; they inaugurate the promised renewal of the world. The Messiah’s people are an advance community of that new creation. Their common life should therefore make the new reality visible.
+
+        Second, Abraham’s family is redefined around the promise. Paul argues that those who belong to the Messiah are the true seed of Abraham and heirs of the promise. God did not promise Abraham two separate families, one Jewish and one Gentile. The promise creates a Jew-and-Gentile family whose membership is marked by pistis—faith, faithfulness, loyalty, and allegiance.
+
+        Third, Paul tells the story as a new Exodus. The world is enslaved; God sends the Son to redeem, sends the Spirit to indwell, and gives Abraham’s children their inheritance. The warning to the Galatians is that circumcision would represent a return to the old slavery rather than movement into the freedom of the new Exodus.
+
+        Finally, the Torah is understood within a story reaching fulfillment in the Messiah. This is not a casual dismissal of Israel’s Scriptures. Paul believes the Scriptures themselves point toward the moment when the nations would seek the Lord. These ideas belong together: God’s action through Jesus creates a new community whose members must learn to regard and treat one another as one family.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">Acts 15:1–21</p><h2>The Jerusalem meeting</h2>
+      <div class="timeline"><div><strong>Demand</strong>Circumcision advocates present their case.</div><div class="fragment"><strong>Testimony</strong>Peter points to God’s gift of the Spirit to Gentiles.</div><div class="fragment"><strong>Mission</strong>Barnabas and Paul describe God’s work among the nations.</div><div class="fragment"><strong>Scripture</strong>James shows that inclusion agrees with prophetic hope.</div></div>
+      <p class="statement fragment">Faithful discernment requires listening, testimony, Scripture, and willingness to recognize God’s work beyond familiar expectations.</p>
+      <aside class="notes">The Jerusalem meeting considers testimony and Scripture together. The source places the meeting fairly certainly in late AD 48 or early AD 49, but this is a historical reconstruction. Paul never describes the Acts 15 “Jerusalem Conference” in his own letters, so Galatians 2 and Acts 15 should not be treated as if their chronology were beyond dispute.
+
+        The journey itself becomes part of the argument. Paul and Barnabas travel south through Phoenicia, Galilee, and Samaria, telling local believers what God has done among the Gentiles. The source imagines Barnabas urging Paul to lead with stories of transformed communities rather than beginning with a long scriptural lecture. That is an interpretive reconstruction, not a recorded conversation, but it helps explain the pastoral strategy: let the evidence of the Spirit speak.
+
+        The hard-line party presents its demand clearly: Gentile converts must be circumcised and keep the Torah. Paul and Barnabas give testimony about the mission, while Peter returns to the earlier story of Cornelius. God gave the Spirit to Gentiles without circumcision, and Peter argues that the community should not place a burden on Gentiles that Jewish people themselves have struggled to carry.
+
+        James then gives the final scriptural framing. Because James is Jesus’s brother and the leading figure in Jerusalem, his interpretation carries unusual weight. He connects the Gentile mission with the prophetic hope that the restored house of David would become a blessing to the nations. The meeting’s work is not a rejection of Scripture; it is a communal effort to read Scripture in light of what God is doing through Jesus and the Spirit.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The decision</p><h2>Gentiles belong without conversion to Jewish identity</h2>
+      <div class="two-col"><div class="letter"><h3>A letter for the churches</h3><ul><li>No circumcision or conversion to Jewish identity is required.</li><li>Reject food offered to idols.</li><li>Do not consume blood or meat from strangled animals.</li><li>Flee sexual immorality.</li></ul></div><div><p>The decision protects <span class="highlight">full Gentile membership</span> while asking for conduct that makes shared fellowship possible.</p><p class="fragment">Christian freedom is not isolation from responsibility. It is freedom practiced with concern for God and for neighbors.</p></div></div>
+      <aside class="notes">The decision does not require Gentiles to become Jews. The central demand for circumcision is conceded, and the letter addresses the recipients as “Gentile brothers and sisters,” already treating the uncircumcised as members of the family. It does, however, give them responsibilities.
+
+        The four areas are food polluted by idols, blood, meat from strangled animals, and sexual immorality. These practices were not all the same kind of issue. Idolatrous meals and blood-related meat practices were connected to Jewish concerns about pagan worship and the sanctity of life. Sexual immorality represented one of the major moral differences between Jewish and pagan lifestyles. Together, the restrictions helped Gentile believers turn away from the practices associated with their former pagan world.
+
+        The source also presents these requirements as a practical and diplomatic solution. Gentile freedom was real, but it was not freedom to ignore the consciences and inherited practices of Jewish believers. The restrictions made shared life possible in communities where Jewish and Gentile followers worshiped together.
+
+        The decision therefore holds together two truths: Gentiles belong fully without circumcision, and belonging creates obligations toward God and the community. The letter attempts to keep the movement together without pretending that every theological and social question has been solved.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">After the meeting</p><h2>What the agreement achieved</h2>
+      <div class="three-col"><div class="card"><h3>Inclusion</h3><p>Gentile membership is affirmed without circumcision.</p></div><div class="card fragment"><h3>Recognition</h3><p>Jerusalem publicly affirms the work of Paul and Barnabas.</p></div><div class="card fragment"><h3>Practice</h3><p>A letter and trusted messengers carry the decision to Antioch.</p></div></div>
+      <p class="statement fragment">The Antioch believers receive the message with joy—but a formal agreement begins a process of <span class="accent">living differently</span>.</p>
+      <aside class="notes">The agreement achieves something real. Gentiles are publicly recognized as members without circumcision, and Jerusalem affirms the mission of Paul and Barnabas. The letter’s language itself makes the point: it speaks to “our Gentile brothers and sisters,” not to outsiders waiting for admission.
+
+        The decision is carried to Antioch by trusted representatives, including Judas Barsabbas and Silas, who travel with Paul and Barnabas. These men are not the same visitors who had created the earlier problem. The earlier visitors had come from Jerusalem but had not been authorized by James and the other leaders; the official messengers now communicate the decision of the apostles, elders, and whole church.
+
+        The letter is sent not only to Antioch but also to churches in Syria and Cilicia. Antioch receives the message with joy because it confirms that Gentile believers are not second-class members. Yet the source warns against imagining that one meeting ends every tension. A formal pronouncement cannot instantly make every church fall into line, and it cannot remove every fear about pagan pollution, Jewish identity, or Paul’s authority.
+
+        Unity must become visible in meals, money, teaching, correction, and daily habits. The agreement begins a process of living differently. It preserves the family for the moment, but the churches still have to learn what shared belonging means in practice.</aside>
+    </section>
+
+    <section class="center" data-background-gradient="radial-gradient(circle at 50% 35%, #3b3159 0%, #201c31 58%, #15121f 100%)">
+      <div class="takeaway"><p class="eyebrow">Living as one family today</p><h2>Shared belonging should become visible.</h2><p class="fragment"><span class="highlight">Welcome</span> — make full participation possible.</p><p class="fragment"><span class="highlight">Integrity</span> — let conduct reflect professed faith.</p><p class="fragment"><span class="highlight">Courage</span> — resist pressure that produces exclusion.</p><p class="fragment"><span class="highlight">Humility and love</span> — receive correction and use freedom for others.</p><p class="source">Based on the supplied extracted text and <em>Antioch and Jerusalem: One Family in the Messiah</em>; see Galatians 2 and Acts 15.</p></div>
+      <aside class="notes">The chapter’s challenge is practical because Paul’s vision is both theological and social. The source warns against reducing the argument to abstract theology on one side or sociology on the other. Paul believes that the One God has acted through Jesus, and that this action creates a new community with new patterns of life.
+
+        If God creates one family through Jesus, that belonging must be visible in daily practices. Welcome means more than allowing someone to attend; it means making full participation possible. Integrity means that conduct must match the welcome we profess. Courage means resisting pressure that turns cultural difference into a test of spiritual worth. Humility means receiving correction, especially when respected leaders have acted inconsistently. Love means using freedom with concern for other people.
+
+        Antioch shows that unity is not the erasure of Jewish, Gentile, cultural, or personal differences. It is a new primary identity and a shared life across former barriers. Invite the group to ask: Where do our tables, leadership structures, traditions, or informal networks make someone feel like a lesser member? Where might our community be announcing welcome while practicing separation? What would it look like for freedom in Christ to become concrete care for another person?
+
+        The final emphasis is not that conflict disappears. The early movement remained contested and fragile. The challenge is to live together as the family God has created, allowing the Messiah’s faithfulness to reshape both belief and behavior.</aside>
+    </section>
+  </div></div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+  <script>
+    const revealReady = Reveal.initialize({ hash: true, slideNumber: 'c/t', controls: false, progress: true, center: true, transition: 'fade', plugins: [RevealNotes] });
+    const buttons = { left: document.getElementById('presenter-left'), right: document.getElementById('presenter-right'), up: document.getElementById('presenter-up'), down: document.getElementById('presenter-down') };
+    const updateNavigation = () => { const { h, f } = Reveal.getIndices(); const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment'); const index = Number.isInteger(f) ? f : -1; buttons.left.disabled = h === 0; buttons.right.disabled = h >= document.querySelectorAll('.slides > section').length - 1; buttons.up.disabled = index < 0; buttons.down.disabled = index >= fragments.length - 1; };
+    buttons.left.addEventListener('click', () => { const { h } = Reveal.getIndices(); if (!buttons.left.disabled) Reveal.slide(h - 1, 0, -1); });
+    buttons.right.addEventListener('click', () => { const { h } = Reveal.getIndices(); if (!buttons.right.disabled) Reveal.slide(h + 1, 0, -1); });
+    buttons.up.addEventListener('click', () => { if (!buttons.up.disabled) Reveal.prev(); });
+    buttons.down.addEventListener('click', () => { if (!buttons.down.disabled) Reveal.next(); });
+    revealReady.then(updateNavigation); Reveal.on('slidechanged', updateNavigation); Reveal.on('fragmentshown', updateNavigation); Reveal.on('fragmenthidden', updateNavigation);
+    const playButton = document.getElementById('play-notes-button');
+    if ('speechSynthesis' in window) { const reset = () => { playButton.classList.remove('is-speaking'); playButton.setAttribute('aria-pressed', 'false'); playButton.innerHTML = '▶ Play notes <span aria-hidden="true">(P)</span>'; }; const speak = () => { if (speechSynthesis.speaking) { speechSynthesis.cancel(); reset(); return; } const notes = Reveal.getSlideNotes(); if (!notes) return; const utterance = new SpeechSynthesisUtterance(notes.trim()); utterance.rate = 1; utterance.onend = reset; utterance.onerror = reset; playButton.classList.add('is-speaking'); playButton.setAttribute('aria-pressed', 'true'); playButton.innerHTML = '■ Stop notes <span aria-hidden="true">(P)</span>'; speechSynthesis.speak(utterance); }; playButton.addEventListener('click', speak); Reveal.addKeyBinding({ keyCode: 80, key: 'P', description: 'Play or stop speaker notes audio' }, speak); Reveal.on('slidechanged', () => { speechSynthesis.cancel(); reset(); }); } else { document.getElementById('voice-controls').hidden = true; }
+  </script>
+</body>
+</html>
