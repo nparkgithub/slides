@@ -66,7 +66,8 @@
     .takeaway p { font-size: .82em; line-height: 1.45; }
     .source { margin-top: 25px; color: #8b879d; font-size: .42em !important; }
     #voice-controls { position: fixed; bottom: 20px; left: 20px; z-index: 1000; }
-    #play-notes-button { padding: 9px 13px; border: 1px solid rgba(139,233,253,.65); border-radius: 7px; background: rgba(40,35,63,.94); color: #f8f8f2; font: 600 14px/1 "Inter", sans-serif; cursor: pointer; }
+    #play-notes-button, #speaker-view-button { padding: 9px 13px; border: 1px solid rgba(139,233,253,.65); border-radius: 7px; background: rgba(40,35,63,.94); color: #f8f8f2; font: 600 14px/1 "Inter", sans-serif; cursor: pointer; }
+    #speaker-view-button { margin-left: 6px; }
     #play-notes-button.is-speaking { border-color: #ff79c6; color: #ff79c6; }
     #presenter-navigation { position: fixed; right: 18px; bottom: 62px; z-index: 1000; display: grid; grid-template-columns: repeat(3, 42px); grid-template-areas: ". up ." "left . right" ". down ."; gap: 6px; }
     #presenter-navigation button { width: 42px; height: 42px; padding: 0; border: 1px solid rgba(40,35,63,.55); border-radius: 50%; background: #50fa7b; color: #282a36; font: 700 22px/1 Arial, sans-serif; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
@@ -78,7 +79,7 @@
   </style>
 </head>
 <body>
-  <div id="voice-controls"><button id="play-notes-button" type="button" aria-pressed="false" title="Play or stop speaker notes (P)">▶ Play notes <span aria-hidden="true">(P)</span></button></div>
+  <div id="voice-controls"><button id="play-notes-button" type="button" aria-pressed="false" title="Play or stop speaker notes (P)">▶ Play notes <span aria-hidden="true">(P)</span></button><button id="speaker-view-button" type="button" title="Open speaker view (S)">▣ Speaker view <span aria-hidden="true">(S)</span></button></div>
   <nav id="presenter-navigation" aria-label="Presentation navigation">
     <button id="presenter-left" type="button" aria-label="Previous slide" title="Previous slide">←</button>
     <button id="presenter-right" type="button" aria-label="Next slide" title="Next slide">→</button>
@@ -244,6 +245,7 @@
     buttons.up.addEventListener('click', () => { if (!buttons.up.disabled) Reveal.prev(); });
     buttons.down.addEventListener('click', () => { if (!buttons.down.disabled) Reveal.next(); });
     revealReady.then(updateNavigation); Reveal.on('slidechanged', updateNavigation); Reveal.on('fragmentshown', updateNavigation); Reveal.on('fragmenthidden', updateNavigation);
+    document.getElementById('speaker-view-button').addEventListener('click', () => RevealNotes.open());
     const playButton = document.getElementById('play-notes-button');
     if ('speechSynthesis' in window) { const reset = () => { playButton.classList.remove('is-speaking'); playButton.setAttribute('aria-pressed', 'false'); playButton.innerHTML = '▶ Play notes <span aria-hidden="true">(P)</span>'; }; const speak = () => { if (speechSynthesis.speaking) { speechSynthesis.cancel(); reset(); return; } const notes = Reveal.getSlideNotes(); if (!notes) return; const utterance = new SpeechSynthesisUtterance(notes.trim()); utterance.rate = 1; utterance.onend = reset; utterance.onerror = reset; playButton.classList.add('is-speaking'); playButton.setAttribute('aria-pressed', 'true'); playButton.innerHTML = '■ Stop notes <span aria-hidden="true">(P)</span>'; speechSynthesis.speak(utterance); }; playButton.addEventListener('click', speak); Reveal.addKeyBinding({ keyCode: 80, key: 'P', description: 'Play or stop speaker notes audio' }, speak); Reveal.on('slidechanged', () => { speechSynthesis.cancel(); reset(); }); } else { document.getElementById('voice-controls').hidden = true; }
   </script>
