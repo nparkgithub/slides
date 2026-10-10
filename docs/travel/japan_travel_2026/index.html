@@ -120,3 +120,25 @@
   </style>
 </body>
 </html>
+<script>
+(function(){
+  const baseMapsWithContext = maps;
+  maps = function(q){
+    const c = cities[city] || {};
+    const cityName = (c.name || city || '').replace(/ \(.+\)$/, '');
+    const country = (city === 'busan' || city === 'seoul') ? 'South Korea' : 'Japan';
+    const contextualQuery = q.includes(cityName) && q.includes(country) ? q : q + ', ' + cityName + ', ' + country;
+    baseMapsWithContext(contextualQuery);
+  };
+  openDirections = function(placeName, mode, transitMode){
+    const c = cities[city] || {};
+    const cityName = (c.name || city || '').replace(/ \(.+\)$/, '');
+    const country = (city === 'busan' || city === 'seoul') ? 'South Korea' : 'Japan';
+    const params = new URLSearchParams({api:'1', origin:(c.hotel.name + ', ' + c.hotel.address), destination:(placeName + ', ' + cityName + ', ' + country), travelmode:mode});
+    if(transitMode) params.set('transit_mode', transitMode);
+    const url = 'https://www.google.com/maps/dir/?' + params.toString();
+    const tab = window.open(url, '_blank');
+    if(!tab) window.location.href = url;
+  };
+})();
+</script>
