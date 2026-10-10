@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Stylized Athens Acropolis at dusk</title>
+  <desc id="desc">A warm illustrated skyline with the Parthenon on a hill, a sea-blue horizon, and stars.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#17162d"/>
+      <stop offset=".64" stop-color="#3b3159"/>
+      <stop offset="1" stop-color="#d27b6e"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" x2="1">
+      <stop offset="0" stop-color="#314e70"/>
+      <stop offset="1" stop-color="#172a48"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f5d29b"/>
+      <stop offset="1" stop-color="#c5816f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="620" fill="url(#sky)"/>
+  <circle cx="955" cy="142" r="66" fill="#ffd58b" opacity=".9"/>
+  <g fill="#fff5cf" opacity=".8">
+    <circle cx="128" cy="96" r="3"/><circle cx="234" cy="150" r="2"/><circle cx="350" cy="74" r="3"/>
+    <circle cx="512" cy="116" r="2"/><circle cx="718" cy="72" r="3"/><circle cx="1090" cy="78" r="2"/>
+    <circle cx="1040" cy="232" r="3"/><circle cx="818" cy="170" r="2"/>
+  </g>
+  <path d="M0 424 C190 385 295 414 443 393 C625 367 741 404 900 380 C1018 362 1100 376 1200 347 L1200 620 L0 620Z" fill="url(#sea)"/>
+  <path d="M0 470 C190 444 301 464 437 449 C626 429 746 459 891 439 C1018 421 1110 437 1200 413" fill="none" stroke="#73a6ad" stroke-width="4" opacity=".55"/>
+  <path d="M0 530 C225 505 356 526 500 507 C691 483 829 522 978 495 C1070 479 1138 492 1200 480 L1200 620 L0 620Z" fill="#101326"/>
+  <path d="M170 487 L240 380 L340 350 L449 368 L534 430 L651 447 L744 401 L832 425 L925 491Z" fill="#1a1a31"/>
+  <path d="M313 355 L372 245 L785 245 L850 397 L754 431 L422 418Z" fill="#2c2640"/>
+  <path d="M366 239 L792 239 L816 264 L344 264Z" fill="url(#stone)"/>
+  <path d="M389 224 L770 224 L794 244 L369 244Z" fill="#f4ce94"/>
+  <g fill="url(#stone)" stroke="#8f5d62" stroke-width="3">
+    <path d="M395 262 H438 V382 H395Z"/><path d="M462 262 H505 V398 H462Z"/>
+    <path d="M529 262 H572 V404 H529Z"/><path d="M596 262 H639 V404 H596Z"/>
+    <path d="M663 262 H706 V398 H663Z"/><path d="M730 262 H773 V382 H730Z"/>
+  </g>
+  <path d="M363 225 L580 132 L799 225Z" fill="#eebf83" stroke="#8f5d62" stroke-width="4"/>
+  <path d="M432 198 L580 146 L727 198Z" fill="#533f55" opacity=".8"/>
+  <path d="M580 145 L594 205 L566 205Z" fill="#f4cf93"/>
+  <g fill="#ffb86c" opacity=".85">
+    <circle cx="81" cy="517" r="5"/><circle cx="110" cy="508" r="3"/><circle cx="1005" cy="519" r="4"/>
+    <circle cx="1050" cy="498" r="3"/><circle cx="1092" cy="516" r="4"/>
+  </g>
+  <g stroke="#8be9fd" stroke-width="4" opacity=".45">
+    <path d="M75 574 H300"/><path d="M880 571 H1130"/><path d="M460 548 H650"/>
+  </g>
+</svg>

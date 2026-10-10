@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athens — Paul in the City of Wisdom</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/dracula.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --r-main-font-size: 27px; --r-heading-font: "Inter", "Segoe UI", Arial, sans-serif; --r-body-font: "Inter", "Segoe UI", Arial, sans-serif; --r-heading-text-transform: none; --r-link-color: #8be9fd; }
+    .reveal { font-family: var(--r-body-font); }
+    .reveal section { text-align: left; }
+    .reveal h1 { font-family: "Playfair Display", Georgia, serif; font-size: 2.3em; letter-spacing: .01em; }
+    .reveal h2 { font-size: 1.48em; }
+    .reveal h3 { margin-top: 0; color: #bd93f9; font-size: 1em; }
+    .center { text-align: center !important; }
+    .small { font-size: .72em; }
+    .muted { color: #b9b6c8; }
+    .highlight { color: #50fa7b; font-weight: 700; }
+    .accent { color: #ff79c6; font-weight: 700; }
+    .warm { color: #ffb86c; font-weight: 700; }
+    .eyebrow { color: #8be9fd; text-transform: uppercase; letter-spacing: .18em; font-size: .5em; font-weight: 700; }
+    .title-rule { width: 115px; height: 4px; margin: 28px auto; border: 0; background: #ff79c6; }
+    .title-copy { max-width: 850px; margin: 0 auto; text-align: center; }
+    .title-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 34px; align-items: center; max-width: 1120px; margin: 0 auto; }
+    .hero-art { width: 100%; border-radius: 18px; border: 1px solid rgba(139,233,253,.35); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+    .question { max-width: 800px; margin: 25px auto 0; padding: 18px 24px; border: 1px solid rgba(139,233,253,.4); border-radius: 12px; background: rgba(255,255,255,.045); font-size: .86em; line-height: 1.4; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .card { min-height: 135px; padding: 17px; border: 1px solid rgba(139,233,253,.35); border-radius: 10px; background: rgba(255,255,255,.035); }
+    .card p, .card li { font-size: .62em; line-height: 1.35; }
+    .card ul, .list { margin: 0; padding-left: 1.1em; }
+    .card h3 { margin-bottom: 9px; }
+    .city-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: center; }
+    .city-card { padding: 20px; border-radius: 14px; background: linear-gradient(145deg, rgba(189,147,249,.18), rgba(80,250,123,.05)); border: 1px solid rgba(189,147,249,.42); }
+    .city-card p, .city-card li { font-size: .65em; line-height: 1.36; }
+    .city-card ul { margin: 0; padding-left: 1.1em; }
+    .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
+    .stat { padding: 14px; border-top: 3px solid #ffb86c; background: rgba(255,255,255,.04); font-size: .59em; line-height: 1.3; }
+    .stat strong { display: block; margin-bottom: 5px; color: #8be9fd; font-size: 1.1em; }
+    .route-wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; }
+    .route-image { width: 100%; border-radius: 14px; box-shadow: 0 16px 35px rgba(0,0,0,.2); }
+    .route-list { display: grid; gap: 12px; }
+    .route-step { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid rgba(139,233,253,.28); border-radius: 10px; background: rgba(255,255,255,.04); font-size: .63em; line-height: 1.32; }
+    .route-step span { display: flex; width: 42px; height: 42px; align-items: center; justify-content: center; border-radius: 50%; background: #28233f; color: #50fa7b; border: 2px solid #50fa7b; font-weight: 700; }
+    .route-step strong { display: block; color: #8be9fd; margin-bottom: 3px; }
+    .philosophy { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .school { padding: 18px; border-radius: 12px; background: rgba(255,255,255,.045); border: 1px solid rgba(139,233,253,.32); }
+    .school.epicurean { border-top: 5px solid #ffb86c; }
+    .school.stoic { border-top: 5px solid #8be9fd; }
+    .school h3 { margin-bottom: 10px; }
+    .school dl { display: grid; grid-template-columns: 100px 1fr; gap: 6px 12px; margin: 0; font-size: .59em; line-height: 1.28; }
+    .school dt { color: #ffb86c; font-weight: 700; }
+    .school.stoic dt { color: #8be9fd; }
+    .school dd { margin: 0; }
+    .school-note { margin: 16px 0 0; padding: 12px 16px; border-left: 5px solid #bd93f9; background: rgba(0,0,0,.13); font-size: .68em; line-height: 1.35; }
+    .method { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 24px; }
+    .method-step { padding: 15px 12px; border-top: 3px solid #50fa7b; background: rgba(255,255,255,.04); font-size: .57em; line-height: 1.3; }
+    .method-step:nth-child(even) { border-top-color: #ff79c6; }
+    .method-step strong { display: block; margin-bottom: 7px; color: #ffb86c; font-size: 1.13em; }
+    .role-line { margin: 19px 0 0; text-align: center; font-size: .8em; }
+    .argument-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .argument { min-height: 112px; padding: 14px; border: 1px solid rgba(139,233,253,.33); border-radius: 10px; background: rgba(255,255,255,.04); font-size: .56em; line-height: 1.32; }
+    .argument:nth-child(n+5) { border-color: rgba(255,121,198,.4); }
+    .argument .number { display: inline-flex; width: 27px; height: 27px; align-items: center; justify-content: center; margin-bottom: 8px; border-radius: 50%; background: #28233f; color: #50fa7b; border: 1px solid #50fa7b; font-weight: 700; }
+    .argument:nth-child(n+5) .number { color: #ff79c6; border-color: #ff79c6; }
+    .argument strong { display: block; margin-bottom: 5px; color: #8be9fd; font-size: 1.12em; }
+    .creator-layout { display: grid; grid-template-columns: 1fr 70px 1fr; gap: 15px; align-items: stretch; text-align: center; }
+    .creator-side { padding: 20px 16px; border-radius: 10px; background: rgba(255,255,255,.045); }
+    .creator-side p { margin: 11px 0 0; font-size: .61em; line-height: 1.4; }
+    .creator-divider { display: flex; align-items: center; justify-content: center; color: #ff79c6; font-size: 2.2em; font-weight: 700; }
+    .statement { margin: 20px 0 0; padding: 14px 18px; border-left: 5px solid #bd93f9; background: rgba(0,0,0,.13); font-size: .7em; line-height: 1.4; }
+    .resurrection { display: grid; grid-template-columns: .82fr 1.18fr; gap: 26px; align-items: center; }
+    .big-claim { padding: 27px 23px; border: 1px solid rgba(255,184,108,.55); border-radius: 14px; background: linear-gradient(145deg, rgba(255,184,108,.16), rgba(189,147,249,.08)); text-align: center; }
+    .big-claim .greek { font-family: Georgia, serif; color: #ffb86c; font-size: 2.25em; }
+    .big-claim p { font-size: .68em; line-height: 1.4; }
+    .contrast-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .contrast-card { padding: 17px 14px; border-top: 4px solid #8be9fd; background: rgba(255,255,255,.04); font-size: .58em; line-height: 1.35; }
+    .contrast-card:nth-child(1) { border-top-color: #ffb86c; }
+    .contrast-card:nth-child(3) { border-top-color: #50fa7b; }
+    .contrast-card strong { display: block; margin-bottom: 7px; color: #8be9fd; font-size: 1.15em; }
+    .response-card { padding: 19px 15px; border-radius: 12px; background: rgba(255,255,255,.045); border: 1px solid rgba(139,233,253,.32); text-align: center; }
+    .response-card .icon { font-size: 1.7em; color: #ffb86c; }
+    .response-card h3 { margin: 8px 0; }
+    .response-card p { margin: 0; font-size: .61em; line-height: 1.35; }
+    .people-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 20px; }
+    .person { padding: 12px 15px; border-left: 3px solid #8be9fd; background: rgba(255,255,255,.04); font-size: .62em; line-height: 1.32; }
+    .person strong { color: #ffb86c; }
+    .takeaway { max-width: 900px; margin: 0 auto; text-align: center; }
+    .takeaway p { font-size: .82em; line-height: 1.43; }
+    .takeaway .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0; }
+    .takeaway .pillar { padding: 16px 12px; border-top: 3px solid #50fa7b; background: rgba(255,255,255,.05); font-size: .62em; }
+    .takeaway .pillar:nth-child(2) { border-top-color: #ff79c6; }
+    .takeaway .pillar:nth-child(3) { border-top-color: #ffb86c; }
+    .source { margin-top: 25px; color: #8b879d; font-size: .42em !important; }
+    #voice-controls { position: fixed; bottom: 20px; left: 20px; z-index: 1000; }
+    #play-notes-button, #speaker-view-button { padding: 9px 13px; border: 1px solid rgba(139,233,253,.65); border-radius: 7px; background: rgba(40,35,63,.94); color: #f8f8f2; font: 600 14px/1 "Inter", sans-serif; cursor: pointer; }
+    #speaker-view-button { margin-left: 6px; }
+    #play-notes-button.is-speaking { border-color: #ff79c6; color: #ff79c6; }
+    #presenter-navigation { position: fixed; right: 18px; bottom: 62px; z-index: 1000; display: grid; grid-template-columns: repeat(3, 42px); grid-template-areas: ". up ." "left . right" ". down ."; gap: 6px; }
+    #presenter-navigation button { width: 42px; height: 42px; padding: 0; border: 1px solid rgba(40,35,63,.55); border-radius: 50%; background: #50fa7b; color: #282a36; font: 700 22px/1 Arial, sans-serif; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
+    #presenter-navigation button:hover:not(:disabled), #presenter-navigation button:focus-visible:not(:disabled) { background: #8be9fd; outline: 2px solid #f8f8f2; outline-offset: 2px; }
+    #presenter-navigation button:disabled { background: #6272a4; color: #c3c6d6; cursor: not-allowed; box-shadow: none; }
+    #presenter-left { grid-area: left; } #presenter-right { grid-area: right; } #presenter-up { grid-area: up; } #presenter-down { grid-area: down; }
+    @media (max-width: 900px) { .title-layout, .city-grid, .route-wrap, .resurrection { grid-template-columns: 1fr; } .title-copy { order: 1; } .hero-art { max-height: 280px; object-fit: cover; } }
+    @media (max-width: 760px) { .two-col, .three-col, .four-col, .philosophy, .contrast-cards, .takeaway .pillars { grid-template-columns: 1fr 1fr; } .method { grid-template-columns: repeat(3, 1fr); } .argument-grid { grid-template-columns: 1fr 1fr; } .creator-layout { grid-template-columns: 1fr; } .creator-divider { display: none; } }
+    @media (max-width: 520px) { .two-col, .three-col, .four-col, .philosophy, .contrast-cards, .takeaway .pillars, .method, .argument-grid, .people-row { grid-template-columns: 1fr; } .stat-row { grid-template-columns: 1fr; } #voice-controls { left: 8px; bottom: 8px; } #presenter-navigation { right: 8px; bottom: 50px; transform: scale(.82); transform-origin: right bottom; } }
+  </style>
+</head>
+<body>
+  <div id="voice-controls"><button id="play-notes-button" type="button" aria-pressed="false" title="Play or stop speaker notes (P)">▶ Play notes <span aria-hidden="true">(P)</span></button><button id="speaker-view-button" type="button" title="Open speaker view (S)">▣ Speaker view <span aria-hidden="true">(S)</span></button></div>
+  <nav id="presenter-navigation" aria-label="Presentation navigation">
+    <button id="presenter-left" type="button" aria-label="Previous slide" title="Previous slide">←</button>
+    <button id="presenter-right" type="button" aria-label="Next slide" title="Next slide">→</button>
+    <button id="presenter-up" type="button" aria-label="Hide previous fragment" title="Hide previous content">↑</button>
+    <button id="presenter-down" type="button" aria-label="Show next fragment" title="Show next content">↓</button>
+  </nav>
+  <div class="reveal"><div class="slides">
+    <section class="center" data-background-gradient="linear-gradient(135deg, #19162a 0%, #28233f 55%, #1d1b2c 100%)">
+      <div class="title-layout"><div class="title-copy"><p class="eyebrow">Acts 17:16–34</p><h1>Athens</h1><hr class="title-rule"><p style="font-size:1.12em">Paul in the <span class="highlight">city of wisdom</span>.</p><div class="question">What happens when the gospel enters a culture that already has answers?</div><p class="muted small">Faith, philosophy, and the resurrection in the heart of the ancient world</p></div><img class="hero-art" src="assets/athens-acropolis.svg" alt="Stylized illustration of the Acropolis and Parthenon at dusk"></div>
+      <aside class="notes">This presentation follows N. T. Wright’s treatment of Athens in Paul: A Biography, chapter 8, alongside Acts 17:16–34. Athens is not simply a scenic stop in Paul’s journey. It represents a culture full of intelligence, religion, art, civic pride, and competing explanations of reality. Paul understands that world deeply, but he insists that the decisive truth is the Creator God revealed through Jesus and confirmed by the resurrection.</aside>
+    </section>
+
+    <section><p class="eyebrow">A city already full of answers</p><h2>Athens: wisdom with a skyline</h2>
+      <div class="city-grid"><div class="city-card"><h3>Why Athens mattered</h3><ul><li>Greek city in Attica, near the Aegean Sea.</li><li>Connected to the wider Mediterranean through Piraeus.</li><li>Under Roman rule, but still famous for its history and schools.</li><li>Known for temples, public debate, philosophy, and artistic achievement.</li></ul><div class="stat-row"><div class="stat"><strong>Acropolis</strong>Religious and artistic identity rising above the city.</div><div class="stat"><strong>Agora</strong>Public life, commerce, conversation, and debate.</div></div></div><div><h3>Paul’s audience</h3><p class="small">Paul is not speaking to people who lack religion or intelligence. He is speaking to people who already have sophisticated explanations of the universe and human life.</p><p class="statement fragment">Athens represents the <span class="highlight">intellectual confidence</span> of the ancient world.</p></div></div>
+      <aside class="notes">Athens was located in Attica on mainland Greece, near the Aegean Sea, with its harbor at Piraeus connecting it to the wider Mediterranean. In Paul’s time it was a Greek city under Roman imperial rule, not an independent modern nation-state. Even under Rome, it remained one of the most respected intellectual and educational centers. The Acropolis and Parthenon represented the city’s religious and artistic identity, while the Agora was a place for commerce, public discussion, and teachers. Wright’s important emphasis is that Paul is addressing people with serious beliefs and sophisticated accounts of the world, not a population that is simply secular or uninformed.</aside>
+    </section>
+
+    <section><p class="eyebrow">Places and people</p><h2>The world behind Paul’s conversation</h2>
+      <div class="four-col"><div class="card"><h3>Acropolis</h3><p>The high center of Athens, filled with major temples.</p></div><div class="card fragment"><h3>Parthenon</h3><p>Temple dedicated to Athena, the city’s patron goddess.</p></div><div class="card fragment"><h3>Agora</h3><p>Marketplace and public center for meeting, teaching, and debate.</p></div><div class="card fragment"><h3>Areopagus</h3><p>Rocky hill and respected council linked with authority and judgment.</p></div></div>
+      <div class="people-row"><div class="person"><strong>Socrates · Plato · Aristotle</strong> The remembered teachers of questions about truth, justice, virtue, knowledge, and reality.</div><div class="person fragment"><strong>Epicurus · Zeno</strong> Later schools offering rival accounts of the gods, nature, death, and the good life.</div></div>
+      <aside class="notes">The Acropolis was the high center of Athens and contained important temples, especially the Parthenon, dedicated to Athena. The Agora was more than a market: it was a public center where citizens met and teachers encountered audiences. The Areopagus referred both to a rocky hill and to the council associated with it, which retained civic and intellectual prestige in the Roman period. Socrates, Plato, and Aristotle lived centuries before Paul, but their traditions shaped how Athens understood knowledge, virtue, and reality. Epicureanism and Stoicism were later movements that also became important in the city.</aside>
+    </section>
+
+    <section><p class="eyebrow">From conflict to Athens</p><h2>Paul arrives while waiting and watching</h2>
+      <div class="route-wrap"><img class="route-image" src="assets/athens-route.svg" alt="Illustrated route from Thessalonica through Berea to Athens"><div class="route-list"><div class="route-step"><span>1</span><div><strong>Thessalonica</strong>Opposition grows around the announcement of Jesus as another king.</div></div><div class="route-step fragment"><span>2</span><div><strong>Berea</strong>People listen, but opponents follow and create further danger.</div></div><div class="route-step fragment"><span>3</span><div><strong>Athens</strong>Paul waits for Silas and Timothy, then begins observing and speaking.</div></div></div></div>
+      <p class="statement fragment">This is not a planned academic lecture tour. Paul enters Athens amid <span class="accent">conflict, uncertainty, and isolation</span>.</p>
+      <aside class="notes">Paul’s arrival in Athens belongs within the wider missionary journey. In Thessalonica, opponents accused the Christians of challenging Roman political authority by proclaiming Jesus as another king. A mob attacked the house of Jason, who had welcomed the missionaries. Paul then went to Berea, where people initially listened carefully, but opponents from Thessalonica followed him and caused more trouble. Believers sent Paul toward Athens for safety. Acts says that Paul waited there for Silas and Timothy, so he was temporarily alone. Wright emphasizes that Paul does not waste the waiting period: he walks through the city, observes its religious life, and begins speaking in the synagogue and marketplace.</aside>
+    </section>
+
+    <section><p class="eyebrow">Epicureanism and Stoicism</p><h2>Two schools, two visions of reality</h2>
+      <div class="philosophy"><div class="school epicurean"><h3>Epicureanism · freedom from fear</h3><dl><dt>Reality</dt><dd>Atoms and empty space.</dd><dt>The gods</dt><dd>Distant and uninvolved.</dd><dt>Good life</dt><dd>Peace, calm, and freedom from disturbance.</dd><dt>Death</dt><dd>No divine punishment; do not fear it.</dd><dt>History</dt><dd>No ultimate divine purpose.</dd></dl></div><div class="school stoic"><h3>Stoicism · virtue in an ordered world</h3><dl><dt>Reality</dt><dd>A rational, ordered universe.</dd><dt>The gods</dt><dd>Present throughout the cosmos.</dd><dt>Good life</dt><dd>Virtue and harmony with nature.</dd><dt>Death</dt><dd>Part of a larger rational order.</dd><dt>History</dt><dd>Often understood through recurring cycles.</dd></dl></div></div>
+      <p class="school-note fragment">Both schools ask serious questions. Paul can meet those questions, but he challenges their accounts of <span class="highlight">Creator, accountability, history, and resurrection</span>.</p>
+      <aside class="notes">Epicureanism was founded by Epicurus, who taught in Athens beginning around 307 BC. Epicureans believed everything consisted of atoms and empty space. The gods might exist, but they were distant from human affairs. Their goal was not crude pleasure but a calm life free from unnecessary desire, fear, and anxiety, especially fear of the gods and punishment after death. Stoicism was founded by Zeno of Citium around 300 BC. Stoics believed the universe was ordered by reason, often described as logos, and taught people to live according to nature through courage, self-control, wisdom, and endurance. Paul can recognize the seriousness of both schools, but he believes they do not understand the Creator, human accountability, the direction of history, or bodily resurrection.</aside>
+    </section>
+
+    <section><p class="eyebrow">Paul as a cultural interpreter</p><h2>Flexible in language, firm in the gospel</h2>
+      <p class="role-line">Paul is simultaneously a <span class="highlight">Jewish interpreter</span>, a Greek-speaking communicator, a Roman citizen, and a public debater.</p>
+      <div class="method"><div class="method-step"><strong>1 · Observe</strong>Study the culture carefully.</div><div class="method-step fragment"><strong>2 · Connect</strong>Find genuine points of contact.</div><div class="method-step fragment"><strong>3 · Translate</strong>Use language people can understand.</div><div class="method-step fragment"><strong>4 · Challenge</strong>Expose assumptions that fail.</div><div class="method-step fragment"><strong>5 · Announce</strong>Lead toward Creator and resurrection.</div></div>
+      <p class="statement fragment center">Paul understands Athens <span class="accent">without becoming Athenian</span>.</p>
+      <aside class="notes">Paul is not presented as someone who simply repeats memorized religious phrases. He understands Jewish Scripture and history, but he also understands Greek language and the intellectual environment of the Roman world. He can speak in a synagogue, debate in a marketplace, and address people connected with the Areopagus. His method is both flexible and firm: he changes his starting point and vocabulary according to his audience, but he does not change the center of his message. He does not abandon Israel’s story to sound acceptable to Athens. He remains committed to the God of creation, the God of Abraham, and the God who acts in history through Jesus.</aside>
+    </section>
+
+    <section><p class="eyebrow">Acts 17:22–31</p><h2>At the Areopagus: from altar to resurrection</h2>
+      <div class="argument-grid"><div class="argument"><span class="number">1</span><strong>Devotion</strong>Paul recognizes that Athens is deeply religious.</div><div class="argument fragment"><span class="number">2</span><strong>Unknown god</strong>He uses an altar as a starting point.</div><div class="argument fragment"><span class="number">3</span><strong>Creator</strong>God made heaven, earth, and everything within them.</div><div class="argument fragment"><span class="number">4</span><strong>Dependence</strong>Human beings receive life and existence from God.</div><div class="argument fragment"><span class="number">5</span><strong>Idols</strong>God cannot be contained by buildings or represented by images.</div><div class="argument fragment"><span class="number">6</span><strong>Repentance</strong>God calls people to turn from ignorance.</div><div class="argument fragment"><span class="number">7</span><strong>Jesus</strong>God will judge the world through the risen Jesus.</div></div>
+      <p class="statement fragment">Paul begins with familiar Athenian language but ends with a <span class="highlight">distinctly Christian announcement</span>.</p>
+      <aside class="notes">Acts 17 describes Paul speaking at the Areopagus. Whether the speech occurred on the hill itself or before the council associated with it, the setting represents public intellectual and civic authority. Paul begins by recognizing that the Athenians are deeply concerned with divine matters. He then refers to an altar dedicated to an unknown god. This is a starting point, not an affirmation that Athens has already understood the biblical God. Paul announces the God they do not yet know: the Creator of heaven and earth, the giver of life, not a local deity confined to a temple. He challenges idols and temples, then announces repentance, judgment, and the resurrection of Jesus.</aside>
+    </section>
+
+    <section><p class="eyebrow">Wright’s main focus</p><h2>The Creator is not another god</h2>
+      <div class="creator-layout"><div class="creator-side"><h3>Athenian assumptions</h3><p>Many gods, temples, images, civic rituals, and human attempts to understand or manage the divine world.</p></div><div class="creator-divider" aria-hidden="true">→</div><div class="creator-side"><h3>Paul’s proclamation</h3><p>One Creator God gives life to all, cannot be reduced to an image, remains sovereign over creation, and will judge the world through Jesus.</p></div></div>
+      <p class="statement fragment center">God is not one more figure inside the system. <span class="highlight">God is the source of the whole system.</span></p>
+      <aside class="notes">Wright’s central theological concern is the difference between the biblical God and the gods of Athens. Athens had many temples, statues, sacrifices, and stories about divine beings. Paul announces that the true God is not one more deity within that system. God is the Creator of the entire system. God does not depend on temples, sacrifices, or statues; human beings do not sustain God, but God sustains human beings. Paul also challenges the idea that religion is simply a human attempt to organize and control the divine world. The Creator cannot be reduced to something human beings make. Greek philosophers had asked important questions, but Athens had not yet understood the Creator who had acted in history through Jesus.</aside>
+    </section>
+
+    <section><p class="eyebrow">The decisive Christian claim</p><h2>The resurrection reorders history</h2>
+      <div class="resurrection"><div class="big-claim"><div class="greek">ἀνάστασις</div><h3>anastasis · resurrection</h3><p>Not merely the soul continuing, but God raising Jesus bodily and beginning the renewal of creation.</p></div><div><div class="contrast-cards"><div class="contrast-card"><strong>Epicureanism</strong>Death ends personal existence; fear of it should be removed.</div><div class="contrast-card"><strong>Stoicism</strong>The universe is ordered by reason and may move through cycles.</div><div class="contrast-card"><strong>Paul</strong>God moves history toward judgment, resurrection, and renewal.</div></div><p class="statement fragment">The gospel is not merely a new intellectual theory. It is an announcement about an event.</p></div></div>
+      <aside class="notes">The resurrection is the decisive point in Paul’s message. Greek philosophical traditions could discuss the soul, the gods, the structure of the universe, and the meaning of death. Paul announces something concrete: God raised Jesus from the dead. Resurrection does not mean only that a person continues to exist spiritually. It means bodily resurrection and the renewal of creation. This challenges Epicureanism, which denied a meaningful future life and sought to remove fear of death. It also challenges Stoicism, especially its cyclical view of the universe and history. Paul presents history as moving toward God’s judgment and renewal, with Jesus’s resurrection as the beginning of that future and the confirmation that God has appointed Jesus to judge the world.</aside>
+    </section>
+
+    <section><p class="eyebrow">Three responses</p><h2>Athens listens, laughs, and believes</h2>
+      <div class="three-col"><div class="response-card"><div class="icon" aria-hidden="true">✦</div><h3>Mockery</h3><p>Some reject the idea of resurrection.</p></div><div class="response-card fragment"><div class="icon" aria-hidden="true">?</div><h3>Curiosity</h3><p>Some want to hear Paul again.</p></div><div class="response-card fragment"><div class="icon" aria-hidden="true">✓</div><h3>Faith</h3><p>Some believe, including Dionysius and Damaris.</p></div></div>
+      <div class="people-row"><div class="person"><strong>Dionysius</strong> An Areopagite connected with Athens’s civic or intellectual leadership.</div><div class="person fragment"><strong>Damaris</strong> A woman named by Acts among those who respond positively.</div></div>
+      <p class="statement fragment center">Wright measures Paul’s faithfulness by the <span class="highlight">truth of his witness</span>, not only by visible success.</p>
+      <aside class="notes">The response to Paul is mixed. Some Athenians mock him when he speaks about resurrection. Others remain curious and want to hear more. A smaller group believes, including Dionysius, an Areopagite, and Damaris, who is named without further explanation. The presence of Damaris reminds us that the audience was not made up only of male philosophers and officials. Acts does not describe a large Athenian church or an obvious public victory. Paul eventually continues to Corinth. Wright does not treat the limited immediate result as a simple failure. Paul has spoken clearly and faithfully in an intellectually difficult environment. The truth of his witness matters even when the visible outcome is small.</aside>
+    </section>
+
+    <section class="center" data-background-gradient="radial-gradient(circle at 50% 35%, #3b3159 0%, #201c31 58%, #15121f 100%)"><div class="takeaway"><p class="eyebrow">What Athens teaches</p><h2>Understand culture. Speak clearly. Keep the resurrection central.</h2><div class="pillars"><div class="pillar"><span class="highlight">Listen deeply</span><br>Notice the questions people are already asking.</div><div class="pillar"><span class="accent">Connect honestly</span><br>Begin with shared language without stopping at agreement.</div><div class="pillar"><span class="warm">Announce boldly</span><br>Human wisdom reaches its limit at the Creator and the risen Jesus.</div></div><p class="fragment">Paul understands Athens without surrendering the gospel to Athens.</p><p class="source">Based on Acts 17:16–34 and N. T. Wright, <em>Paul: A Biography</em>, chapter 8, “Athens.”</p></div><aside class="notes">Wright uses Athens to show what happens when the gospel enters a powerful intellectual and cultural environment. Athens represents human wisdom, religious devotion, artistic achievement, civic pride, philosophical confidence, and the search for meaning. Paul does not respond by rejecting everything in Athens. He listens, observes, quotes ideas familiar to the audience, and speaks in language they can understand. At the same time, he refuses to let Christianity become simply another Greek philosophy. He announces that the Creator has acted in history and that Jesus has been raised from the dead. The chapter presents Paul as both a cultural interpreter and a theological challenger: he understands the culture, but he does not surrender the gospel to the culture. The resurrection remains the decisive Christian claim.</aside></section>
+  </div></div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+  <script>
+    const revealReady = Reveal.initialize({ hash: true, slideNumber: 'c/t', controls: false, progress: true, center: true, transition: 'fade', plugins: [RevealNotes] });
+    const buttons = { left: document.getElementById('presenter-left'), right: document.getElementById('presenter-right'), up: document.getElementById('presenter-up'), down: document.getElementById('presenter-down') };
+    const updateNavigation = () => { const { h, f } = Reveal.getIndices(); const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment'); const index = Number.isInteger(f) ? f : -1; buttons.left.disabled = h === 0; buttons.right.disabled = h >= document.querySelectorAll('.slides > section').length - 1; buttons.up.disabled = index < 0; buttons.down.disabled = index >= fragments.length - 1; };
+    buttons.left.addEventListener('click', () => { const { h } = Reveal.getIndices(); if (!buttons.left.disabled) Reveal.slide(h - 1, 0, -1); });
+    buttons.right.addEventListener('click', () => { const { h } = Reveal.getIndices(); if (!buttons.right.disabled) Reveal.slide(h + 1, 0, -1); });
+    buttons.up.addEventListener('click', () => { if (!buttons.up.disabled) Reveal.prev(); });
+    buttons.down.addEventListener('click', () => { if (!buttons.down.disabled) Reveal.next(); });
+    revealReady.then(updateNavigation); Reveal.on('slidechanged', updateNavigation); Reveal.on('fragmentshown', updateNavigation); Reveal.on('fragmenthidden', updateNavigation);
+    document.getElementById('speaker-view-button').addEventListener('click', () => RevealNotes.open());
+    const playButton = document.getElementById('play-notes-button');
+    if ('speechSynthesis' in window) { const reset = () => { playButton.classList.remove('is-speaking'); playButton.setAttribute('aria-pressed', 'false'); playButton.innerHTML = '▶ Play notes <span aria-hidden="true">(P)</span>'; }; const speak = () => { if (speechSynthesis.speaking) { speechSynthesis.cancel(); reset(); return; } const notes = Reveal.getSlideNotes(); if (!notes) return; const utterance = new SpeechSynthesisUtterance(notes.trim()); utterance.rate = 1; utterance.onend = reset; utterance.onerror = reset; playButton.classList.add('is-speaking'); playButton.setAttribute('aria-pressed', 'true'); playButton.innerHTML = '■ Stop notes <span aria-hidden="true">(P)</span>'; speechSynthesis.speak(utterance); }; playButton.addEventListener('click', speak); Reveal.addKeyBinding({ keyCode: 80, key: 'P', description: 'Play or stop speaker notes audio' }, speak); Reveal.on('slidechanged', () => { speechSynthesis.cancel(); reset(); }); } else { document.getElementById('voice-controls').hidden = true; }
+  </script>
+</body>
+</html>

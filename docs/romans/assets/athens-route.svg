@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Paul's route from Thessalonica to Athens</title>
+  <desc id="desc">A stylized route line connecting Thessalonica, Berea, and Athens.</desc>
+  <defs>
+    <linearGradient id="route" x1="0" x2="1">
+      <stop offset="0" stop-color="#8be9fd"/><stop offset=".52" stop-color="#50fa7b"/><stop offset="1" stop-color="#ff79c6"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="360" rx="28" fill="#f7edcf"/>
+  <path d="M58 55 C236 5 260 150 398 107 C528 68 539 269 712 225 C775 209 810 240 850 303" fill="none" stroke="#d8c58e" stroke-width="48" opacity=".32"/>
+  <path d="M58 55 C236 5 260 150 398 107 C528 68 539 269 712 225 C775 209 810 240 850 303" fill="none" stroke="url(#route)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 18"/>
+  <g fill="#28233f" stroke="#f7edcf" stroke-width="7">
+    <circle cx="82" cy="57" r="19"/><circle cx="399" cy="107" r="19"/><circle cx="850" cy="303" r="19"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" fill="#28233f">
+    <text x="53" y="116" font-size="24" font-weight="700">Thessalonica</text>
+    <text x="340" y="167" font-size="24" font-weight="700">Berea</text>
+    <text x="786" y="348" font-size="24" font-weight="700">Athens</text>
+    <text x="55" y="25" font-size="17" fill="#8d4566" letter-spacing="2">OPPOSITION</text>
+    <text x="350" y="83" font-size="17" fill="#8d4566" letter-spacing="2">LISTENING</text>
+    <text x="675" y="274" font-size="17" fill="#8d4566" letter-spacing="2">PUBLIC WITNESS</text>
+  </g>
+  <g fill="#8d4566" opacity=".5">
+    <circle cx="150" cy="258" r="5"/><circle cx="215" cy="290" r="3"/><circle cx="646" cy="76" r="4"/><circle cx="751" cy="103" r="3"/>
+  </g>
+</svg>
