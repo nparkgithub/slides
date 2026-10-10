@@ -177,3 +177,61 @@
       if(typeof render==='function')render();
     })();
   </script>
+
+  <style>
+    .trail-map-link,.trail-map-action{display:inline-flex;align-items:center;gap:5px;color:var(--accent,#1f5d4a);font-size:11px;font-weight:800;text-decoration:none}
+    .trail-map-link{margin-left:auto;padding:2px 0;white-space:nowrap}
+    .trail-map-action{margin:0 0 14px;padding:9px 11px;border:1px solid currentColor}
+    .trail-map-link:hover,.trail-map-action:hover{text-decoration:underline}
+  </style>
+  <script>
+    (function(){
+      const trailMaps={
+        "Mount Takao Summit Trail":["https://www.gotokyo.org/book/wp-content/uploads/2020/11/2011_takao-map_EN.pdf","Official Mt. Takao trail map (PDF)"],
+        "Imperial Palace East Gardens Walk":["https://www.kunaicho.go.jp/e-event/pdf/illustrationmap-e.pdf","Official East Gardens map (PDF)"],
+        "Philosopher's Path":["https://kyoto.travel/en/destinations/philosophers-path-tetsugakunomichi/","Official Philosopher's Path guide"],
+        "Kurama–Kibune Mountain Trail":["https://kyoto.travel/en/areas/kurama-kibune/","Official Kurama–Kibune guide"],
+        "Minoh Falls Trail":["https://discover.osaka-info.jp/en/spots/mino-park","Official Minoh Park guide"],
+        "Osaka Castle Park Loop":["https://osaka-info.jp/en/spot/osaka-castle-park/","Official Osaka Castle Park guide"],
+        "Igidae Coastal Trail (이기대 해안산책로)":["https://www.busan.go.kr/geopark_en/igidae","Official Igidae coastal guide"],
+        "Taejongdae Coastal Loop (태종대 해안순환로)":["https://www.busan.go.kr/geopark_en/taejongdae","Official Taejongdae guide"],
+        "Namsan Southern Walking Path (남산 남측순환로)":["https://english.visitseoul.net/other/Namsan-Trails/ENP9jn7zj","Official Namsan trail guide"],
+        "Inwangsan Seoul City Wall Trail (인왕산 한양도성길)":["https://www.seoulhiking.or.kr/theme/basic/img/mountain_inwangsan-eng.pdf","Official Inwangsan trail map (PDF)"],
+        "Bukhansan Baegundae Trail (북한산 백운대 코스)":["https://english.seoul.go.kr/wp-content/uploads/2024/01/SEOUL-HIKING-GUIDE-BOOK.pdf","Official Bukhansan hiking guide (PDF)"],
+        "Seoul Dulle-gil Trail 12 / Gwanaksan (서울둘레길 12코스 / 관악산)":["https://gil.seoul.go.kr/bbsctt/view.do?key=2406050007&sc_bbscttSn=2407100069","Official Seoul Trail map page"]
+      };
+      function trailLink(name){
+        if(trailMaps[name])return {href:trailMaps[name][0],label:trailMaps[name][1]};
+        const c=cities[city];
+        const cityName=c.name.replace(/ (.+)$/,'');
+        const country=(city==='busan'||city==='seoul')?'South Korea':'Japan';
+        return {href:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(name+', '+cityName+', '+country),label:'Open trail in Google Maps'};
+      }
+      function decorateTrailUI(){
+        document.querySelectorAll('.row').forEach(function(row){
+          const label=row.querySelector('.row-copy strong');
+          const meta=row.querySelector('.row-copy small');
+          if(!label||!meta||!meta.textContent.includes('Trail')||row.querySelector('.trail-map-link'))return;
+          const link=trailLink(label.textContent.trim());
+          const a=document.createElement('a');
+          a.className='trail-map-link';a.href=link.href;a.target='_blank';a.rel='noreferrer';a.textContent='Map ↗';
+          a.title=link.label;a.setAttribute('aria-label','Open map for '+label.textContent.trim());
+          a.addEventListener('click',function(e){e.stopPropagation()});
+          const add=row.querySelector('.add');
+          if(add)row.insertBefore(a,add);else row.appendChild(a);
+        });
+        const detailCard=document.querySelector('.detail');
+        const place=cities[city]&&cities[city].places.find(function(x){return slug(x[0])===selected});
+        if(detailCard&&place&&place[1]==='Trail'&&!detailCard.querySelector('.trail-map-action')){
+          const link=trailLink(place[0]);
+          const a=document.createElement('a');a.className='trail-map-action';a.href=link.href;a.target='_blank';a.rel='noreferrer';a.textContent='🥾 '+link.label+' ↗';
+          const actions=detailCard.querySelector('.detail-actions');
+          if(actions)detailCard.insertBefore(a,actions);else detailCard.appendChild(a);
+        }
+      }
+      const trailAwareRender=render;
+      render=function(){trailAwareRender();decorateTrailUI()};
+      decorateTrailUI();
+      render();
+    })();
+  </script>
