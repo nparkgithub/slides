@@ -142,3 +142,28 @@
   };
 })();
 </script>
+
+<script>
+(function(){
+  function updateLandingForKorea(){
+    const title=document.querySelector('.landing-copy h1');
+    if(title) title.textContent='Tokyo, Osaka, Kyoto, Busan & Seoul in 2026';
+    const source=document.querySelector('.landing-top>small');
+    if(source) source.textContent='Route index · Tokyo / Osaka / Kyoto / Busan (Pusan) / Seoul';
+    const description=document.querySelector('.landing-copy p');
+    if(description) description.textContent='Start with the map that shaped the trip, then move into the interactive companion for neighborhoods, hotels, saved places, and routes across Japan and Korea.';
+    const image=document.querySelector('.landing-frame img');
+    if(image) image.alt='Tokyo, Osaka, and Kyoto travel map reference with Busan and Seoul chapters';
+    const caption=document.querySelector('.landing-caption');
+    if(caption) caption.textContent='Reference map · supplied Japan structure · Busan and Seoul chapters added to the interactive layer';
+    const meta=document.querySelectorAll('.landing-meta span');
+    if(meta[0]) meta[0].textContent='5 cities';
+    if(meta[1]) meta[1].textContent='Hotels + places + trails';
+  }
+  if(typeof updateLandingCopy === 'function'){
+    const priorUpdateLandingCopy=updateLandingCopy;
+    updateLandingCopy=function(){ priorUpdateLandingCopy(); updateLandingForKorea(); };
+  }
+  updateLandingForKorea();
+})();
+</script>
