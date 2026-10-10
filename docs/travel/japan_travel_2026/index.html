@@ -85,6 +85,7 @@
     const originalRender=render;render=function(){originalRender();addIconLegend();wireMapControls();buildFilteredLeaflet();addDirectionsPanel()};buildFilteredLeaflet();addIconLegend();wireMapControls();addDirectionsPanel();
   </script>
   <script>
+    if(cities.osaka.places.length===3){cities.osaka.places.push(['広島お好み焼き 町 GOBUNN','Japanese','Kita-ku','お',62,48],['Kurashiki Coffee','Cafe','Namba','茶',43,73],['Nonta-sushi Kamiyacho','Sushi','Honmachi','鮨',57,58]);cities.osaka.places.forEach(place=>{place[3]=iconFor(place)})}
     function updateLandingCopy(){const title=document.querySelector('.landing-copy h1');if(title)title.textContent='Tokyo, Osaka, Kyoto travel in 2026';const source=document.querySelector('.landing-top>small');if(source)source.textContent='Source map · Tokyo / Osaka / Kyoto'}
     function reorderCityTabs(){const list=document.querySelector('.tablist');if(!list)return;['Tokyo','Osaka','Kyoto'].forEach((name,index)=>{const button=[...list.querySelectorAll('.tab')].find(item=>item.textContent.includes(name));if(button){const number=button.querySelector('small');if(number)number.textContent='0'+(index+1);list.appendChild(button)}})}
     function addMobilePlaceSheet(){const existing=document.querySelector('.mobile-place-sheet');if(existing)existing.remove();const c=cities[city];const panel=document.querySelector('.map-panel');if(!panel)return;const sheet=mobilePlaceSheet(c);if(sheet)panel.insertAdjacentHTML('afterend',sheet)}
