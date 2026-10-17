@@ -23,6 +23,13 @@
             --fragment-end-bg: #6b3b4a;
         }
 
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
@@ -31,6 +38,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
+            height: 100dvh;
         }
 
         header {
@@ -38,6 +46,8 @@
             padding: 10px 20px;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 12px;
             border-bottom: 2px solid var(--border-color);
             flex-shrink: 0;
         }
@@ -48,7 +58,7 @@
         }
 
         header>* {
-            margin-right: 20px;
+            margin-right: 0;
         }
 
         button,
@@ -72,14 +82,17 @@
         }
 
         .main-container {
+            --editor-panel-width: 30%;
             display: flex;
-            flex-grow: 1;
+            flex: 1 1 0;
+            height: 0;
             overflow: hidden;
             min-height: 0;
         }
 
         .editor-panel {
-            width: 40%;
+            flex: 0 0 var(--editor-panel-width);
+            width: auto;
             display: flex;
             flex-direction: column;
             padding: 10px;
@@ -87,11 +100,203 @@
             min-height: 0;
         }
 
+        .editor-preview-divider {
+            flex: 0 0 8px;
+            width: 8px;
+            position: relative;
+            z-index: 3;
+            background-color: var(--border-color);
+            cursor: col-resize;
+            touch-action: none;
+        }
+
+        .editor-preview-divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 3px;
+            height: 44px;
+            border-radius: 2px;
+            background-color: var(--fg-color);
+            opacity: 0.45;
+            transform: translate(-50%, -50%);
+        }
+
+        .editor-preview-divider:hover,
+        .editor-preview-divider.is-dragging,
+        .editor-preview-divider:focus-visible {
+            background-color: var(--button-bg);
+            outline: none;
+        }
+
+        .editor-preview-divider:focus-visible::after,
+        .editor-preview-divider:hover::after,
+        .editor-preview-divider.is-dragging::after {
+            opacity: 0.9;
+        }
+
+        .main-container.editors-hidden .editor-preview-divider {
+            display: none;
+        }
+
+        body.is-resizing-editor,
+        body.is-resizing-editor * {
+            cursor: col-resize !important;
+            user-select: none !important;
+        }
+
         .preview-panel {
-            width: 60%;
+            flex: 1 1 auto;
+            width: auto;
             display: flex;
             flex-direction: column;
             position: relative;
+            min-height: 0;
+            min-width: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide-overview {
+            flex: 0 0 250px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background-color: var(--panel-bg);
+            border-left: 2px solid var(--border-color);
+        }
+
+        .slide-overview.is-hidden {
+            display: none;
+        }
+
+        .slide-overview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .slide-overview-header h2 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .slide-overview-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .slide-overview-actions button {
+            padding: 5px 7px;
+            font-size: 12px;
+        }
+
+        .slide-overview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: auto;
+            min-height: 0;
+            padding: 10px;
+        }
+
+        .slide-overview-empty {
+            margin: 8px 2px;
+            color: #c5c7d0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .slide-thumbnail {
+            display: block;
+            flex: 0 0 auto;
+            padding: 6px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--input-bg);
+            color: var(--fg-color);
+            cursor: grab;
+            outline: none;
+        }
+
+        .slide-thumbnail:active {
+            cursor: grabbing;
+        }
+
+        .slide-thumbnail:focus-visible,
+        .slide-thumbnail.is-current {
+            border-color: var(--syntax-punctuation);
+            box-shadow: 0 0 0 2px rgba(255, 121, 198, 0.25);
+        }
+
+        .slide-thumbnail.is-drag-over {
+            border-color: var(--button-bg);
+            box-shadow: 0 0 0 2px rgba(80, 250, 123, 0.25);
+        }
+
+        .slide-thumbnail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
+            min-height: 25px;
+            margin-bottom: 5px;
+        }
+
+        .slide-thumbnail-title {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.01em;
+        }
+
+        .slide-thumbnail-delete {
+            flex: 0 0 auto;
+            padding: 2px 6px;
+            border: 1px solid rgba(255, 121, 198, 0.7);
+            background: var(--fragment-end-bg);
+            color: var(--fg-color);
+            font-size: 12px;
+        }
+
+        .slide-thumbnail-frame {
+            display: block;
+            width: 100%;
+            aspect-ratio: 960 / 700;
+            border: 1px solid var(--border-color);
+            background: #000;
+            pointer-events: none;
+        }
+
+        .slide-thumbnail:hover {
+            border-color: var(--syntax-tag);
+        }
+
+        .main-container.editors-hidden .editor-panel {
+            display: none;
+        }
+
+        .main-container.editors-hidden .preview-panel {
+            flex: 1 1 auto;
+            width: auto;
+            align-items: stretch;
+            justify-content: stretch;
+        }
+
+        .main-container.editors-hidden #preview-frame {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            flex: 1 1 auto;
+            aspect-ratio: auto;
         }
 
         .editor-box {
@@ -177,8 +382,11 @@
         .syntax-comment { color: var(--syntax-comment); }
 
         #preview-frame {
+            display: block;
             width: 100%;
-            height: 100%;
+            height: auto;
+            min-height: 0;
+            flex: 1 1 auto;
             border: none;
             background-color: #fff;
         }
@@ -186,7 +394,7 @@
         .preview-navigation {
             position: absolute;
             right: 16px;
-            top: 50%;
+            bottom: 16px;
             z-index: 2;
             display: grid;
             grid-template-columns: repeat(3, 46px);
@@ -195,7 +403,6 @@
                 "left . right"
                 ". down .";
             gap: 8px;
-            transform: translateY(-50%);
         }
 
         .preview-navigation button {
@@ -208,6 +415,12 @@
             color: var(--fg-color);
             font-size: 24px;
             line-height: 1;
+        }
+
+        .preview-navigation button:not(:disabled) {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border-color: rgba(248, 248, 242, 0.8);
         }
 
         .preview-navigation button:hover:not(:disabled),
@@ -229,6 +442,51 @@
             color: #d7b4bc;
         }
 
+        .preview-navigation button:disabled {
+            background-color: rgba(40, 42, 54, 0.72);
+            color: #9b9eae;
+            opacity: 0.72;
+        }
+
+        #preview-prev-fragment:disabled,
+        #preview-next-fragment:disabled {
+            background-color: var(--fragment-end-bg);
+            color: #d7b4bc;
+        }
+
+        .editor-label-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .editor-selection-status {
+            color: var(--syntax-punctuation);
+            font-size: 11px;
+            font-weight: normal;
+            min-height: 1em;
+        }
+
+        .editor-box.source-selected {
+            outline: 2px solid var(--syntax-punctuation);
+            outline-offset: -2px;
+        }
+
+        .editor-label-row label {
+            margin-bottom: 0;
+        }
+
+        .editor-toggle-button {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        .editor-box.is-hidden {
+            display: none;
+        }
+
         #slide-nav {
             font-weight: bold;
         }
@@ -241,6 +499,82 @@
         #grammar-status {
             font-size: 12px;
             color: #ccc;
+        }
+
+        #preview-status {
+            min-width: 180px;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        #preview-status.is-warning {
+            color: #ffb86c;
+        }
+
+        #preview-status.is-error {
+            color: #ff79c6;
+        }
+
+        #source-url,
+        #asset-base-url {
+            width: 190px;
+            box-sizing: border-box;
+            padding: 7px 8px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--fg-color);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 900px) {
+            .editor-panel { flex-basis: var(--editor-panel-width); }
+            .preview-panel { width: auto; }
+
+            #source-url,
+            #asset-base-url {
+                width: 150px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .main-container {
+                flex-direction: column;
+                overflow: auto;
+            }
+
+            .editor-panel,
+            .preview-panel {
+                width: 100%;
+                flex: 1 1 50%;
+            }
+
+            .editor-preview-divider {
+                display: none;
+            }
+
+            .preview-panel {
+                min-height: 360px;
+            }
+
+            .slide-overview {
+                flex: 0 0 30%;
+                width: 100%;
+                max-height: 320px;
+                border-top: 2px solid var(--border-color);
+                border-left: 0;
+            }
         }
 
         #writing-results {
@@ -361,6 +695,16 @@
         <button id="load-button">Load File</button>
         <input type="file" id="file-input" accept=".html" style="display: none;">
         <span id="file-name">No file loaded</span>
+        <label for="source-url" class="sr-only">Deck URL</label>
+        <input id="source-url" type="url" placeholder="Deck URL (optional)" title="Load a deck from a URL or repository path">
+        <button id="load-url-button" type="button">Load URL</button>
+        <label for="asset-base-url" class="sr-only">Asset base URL</label>
+        <input id="asset-base-url" type="text" placeholder="Asset base URL, e.g. docs/romans/" title="Base URL used for relative images, fonts, and other assets">
+        <button id="choose-asset-folder-button" type="button" disabled title="Choose the folder containing this deck and its local assets">Choose Asset Folder</button>
+        <button id="toggle-editors-button" type="button" aria-controls="editor-panel" aria-expanded="true">Hide Editors</button>
+        <button id="toggle-content-editor-button" type="button" aria-controls="content-editor-box" aria-expanded="true">Hide Slide Editor</button>
+        <button id="toggle-notes-editor-button" type="button" aria-controls="notes-editor-box" aria-expanded="true">Hide Speaker Notes</button>
+        <button id="toggle-slide-overview-button" type="button" aria-controls="slide-overview" aria-expanded="false">Show Slide Overview</button>
         <div id="navigation-controls" style="display: none;">
             <button id="prev-slide">◀ Prev</button>
             <span id="slide-nav">Slide 0 / 0</span>
@@ -370,7 +714,12 @@
         <button id="spellcheck-button" type="button">Spell: On</button>
         <button id="grammar-button" type="button" disabled>Grammar Check</button>
         <span id="grammar-status" aria-live="polite"></span>
-        <button id="save-button" disabled>Save & Download</button>
+        <span id="preview-status" aria-live="polite"></span>
+        <button id="refresh-preview-button" type="button" disabled>Refresh Preview</button>
+        <button id="toggle-preview-editing-button" type="button" disabled aria-pressed="true">Disable Preview Editing</button>
+        <button id="reload-file-button" type="button" disabled title="Reload the currently loaded HTML file">Reload File</button>
+        <button id="save-button" disabled>Save</button>
+        <button id="save-as-button" type="button" disabled>Save As…</button>
     </header>
 
     <div id="find-replace-panel">
@@ -393,23 +742,29 @@
         <div id="writing-results-list"></div>
     </div>
 
-    <div class="main-container">
-        <div class="editor-panel">
-            <div class="editor-box" style="flex-basis: 65%;">
-                <label for="content-editor">Slide Content (HTML)</label>
+    <div class="main-container" id="main-container">
+        <div class="editor-panel" id="editor-panel">
+            <div class="editor-box" id="content-editor-box" style="flex-basis: 65%;">
+                <div class="editor-label-row">
+                    <label for="content-editor">Slide Content (HTML)</label>
+                    <span id="editor-selection-status" class="editor-selection-status" aria-live="polite"></span>
+                </div>
                 <div class="editor-wrapper">
                     <div id="content-backdrop" class="editor-highlight-backdrop"></div>
                     <textarea id="content-editor" disabled spellcheck="true"></textarea>
                 </div>
             </div>
-            <div class="editor-box" style="flex-basis: 35%;">
-                <label for="notes-editor">Speaker Notes</label>
+            <div class="editor-box" id="notes-editor-box" style="flex-basis: 35%;">
+                <div class="editor-label-row">
+                    <label for="notes-editor">Speaker Notes</label>
+                </div>
                 <div class="editor-wrapper">
                     <div id="notes-backdrop" class="editor-highlight-backdrop"></div>
                     <textarea id="notes-editor" disabled spellcheck="true"></textarea>
                 </div>
             </div>
         </div>
+        <div id="editor-preview-divider" class="editor-preview-divider" role="separator" aria-label="Resize slide editor and preview" aria-orientation="vertical" aria-valuemin="20" aria-valuemax="55" aria-valuenow="30" tabindex="0" title="Drag to resize editor and preview; double-click to reset"></div>
         <div class="preview-panel">
             <iframe id="preview-frame" title="Slide Preview" sandbox="allow-scripts"></iframe>
             <div class="preview-navigation" aria-label="Content navigation">
@@ -419,6 +774,16 @@
                 <button id="preview-next-fragment" type="button" title="Show next content" aria-label="Show next content">↓</button>
             </div>
         </div>
+        <aside id="slide-overview" class="slide-overview is-hidden" aria-label="Slide overview">
+            <div class="slide-overview-header">
+                <h2>Slides</h2>
+                <div class="slide-overview-actions">
+                    <button id="undo-delete-slide-button" type="button" disabled title="Undo the last deleted slide">Undo</button>
+                    <button id="hide-slide-overview-button" type="button" title="Hide slide overview">Hide</button>
+                </div>
+            </div>
+            <div id="slide-overview-list" class="slide-overview-list" role="list"></div>
+        </aside>
     </div>
 
     <script>
@@ -426,6 +791,21 @@
         document.addEventListener('DOMContentLoaded', () => {
             const fileInput = document.getElementById('file-input');
             const fileNameDisplay = document.getElementById('file-name');
+            const sourceUrlInput = document.getElementById('source-url');
+            const loadUrlButton = document.getElementById('load-url-button');
+            const mainContainer = document.getElementById('main-container');
+            const editorPanel = document.getElementById('editor-panel');
+            const editorPreviewDivider = document.getElementById('editor-preview-divider');
+            const toggleEditorsButton = document.getElementById('toggle-editors-button');
+            const contentEditorBox = document.getElementById('content-editor-box');
+            const notesEditorBox = document.getElementById('notes-editor-box');
+            const toggleContentEditorButton = document.getElementById('toggle-content-editor-button');
+            const toggleNotesEditorButton = document.getElementById('toggle-notes-editor-button');
+            const toggleSlideOverviewButton = document.getElementById('toggle-slide-overview-button');
+            const slideOverview = document.getElementById('slide-overview');
+            const slideOverviewList = document.getElementById('slide-overview-list');
+            const hideSlideOverviewButton = document.getElementById('hide-slide-overview-button');
+            const undoDeleteSlideButton = document.getElementById('undo-delete-slide-button');
             const navControls = document.getElementById('navigation-controls');
             const prevBtn = document.getElementById('prev-slide');
             const nextBtn = document.getElementById('next-slide');
@@ -435,6 +815,7 @@
             const previewNextFragmentBtn = document.getElementById('preview-next-fragment');
             const slideNavDisplay = document.getElementById('slide-nav');
             const saveBtn = document.getElementById('save-button');
+            const saveAsBtn = document.getElementById('save-as-button');
             const contentEditor = document.getElementById('content-editor');
             const notesEditor = document.getElementById('notes-editor');
             const previewFrame = document.getElementById('preview-frame');
@@ -450,6 +831,12 @@
             const spellcheckButton = document.getElementById('spellcheck-button');
             const grammarButton = document.getElementById('grammar-button');
             const grammarStatus = document.getElementById('grammar-status');
+            const previewStatus = document.getElementById('preview-status');
+            const refreshPreviewButton = document.getElementById('refresh-preview-button');
+            const togglePreviewEditingButton = document.getElementById('toggle-preview-editing-button');
+            const reloadFileButton = document.getElementById('reload-file-button');
+            const assetBaseUrlInput = document.getElementById('asset-base-url');
+            const chooseAssetFolderButton = document.getElementById('choose-asset-folder-button');
             const writingResults = document.getElementById('writing-results');
             const writingResultsList = document.getElementById('writing-results-list');
             const closeWritingResultsBtn = document.getElementById('close-writing-results');
@@ -463,10 +850,37 @@
             let currentFileHandle = null; // For File System Access API
             let lastFocusedEditor = null; // To track which editor is active for find/replace
             let previewUpdateTimer = null;
+            let previewGeneration = 0;
             let spellcheckEnabled = true;
+            let previewEditingEnabled = true;
+            let contentEditorVisible = true;
+            let notesEditorVisible = true;
+            let slideOverviewVisible = false;
+            let editorPanelRatio = 0.30;
+            let isEditorDividerDragging = false;
+            let isDirty = false;
+            let localAssetDirectoryHandle = null;
+            const localAssetObjectUrls = new Map();
+            let editorSelectionTimer = null;
+            let slideOverviewRenderTimer = null;
+            let draggedSlideIndex = null;
+            let lastDeletedSlide = null;
+            const editorViewState = new WeakMap();
+            const fragmentState = new WeakMap();
+
+            try {
+                slideOverviewVisible = localStorage.getItem('reveal-editor-slide-overview') === 'true';
+                const savedPreviewEditing = localStorage.getItem('reveal-editor-preview-editing');
+                if (savedPreviewEditing !== null) previewEditingEnabled = savedPreviewEditing === 'true';
+                const savedEditorPanelRatio = Number(localStorage.getItem('reveal-editor-panel-ratio'));
+                if (Number.isFinite(savedEditorPanelRatio)) editorPanelRatio = Math.min(0.55, Math.max(0.20, savedEditorPanelRatio));
+            } catch (error) {
+                // Storage may be unavailable for local files; default to hidden.
+            }
 
             const contentBackdrop = document.getElementById('content-backdrop');
             const notesBackdrop = document.getElementById('notes-backdrop');
+            const editorSelectionStatus = document.getElementById('editor-selection-status');
             const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
             const voidElements = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
@@ -509,15 +923,632 @@
                 return openElements.at(-1)?.index ?? null;
             }
 
+            function htmlRangeForElementIndex(text, targetIndex) {
+                const tagPattern = /<!--[\s\S]*?-->|<\/?[A-Za-z][^>]*>/g;
+                const openElements = [];
+                let elementIndex = -1;
+                let tagMatch;
+
+                while ((tagMatch = tagPattern.exec(text)) !== null) {
+                    const tag = tagMatch[0];
+                    const tagStart = tagMatch.index;
+                    const tagEnd = tagStart + tag.length;
+                    if (tag.startsWith('<!--')) continue;
+
+                    const nameMatch = /^<\s*(\/?)\s*([A-Za-z][\w:-]*)/.exec(tag);
+                    if (!nameMatch) continue;
+                    const isClosingTag = Boolean(nameMatch[1]);
+                    const tagName = nameMatch[2].toLowerCase();
+
+                    if (isClosingTag) {
+                        for (let index = openElements.length - 1; index >= 0; index -= 1) {
+                            if (openElements[index].name !== tagName) continue;
+                            const element = openElements.splice(index, 1)[0];
+                            if (element.index === targetIndex) {
+                                return { start: element.start, end: tagEnd };
+                            }
+                            break;
+                        }
+                        continue;
+                    }
+
+                    elementIndex += 1;
+                    const isVoidElement = voidElements.has(tagName) || /\/\s*>$/.test(tag);
+                    const element = { name: tagName, index: elementIndex, start: tagStart };
+                    if (elementIndex === targetIndex && isVoidElement) {
+                        return { start: tagStart, end: tagEnd };
+                    }
+                    if (!isVoidElement) openElements.push(element);
+                }
+
+                const openElement = openElements.find((element) => element.index === targetIndex);
+                return openElement ? { start: openElement.start, end: text.length } : null;
+            }
+
+            function htmlContentRangeForElementIndex(text, targetIndex) {
+                const tagPattern = /<!--[\s\S]*?-->|<\/?[A-Za-z][^>]*>/g;
+                const openElements = [];
+                let elementIndex = -1;
+                let tagMatch;
+
+                while ((tagMatch = tagPattern.exec(text)) !== null) {
+                    const tag = tagMatch[0];
+                    const tagStart = tagMatch.index;
+                    const tagEnd = tagStart + tag.length;
+                    if (tag.startsWith('<!--')) continue;
+
+                    const nameMatch = /^<\s*(\/?)\s*([A-Za-z][\w:-]*)/.exec(tag);
+                    if (!nameMatch) continue;
+                    const isClosingTag = Boolean(nameMatch[1]);
+                    const tagName = nameMatch[2].toLowerCase();
+
+                    if (isClosingTag) {
+                        for (let index = openElements.length - 1; index >= 0; index -= 1) {
+                            if (openElements[index].name !== tagName) continue;
+                            const element = openElements.splice(index, 1)[0];
+                            if (element.index === targetIndex) {
+                                return { start: element.openEnd, end: tagStart };
+                            }
+                            break;
+                        }
+                        continue;
+                    }
+
+                    elementIndex += 1;
+                    const isVoidElement = voidElements.has(tagName) || /\/\s*>$/.test(tag);
+                    if (!isVoidElement) openElements.push({ name: tagName, index: elementIndex, openEnd: tagEnd });
+                }
+
+                const openElement = openElements.find((element) => element.index === targetIndex);
+                return openElement ? { start: openElement.openEnd, end: text.length } : null;
+            }
+
+            function selectHtmlElementInEditor(nodeIndex, { focusEditor = false } = {}) {
+                if (!presentationDoc || !Number.isInteger(nodeIndex)) return;
+                const range = htmlRangeForElementIndex(contentEditor.value, nodeIndex);
+                if (!range) return;
+                if (focusEditor) contentEditor.focus({ preventScroll: true });
+                contentEditor.setSelectionRange(range.start, range.end);
+                const lineHeight = parseFloat(getComputedStyle(contentEditor).lineHeight) || 20;
+                const lineNumber = contentEditor.value.slice(0, range.start).split('\n').length - 1;
+                contentEditor.scrollTop = Math.max(0, lineNumber * lineHeight - contentEditor.clientHeight * 0.25);
+                syncBackdropScroll(contentEditor, contentBackdrop);
+                const tagMatch = /^<\s*([A-Za-z][\w:-]*)/.exec(contentEditor.value.slice(range.start));
+                editorSelectionStatus.textContent = tagMatch ? `Preview points to <${tagMatch[1]}>` : 'Preview selection';
+                contentEditorBox.classList.add('source-selected');
+                clearTimeout(editorSelectionTimer);
+                editorSelectionTimer = setTimeout(() => contentEditorBox.classList.remove('source-selected'), 1800);
+                previewFrame.contentWindow?.postMessage({ type: 'editor-selection', nodeIndex }, '*');
+            }
+
+            function applyPreviewContentEdit(nodeIndex, innerHTML) {
+                if (!presentationDoc || !Number.isInteger(nodeIndex)) return;
+                const range = htmlContentRangeForElementIndex(contentEditor.value, nodeIndex);
+                if (!range || range.start > range.end) return;
+                contentEditor.value = contentEditor.value.slice(0, range.start) + innerHTML + contentEditor.value.slice(range.end);
+                const currentSlide = slideElements[currentSlideIndex];
+                applyEditorValuesToSlide(currentSlide);
+                updateHighlights();
+                setDirty(true);
+                scheduleSlideOverviewRefresh();
+            }
+
             function showSelectedElementInPreview() {
-                if (!presentationDoc || document.activeElement !== contentEditor) return;
+                if (!previewEditingEnabled || !presentationDoc || document.activeElement !== contentEditor) return;
                 const nodeIndex = selectedHtmlElementIndex(contentEditor.value, contentEditor.selectionStart);
                 previewFrame.contentWindow?.postMessage({ type: 'editor-selection', nodeIndex }, '*');
+            }
+
+            function updatePreviewEditingButton() {
+                togglePreviewEditingButton.textContent = previewEditingEnabled
+                    ? 'Disable Preview Editing'
+                    : 'Enable Preview Editing';
+                togglePreviewEditingButton.setAttribute('aria-pressed', String(previewEditingEnabled));
+                togglePreviewEditingButton.setAttribute('aria-label', previewEditingEnabled
+                    ? 'Disable direct editing and selection markers in the preview'
+                    : 'Enable direct editing and selection mapping in the preview');
+            }
+
+            function setPreviewEditingEnabled(enabled, { persist = true, refresh = true } = {}) {
+                previewEditingEnabled = Boolean(enabled);
+                updatePreviewEditingButton();
+                if (!previewEditingEnabled) {
+                    editorSelectionStatus.textContent = '';
+                    contentEditorBox.classList.remove('source-selected');
+                    previewFrame.contentWindow?.postMessage({ type: 'clear-editor-selection' }, '*');
+                }
+                if (persist) {
+                    try {
+                        localStorage.setItem('reveal-editor-preview-editing', String(previewEditingEnabled));
+                    } catch (error) {
+                        // Storage is optional, especially when the editor is opened as a local file.
+                    }
+                }
+                if (refresh && presentationDoc) refreshCurrentPreview();
             }
 
             function movePreviewFragment(direction) {
                 previewFrame.contentWindow?.postMessage({ type: 'preview-fragment', direction }, '*');
             }
+
+            function updateEditorVisibility() {
+                contentEditorBox.classList.toggle('is-hidden', !contentEditorVisible);
+                notesEditorBox.classList.toggle('is-hidden', !notesEditorVisible);
+                const anyEditorVisible = contentEditorVisible || notesEditorVisible;
+                mainContainer.classList.toggle('editors-hidden', !anyEditorVisible);
+
+                toggleContentEditorButton.textContent = contentEditorVisible ? 'Hide Slide Editor' : 'Show Slide Editor';
+                toggleContentEditorButton.setAttribute('aria-expanded', String(contentEditorVisible));
+                toggleNotesEditorButton.textContent = notesEditorVisible ? 'Hide Speaker Notes' : 'Show Speaker Notes';
+                toggleNotesEditorButton.setAttribute('aria-expanded', String(notesEditorVisible));
+
+                const allEditorsVisible = contentEditorVisible && notesEditorVisible;
+                toggleEditorsButton.textContent = allEditorsVisible ? 'Hide Editors' : anyEditorVisible ? 'Show All Editors' : 'Show Editors';
+                toggleEditorsButton.setAttribute('aria-expanded', String(allEditorsVisible));
+                window.requestAnimationFrame(() => {
+                    previewFrame.contentWindow?.postMessage({ type: 'reveal-layout' }, '*');
+                });
+            }
+
+            function toggleEditors() {
+                const showAll = !(contentEditorVisible && notesEditorVisible);
+                contentEditorVisible = showAll;
+                notesEditorVisible = showAll;
+                updateEditorVisibility();
+            }
+
+            function setEditorPanelRatio(ratio, { persist = true } = {}) {
+                editorPanelRatio = Math.min(0.55, Math.max(0.20, Number(ratio) || 0.30));
+                mainContainer.style.setProperty('--editor-panel-width', `${(editorPanelRatio * 100).toFixed(2)}%`);
+                editorPreviewDivider.setAttribute('aria-valuenow', String(Math.round(editorPanelRatio * 100)));
+                if (persist) {
+                    try {
+                        localStorage.setItem('reveal-editor-panel-ratio', String(editorPanelRatio));
+                    } catch (error) {
+                        // Storage is optional, especially when the editor is opened as a local file.
+                    }
+                }
+            }
+
+            function resizeEditorPanelFromPointer(clientX) {
+                const bounds = mainContainer.getBoundingClientRect();
+                if (!bounds.width) return;
+                setEditorPanelRatio((clientX - bounds.left) / bounds.width);
+            }
+
+            function finishEditorDividerDrag() {
+                if (!isEditorDividerDragging) return;
+                isEditorDividerDragging = false;
+                editorPreviewDivider.classList.remove('is-dragging');
+                document.body.classList.remove('is-resizing-editor');
+                previewFrame.contentWindow?.postMessage({ type: 'reveal-layout' }, '*');
+            }
+
+            editorPreviewDivider.addEventListener('pointerdown', (event) => {
+                if (event.button !== 0) return;
+                event.preventDefault();
+                isEditorDividerDragging = true;
+                editorPreviewDivider.classList.add('is-dragging');
+                document.body.classList.add('is-resizing-editor');
+                editorPreviewDivider.setPointerCapture?.(event.pointerId);
+                resizeEditorPanelFromPointer(event.clientX);
+            });
+            editorPreviewDivider.addEventListener('dblclick', () => setEditorPanelRatio(0.30));
+            editorPreviewDivider.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    setEditorPanelRatio(editorPanelRatio - 0.02);
+                } else if (event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    setEditorPanelRatio(editorPanelRatio + 0.02);
+                } else if (event.key === 'Home') {
+                    event.preventDefault();
+                    setEditorPanelRatio(0.20);
+                } else if (event.key === 'End') {
+                    event.preventDefault();
+                    setEditorPanelRatio(0.55);
+                } else if (event.key === 'Enter') {
+                    event.preventDefault();
+                    setEditorPanelRatio(0.30);
+                }
+            });
+            window.addEventListener('pointermove', (event) => {
+                if (isEditorDividerDragging) resizeEditorPanelFromPointer(event.clientX);
+            });
+            window.addEventListener('pointerup', finishEditorDividerDrag);
+            window.addEventListener('pointercancel', finishEditorDividerDrag);
+            setEditorPanelRatio(editorPanelRatio, { persist: false });
+
+            function updateSlideOverviewVisibility() {
+                slideOverview.classList.toggle('is-hidden', !slideOverviewVisible);
+                toggleSlideOverviewButton.textContent = slideOverviewVisible ? 'Hide Slide Overview' : 'Show Slide Overview';
+                toggleSlideOverviewButton.setAttribute('aria-expanded', String(slideOverviewVisible));
+                if (slideOverviewVisible) renderSlideOverview();
+                try {
+                    localStorage.setItem('reveal-editor-slide-overview', String(slideOverviewVisible));
+                } catch (error) {
+                    // Storage is optional, especially when the editor is opened as a local file.
+                }
+            }
+
+            function updateSlideOverviewSelection() {
+                slideOverviewList.querySelectorAll('.slide-thumbnail').forEach((thumbnail) => {
+                    const isCurrent = Number(thumbnail.dataset.slideIndex) === currentSlideIndex;
+                    thumbnail.classList.toggle('is-current', isCurrent);
+                    thumbnail.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+                });
+            }
+
+            function slideOverviewTitle(slide, index) {
+                const heading = slide.querySelector('h1, h2, h3, h4, h5, h6');
+                const title = heading?.textContent.replace(/\s+/g, ' ').trim();
+                return title || `Slide ${index + 1}`;
+            }
+
+            function renderSlideOverview() {
+                if (!slideOverviewVisible) return;
+                slideOverviewList.replaceChildren();
+
+                if (!presentationDoc || slideElements.length === 0) {
+                    const emptyMessage = document.createElement('p');
+                    emptyMessage.className = 'slide-overview-empty';
+                    emptyMessage.textContent = 'Load a presentation to see its slides.';
+                    slideOverviewList.appendChild(emptyMessage);
+                    undoDeleteSlideButton.disabled = true;
+                    return;
+                }
+
+                slideElements.forEach((slide, index) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'slide-thumbnail';
+                    thumbnail.dataset.slideIndex = String(index);
+                    thumbnail.draggable = true;
+                    thumbnail.tabIndex = 0;
+                    thumbnail.setAttribute('role', 'listitem');
+                    thumbnail.setAttribute('aria-label', `Slide ${index + 1}: ${slideOverviewTitle(slide, index)}`);
+
+                    const header = document.createElement('div');
+                    header.className = 'slide-thumbnail-header';
+
+                    const title = document.createElement('span');
+                    title.className = 'slide-thumbnail-title';
+                    title.textContent = `${index + 1}. ${slideOverviewTitle(slide, index)}`;
+                    header.appendChild(title);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'slide-thumbnail-delete';
+                    deleteButton.type = 'button';
+                    deleteButton.title = `Delete slide ${index + 1}`;
+                    deleteButton.setAttribute('aria-label', `Delete slide ${index + 1}`);
+                    deleteButton.textContent = '×';
+                    deleteButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        deleteSlide(index);
+                    });
+                    header.appendChild(deleteButton);
+                    thumbnail.appendChild(header);
+
+                    const frame = document.createElement('iframe');
+                    frame.className = 'slide-thumbnail-frame';
+                    frame.title = `Preview of slide ${index + 1}`;
+                    frame.tabIndex = -1;
+                    frame.setAttribute('sandbox', 'allow-scripts');
+                    thumbnail.appendChild(frame);
+                    slideOverviewList.appendChild(thumbnail);
+                    const thumbnailScale = Math.min(0.32, Math.max(0.18, frame.clientWidth / 960));
+                    frame.srcdoc = buildThumbnailDoc(slide, thumbnailScale);
+
+                    thumbnail.addEventListener('click', () => renderSlide(index));
+                    thumbnail.addEventListener('keydown', (event) => {
+                        if (event.key !== 'Enter' && event.key !== ' ') return;
+                        event.preventDefault();
+                        renderSlide(index);
+                    });
+                    thumbnail.addEventListener('dragstart', (event) => {
+                        draggedSlideIndex = index;
+                        event.dataTransfer.effectAllowed = 'move';
+                        event.dataTransfer.setData('text/plain', String(index));
+                    });
+                    thumbnail.addEventListener('dragover', (event) => {
+                        if (draggedSlideIndex === null) return;
+                        event.preventDefault();
+                        thumbnail.classList.add('is-drag-over');
+                    });
+                    thumbnail.addEventListener('dragleave', () => thumbnail.classList.remove('is-drag-over'));
+                    thumbnail.addEventListener('drop', (event) => {
+                        event.preventDefault();
+                        const fromIndex = Number(event.dataTransfer.getData('text/plain'));
+                        const sourceIndex = Number.isInteger(fromIndex) ? fromIndex : draggedSlideIndex;
+                        thumbnail.classList.remove('is-drag-over');
+                        moveSlide(sourceIndex, index);
+                    });
+                    thumbnail.addEventListener('dragend', () => {
+                        draggedSlideIndex = null;
+                        slideOverviewList.querySelectorAll('.slide-thumbnail').forEach((item) => item.classList.remove('is-drag-over'));
+                    });
+
+                });
+
+                undoDeleteSlideButton.disabled = !lastDeletedSlide;
+                updateSlideOverviewSelection();
+            }
+
+            function scheduleSlideOverviewRefresh() {
+                if (!slideOverviewVisible) return;
+                clearTimeout(slideOverviewRenderTimer);
+                slideOverviewRenderTimer = setTimeout(renderSlideOverview, 300);
+            }
+
+            function moveSlide(fromIndex, toIndex) {
+                if (!presentationDoc || fromIndex === toIndex || fromIndex < 0 || toIndex < 0 || fromIndex >= slideElements.length || toIndex >= slideElements.length) return;
+
+                const movedSlide = slideElements[fromIndex];
+                const targetSlide = slideElements[toIndex];
+                if (!movedSlide || !targetSlide || !targetSlide.parentNode) return;
+
+                if (fromIndex < toIndex) targetSlide.parentNode.insertBefore(movedSlide, targetSlide.nextSibling);
+                else targetSlide.parentNode.insertBefore(movedSlide, targetSlide);
+
+                slideElements.splice(fromIndex, 1);
+                slideElements.splice(toIndex, 0, movedSlide);
+
+                if (currentSlideIndex === fromIndex) currentSlideIndex = toIndex;
+                else if (fromIndex < currentSlideIndex && toIndex >= currentSlideIndex) currentSlideIndex -= 1;
+                else if (fromIndex > currentSlideIndex && toIndex <= currentSlideIndex) currentSlideIndex += 1;
+
+                setDirty(true);
+                renderSlide(currentSlideIndex);
+                renderSlideOverview();
+            }
+
+            function deleteSlide(index) {
+                if (!presentationDoc || index < 0 || index >= slideElements.length) return;
+                if (slideElements.length === 1) {
+                    setPreviewStatus('A presentation must contain at least one slide.', 'warning');
+                    return;
+                }
+                if (!window.confirm(`Delete slide ${index + 1}? You can undo this from the slide overview.`)) return;
+
+                const slide = slideElements[index];
+                const parent = slide.parentNode;
+                const nextSibling = slide.nextSibling;
+                lastDeletedSlide = {
+                    slide,
+                    parent,
+                    nextSibling,
+                    originalIndex: index,
+                    previousCurrentIndex: currentSlideIndex,
+                };
+                slide.remove();
+                slideElements.splice(index, 1);
+
+                if (currentSlideIndex === index) currentSlideIndex = Math.min(index, slideElements.length - 1);
+                else if (currentSlideIndex > index) currentSlideIndex -= 1;
+
+                setDirty(true);
+                renderSlide(currentSlideIndex);
+                renderSlideOverview();
+                setPreviewStatus('Slide deleted. Use Undo to restore it.');
+            }
+
+            function undoDeleteSlide() {
+                if (!lastDeletedSlide || !lastDeletedSlide.parent) return;
+                const { slide, parent, nextSibling, originalIndex, previousCurrentIndex } = lastDeletedSlide;
+                parent.insertBefore(slide, nextSibling && nextSibling.parentNode === parent ? nextSibling : null);
+                slideElements.splice(Math.min(originalIndex, slideElements.length), 0, slide);
+                currentSlideIndex = Math.min(previousCurrentIndex, slideElements.length - 1);
+                lastDeletedSlide = null;
+                setDirty(true);
+                renderSlide(currentSlideIndex);
+                renderSlideOverview();
+                setPreviewStatus('Deleted slide restored.');
+            }
+
+            function setPreviewStatus(message, type = '') {
+                previewStatus.textContent = message;
+                previewStatus.className = type ? `is-${type}` : '';
+            }
+
+            function setDirty(dirty) {
+                isDirty = dirty;
+                saveBtn.textContent = dirty ? 'Save*' : 'Save';
+                saveBtn.setAttribute('aria-label', dirty ? 'Save changes' : 'Save');
+            }
+
+            function updateReloadAvailability() {
+                reloadFileButton.disabled = !(currentFileHandle || sourceUrlInput.value.trim());
+            }
+
+            function captureReloadState() {
+                captureEditorViewState();
+                const currentSlide = slideElements[currentSlideIndex];
+                const viewState = currentSlide ? editorViewState.get(currentSlide) : null;
+                return {
+                    currentSlideIndex,
+                    contentEditorVisible,
+                    notesEditorVisible,
+                    slideOverviewVisible,
+                    editorPanelRatio,
+                    assetBaseUrl: assetBaseUrlInput.value,
+                    sourceUrl: sourceUrlInput.value,
+                    localAssetDirectoryHandle,
+                    viewState: viewState ? { ...viewState } : null,
+                };
+            }
+
+            function directNotesElement(slide) {
+                return Array.from(slide.children).find((child) => child.matches('aside.notes')) || null;
+            }
+
+            function captureEditorViewState() {
+                const slide = slideElements[currentSlideIndex];
+                if (!slide) return;
+
+                editorViewState.set(slide, {
+                    activeEditor: document.activeElement === contentEditor ? 'content' : document.activeElement === notesEditor ? 'notes' : null,
+                    contentSelectionStart: contentEditor.selectionStart,
+                    contentSelectionEnd: contentEditor.selectionEnd,
+                    contentScrollTop: contentEditor.scrollTop,
+                    contentScrollLeft: contentEditor.scrollLeft,
+                    notesSelectionStart: notesEditor.selectionStart,
+                    notesSelectionEnd: notesEditor.selectionEnd,
+                    notesScrollTop: notesEditor.scrollTop,
+                    notesScrollLeft: notesEditor.scrollLeft,
+                });
+            }
+
+            function restoreEditorViewState(slide) {
+                const saved = editorViewState.get(slide);
+                if (!saved) return;
+
+                const restore = () => {
+                    const contentStart = Math.min(saved.contentSelectionStart ?? 0, contentEditor.value.length);
+                    const contentEnd = Math.min(saved.contentSelectionEnd ?? contentStart, contentEditor.value.length);
+                    const notesStart = Math.min(saved.notesSelectionStart ?? 0, notesEditor.value.length);
+                    const notesEnd = Math.min(saved.notesSelectionEnd ?? notesStart, notesEditor.value.length);
+                    contentEditor.setSelectionRange(contentStart, contentEnd);
+                    notesEditor.setSelectionRange(notesStart, notesEnd);
+                    contentEditor.scrollTop = saved.contentScrollTop ?? 0;
+                    contentEditor.scrollLeft = saved.contentScrollLeft ?? 0;
+                    notesEditor.scrollTop = saved.notesScrollTop ?? 0;
+                    notesEditor.scrollLeft = saved.notesScrollLeft ?? 0;
+                    if (saved.activeEditor === 'content') contentEditor.focus({ preventScroll: true });
+                    if (saved.activeEditor === 'notes') notesEditor.focus({ preventScroll: true });
+                };
+
+                window.requestAnimationFrame(restore);
+            }
+
+            function previewBaseUrl() {
+                const configuredBase = assetBaseUrlInput.value.trim();
+                try {
+                    return new URL(configuredBase || document.baseURI, document.baseURI).href;
+                } catch (error) {
+                    setPreviewStatus('Invalid asset base URL', 'warning');
+                    return document.baseURI;
+                }
+            }
+
+            function localAssetKey(rawUrl) {
+                if (!rawUrl || /^(?:[a-z][a-z\d+.-]*:|\/\/|\/|#)/i.test(rawUrl.trim())) return null;
+                try {
+                    const parsed = new URL(rawUrl, 'https://local-asset.invalid/');
+                    return decodeURIComponent(parsed.pathname).replace(/^\/+/, '');
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function localAssetObjectUrl(rawUrl) {
+                const key = localAssetKey(rawUrl);
+                return key ? localAssetObjectUrls.get(key) || null : null;
+            }
+
+            function replaceLocalAssetReferences(value) {
+                return value.replace(/url\(\s*(['"]?)([^)'"\s]+)\1\s*\)/gi, (match, quote, rawUrl) => {
+                    const objectUrl = localAssetObjectUrl(rawUrl);
+                    return objectUrl ? `url(${quote}${objectUrl}${quote})` : match;
+                });
+            }
+
+            function rewriteLocalAssetReferences(root) {
+                if (!localAssetDirectoryHandle || localAssetObjectUrls.size === 0) return;
+
+                root.querySelectorAll('[src], [poster]').forEach((element) => {
+                    ['src', 'poster'].forEach((attribute) => {
+                        const rawUrl = element.getAttribute(attribute);
+                        const objectUrl = localAssetObjectUrl(rawUrl);
+                        if (objectUrl) element.setAttribute(attribute, objectUrl);
+                    });
+                });
+                root.querySelectorAll('[style]').forEach((element) => {
+                    element.setAttribute('style', replaceLocalAssetReferences(element.getAttribute('style')));
+                });
+                root.querySelectorAll('style').forEach((style) => {
+                    style.textContent = replaceLocalAssetReferences(style.textContent);
+                });
+            }
+
+            async function readLocalAssetFile(relativePath) {
+                if (!localAssetDirectoryHandle || !relativePath) return null;
+                const parts = relativePath.split('/').filter(Boolean);
+                const candidates = [parts];
+                // Accept either the deck folder (deck.html + assets/) or the
+                // assets folder itself. This avoids the common assets/assets/
+                // mismatch when the user selects the folder named "assets".
+                if (parts[0] === localAssetDirectoryHandle.name) candidates.push(parts.slice(1));
+
+                for (const candidate of candidates) {
+                    let directory = localAssetDirectoryHandle;
+                    try {
+                        for (const part of candidate.slice(0, -1)) {
+                            if (part === '..') throw new Error('Asset path escapes selected folder');
+                            directory = await directory.getDirectoryHandle(part);
+                        }
+                        if (candidate.length && candidate.at(-1) !== '..') {
+                            return await directory.getFileHandle(candidate.at(-1));
+                        }
+                    } catch (error) {
+                        // Try the next candidate path, if one exists.
+                    }
+                }
+                return null;
+            }
+
+            function fileAsDataUrl(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = () => reject(reader.error || new Error('Could not read local asset'));
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            async function loadLocalAssetFiles() {
+                if (!localAssetDirectoryHandle) return;
+
+                const rawUrls = new Set();
+                const collectCssUrls = (value) => {
+                    for (const match of value.matchAll(/url\(\s*(['"]?)([^)'"\s]+)\1\s*\)/gi)) {
+                        if (localAssetKey(match[2])) rawUrls.add(match[2]);
+                    }
+                };
+                slideElements.forEach((slide) => {
+                    slide.querySelectorAll('[src], [poster]').forEach((element) => {
+                        ['src', 'poster'].forEach((attribute) => {
+                            const rawUrl = element.getAttribute(attribute);
+                            if (localAssetKey(rawUrl)) rawUrls.add(rawUrl);
+                        });
+                    });
+                    slide.querySelectorAll('[style], style').forEach((element) => {
+                        collectCssUrls(element.getAttribute('style') || element.textContent || '');
+                    });
+                });
+                presentationDoc.head.querySelectorAll('style').forEach((style) => collectCssUrls(style.textContent));
+
+                for (const rawUrl of rawUrls) {
+                    const key = localAssetKey(rawUrl);
+                    if (!key || localAssetObjectUrls.has(key)) continue;
+                    const fileHandle = await readLocalAssetFile(key);
+                    if (!fileHandle) continue;
+                    const file = await fileHandle.getFile();
+                    // Data URLs work inside the sandboxed srcdoc iframe even
+                    // when blob URLs are blocked by the browser's origin rules.
+                    localAssetObjectUrls.set(key, await fileAsDataUrl(file));
+                }
+            }
+
+            function clearLocalAssetState() {
+                localAssetObjectUrls.clear();
+                localAssetDirectoryHandle = null;
+            }
+
+            const escapeAttribute = (value) => String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
 
             const escapeHTML = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -603,13 +1634,43 @@
 
             window.addEventListener('message', (event) => {
                 if (event.data?.type !== 'fragment-state') return;
+                if (event.source !== previewFrame.contentWindow) return;
+                const currentSlide = slideElements[currentSlideIndex];
+                if (currentSlide && Number.isInteger(event.data.fragmentIndex)) {
+                    fragmentState.set(currentSlide, event.data.fragmentIndex);
+                }
                 previewPrevFragmentBtn.disabled = !event.data.canPrevious;
                 previewNextFragmentBtn.disabled = !event.data.canNext;
+                if (event.data.missingAssets?.length) {
+                    setPreviewStatus('Missing preview assets; check Asset base URL', 'warning');
+                } else {
+                    setPreviewStatus(event.data.overflow ? 'Preview content may overflow' : 'Preview ready', event.data.overflow ? 'warning' : '');
+                }
+            });
+
+            window.addEventListener('message', (event) => {
+                if (event.source !== previewFrame.contentWindow) return;
+                if (event.data?.type === 'preview-element-selected') {
+                    if (!previewEditingEnabled) return;
+                    if (!contentEditorVisible) {
+                        contentEditorVisible = true;
+                        updateEditorVisibility();
+                    }
+                    selectHtmlElementInEditor(event.data.nodeIndex);
+                }
+                if (event.data?.type === 'preview-content-input') {
+                    if (!previewEditingEnabled) return;
+                    applyPreviewContentEdit(event.data.nodeIndex, event.data.innerHTML || '');
+                }
             });
 
             const state = {
                 enable: () => {
                     saveBtn.disabled = false;
+                    saveAsBtn.disabled = false;
+                    refreshPreviewButton.disabled = false;
+                    togglePreviewEditingButton.disabled = false;
+                    updateReloadAvailability();
                     grammarButton.disabled = false;
                     contentEditor.disabled = false;
                     notesEditor.disabled = false;
@@ -619,9 +1680,14 @@
                     previewNextFragmentBtn.disabled = false;
                     navControls.style.display = 'block';
                     grammarStatus.textContent = 'Grammar checks send text to LanguageTool.';
+                    setPreviewStatus('Preview ready');
                 },
                 disable: () => {
                     saveBtn.disabled = true;
+                    saveAsBtn.disabled = true;
+                    refreshPreviewButton.disabled = true;
+                    togglePreviewEditingButton.disabled = true;
+                    reloadFileButton.disabled = true;
                     grammarButton.disabled = true;
                     contentEditor.disabled = true;
                     notesEditor.disabled = true;
@@ -635,20 +1701,36 @@
                     previewPrevFragmentBtn.disabled = true;
                     previewNextFragmentBtn.disabled = true;
                     grammarStatus.textContent = '';
+                    setPreviewStatus('');
+                    clearTimeout(slideOverviewRenderTimer);
+                    slideOverviewList.replaceChildren();
+                    lastDeletedSlide = null;
+                    undoDeleteSlideButton.disabled = true;
+                    setDirty(false);
                 }
             };
 
-            const loadFile = (file) => {
+            const loadFile = (file, { localFile = false, reloadState = null, reloaded = false } = {}) => {
                 if (!file) return;
 
+                const preservedAssetDirectoryHandle = reloadState?.localAssetDirectoryHandle || null;
+                clearLocalAssetState();
+                chooseAssetFolderButton.disabled = !localFile || !('showDirectoryPicker' in window);
+                if (localFile) {
+                    assetBaseUrlInput.value = '';
+                    sourceUrlInput.value = '';
+                }
                 originalFileName = file.name;
                 fileNameDisplay.textContent = originalFileName;
                 const reader = new FileReader();
 
-                reader.onload = (e) => {
+                reader.onload = async (e) => {
                     const content = e.target.result;
                     const parser = new DOMParser();
                     presentationDoc = parser.parseFromString(content, 'text/html');
+                    previewGeneration += 1;
+                    clearTimeout(previewUpdateTimer);
+                    previewUpdateTimer = null;
                     // Reveal supports vertical slides as direct child sections of a
                     // horizontal section. Flatten them so each slide can be edited
                     // and navigated independently.
@@ -664,9 +1746,45 @@
                     scriptHTML = scriptTags.map(s => s.outerHTML).join('\n');
 
                     if (slideElements.length > 0) {
-                        currentSlideIndex = 0;
+                        if (reloadState) {
+                            contentEditorVisible = reloadState.contentEditorVisible;
+                            notesEditorVisible = reloadState.notesEditorVisible;
+                            slideOverviewVisible = reloadState.slideOverviewVisible;
+                            setEditorPanelRatio(reloadState.editorPanelRatio, { persist: false });
+                            assetBaseUrlInput.value = reloadState.assetBaseUrl;
+                            sourceUrlInput.value = reloadState.sourceUrl;
+                        }
+
+                        currentSlideIndex = reloadState
+                            ? Math.min(reloadState.currentSlideIndex, slideElements.length - 1)
+                            : 0;
+                        lastDeletedSlide = null;
+                        setDirty(false);
                         state.enable();
+                        updateEditorVisibility();
+                        updateSlideOverviewVisibility();
                         renderSlide(currentSlideIndex);
+                        if (reloadState?.viewState) {
+                            editorViewState.set(slideElements[currentSlideIndex], reloadState.viewState);
+                            restoreEditorViewState(slideElements[currentSlideIndex]);
+                        }
+                        renderSlideOverview();
+
+                        if (preservedAssetDirectoryHandle) {
+                            localAssetDirectoryHandle = preservedAssetDirectoryHandle;
+                            setPreviewStatus('Reloading local assets…');
+                            try {
+                                await loadLocalAssetFiles();
+                                refreshCurrentPreview();
+                                renderSlideOverview();
+                                setPreviewStatus('Reloaded from disk');
+                            } catch (error) {
+                                setPreviewStatus(`Reloaded, but local assets could not be refreshed: ${error.message}`, 'warning');
+                                console.error('Error reloading local assets:', error);
+                            }
+                        } else if (reloaded) {
+                            setPreviewStatus('Reloaded from disk');
+                        }
                     } else {
                         alert('Could not find any slides (<section> tags) in this file.');
                         state.disable();
@@ -676,15 +1794,74 @@
                 reader.readAsText(file);
             };
 
+            async function loadFromUrl(rawUrl, { reloadState = null, reloaded = false } = {}) {
+                const resolvedUrl = new URL(rawUrl, document.baseURI);
+                const response = await fetch(resolvedUrl.href);
+                if (!response.ok) throw new Error(`Could not load deck (${response.status})`);
+                const blob = await response.blob();
+                const fileName = decodeURIComponent(resolvedUrl.pathname.split('/').pop() || 'presentation.html');
+                assetBaseUrlInput.value = new URL('.', resolvedUrl).href;
+                sourceUrlInput.value = resolvedUrl.href;
+                currentFileHandle = null;
+                updateReloadAvailability();
+                loadFile(new File([blob], fileName, { type: 'text/html' }), { reloadState, reloaded });
+            }
+
+            async function reloadCurrentFile() {
+                if (!presentationDoc) return;
+                if (isDirty && !window.confirm('Reload the file and discard unsaved changes?')) return;
+
+                const reloadState = captureReloadState();
+                reloadFileButton.disabled = true;
+                setPreviewStatus('Reloading…');
+
+                try {
+                    if (currentFileHandle) {
+                        const file = await currentFileHandle.getFile();
+                        loadFile(file, { localFile: true, reloadState, reloaded: true });
+                    } else if (sourceUrlInput.value.trim()) {
+                        await loadFromUrl(sourceUrlInput.value.trim(), { reloadState, reloaded: true });
+                    } else {
+                        setPreviewStatus('Reopen the file to reload it.', 'warning');
+                        updateReloadAvailability();
+                    }
+                } catch (error) {
+                    updateReloadAvailability();
+                    setPreviewStatus(`Reload failed: ${error.message}`, 'error');
+                    console.error('Error reloading deck:', error);
+                }
+            }
+
+            loadUrlButton.addEventListener('click', async () => {
+                if (!sourceUrlInput.value.trim()) return;
+                try {
+                    await loadFromUrl(sourceUrlInput.value.trim());
+                } catch (error) {
+                    setPreviewStatus(`Load failed: ${error.message}`, 'error');
+                    console.error('Error loading deck URL:', error);
+                }
+            });
+
+            reloadFileButton.addEventListener('click', reloadCurrentFile);
+
+            const initialFileUrl = new URLSearchParams(window.location.search).get('file');
+            if (initialFileUrl) {
+                loadFromUrl(initialFileUrl).catch((error) => {
+                    setPreviewStatus(`Load failed: ${error.message}`, 'error');
+                    console.error('Error loading initial deck URL:', error);
+                });
+            }
+
             loadButton.addEventListener('click', async () => {
                 if ('showOpenFilePicker' in window) {
                     try {
                         const [handle] = await window.showOpenFilePicker({
+                            id: 'reveal-editor-open-html',
                             types: [{ description: 'HTML Files', accept: { 'text/html': ['.html'] } }],
                         });
                         currentFileHandle = handle;
                         const file = await handle.getFile();
-                        loadFile(file);
+                        loadFile(file, { localFile: true });
                     } catch (err) {
                         if (err.name !== 'AbortError') console.error('Error opening file:', err);
                     }
@@ -695,45 +1872,137 @@
             });
 
             fileInput.addEventListener('change', (event) => {
-                loadFile(event.target.files[0]);
+                currentFileHandle = null;
+                loadFile(event.target.files[0], { localFile: true });
             });
 
-            function buildPreviewDoc(currentSlide) {
+            chooseAssetFolderButton.addEventListener('click', async () => {
+                if (!presentationDoc || !('showDirectoryPicker' in window)) return;
+                try {
+                    const directoryPickerOptions = {
+                        id: 'reveal-editor-assets',
+                        mode: 'read',
+                    };
+                    // When the HTML was opened with the File System Access
+                    // picker, start beside that file so the deck's assets
+                    // folder is immediately available to select.
+                    if (currentFileHandle) directoryPickerOptions.startIn = currentFileHandle;
+                    localAssetDirectoryHandle = await window.showDirectoryPicker(directoryPickerOptions);
+                    localAssetObjectUrls.clear();
+                    setPreviewStatus('Loading local assets…');
+                    await loadLocalAssetFiles();
+                    refreshCurrentPreview();
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        setPreviewStatus(`Could not load local assets: ${error.message}`, 'warning');
+                        console.error('Error loading local assets:', error);
+                    }
+                }
+            });
+
+            toggleEditorsButton.addEventListener('click', toggleEditors);
+            toggleContentEditorButton.addEventListener('click', () => {
+                contentEditorVisible = !contentEditorVisible;
+                updateEditorVisibility();
+            });
+            toggleNotesEditorButton.addEventListener('click', () => {
+                notesEditorVisible = !notesEditorVisible;
+                updateEditorVisibility();
+            });
+            toggleSlideOverviewButton.addEventListener('click', () => {
+                slideOverviewVisible = !slideOverviewVisible;
+                updateSlideOverviewVisibility();
+            });
+            hideSlideOverviewButton.addEventListener('click', () => {
+                slideOverviewVisible = false;
+                updateSlideOverviewVisibility();
+            });
+            togglePreviewEditingButton.addEventListener('click', () => {
+                setPreviewEditingEnabled(!previewEditingEnabled);
+            });
+            undoDeleteSlideButton.addEventListener('click', undoDeleteSlide);
+            updatePreviewEditingButton();
+            updateEditorVisibility();
+            updateSlideOverviewVisibility();
+
+            function buildPreviewDoc(currentSlide, initialFragmentIndex = -1) {
                 // Scripts already present in <head> would otherwise run twice: once
                 // from the copied head and once from scriptHTML below.
                 const previewHead = presentationDoc.head.cloneNode(true);
                 previewHead.querySelectorAll('script').forEach(script => script.remove());
+                previewHead.querySelectorAll('base').forEach(base => base.remove());
+                const baseElement = presentationDoc.createElement('base');
+                baseElement.href = previewBaseUrl();
+                previewHead.prepend(baseElement);
                 const previewSlide = currentSlide.cloneNode(true);
-                previewSlide.querySelectorAll('*').forEach((element, index) => {
-                    element.dataset.editorNode = index;
-                });
+                rewriteLocalAssetReferences(previewHead);
+                rewriteLocalAssetReferences(previewSlide);
+                if (previewEditingEnabled) {
+                    previewSlide.setAttribute('contenteditable', 'true');
+                    previewSlide.setAttribute('spellcheck', 'false');
+                    previewSlide.querySelectorAll('*').forEach((element, index) => {
+                        element.dataset.editorNode = index;
+                        if (!element.closest('aside.notes')) element.setAttribute('contenteditable', 'true');
+                    });
+                } else {
+                    previewSlide.removeAttribute('contenteditable');
+                    previewSlide.removeAttribute('spellcheck');
+                    previewSlide.querySelectorAll('[contenteditable], [data-editor-node]').forEach((element) => {
+                        element.removeAttribute('contenteditable');
+                        element.removeAttribute('data-editor-node');
+                    });
+                }
 
                 return `<html style="background-color: #000;">
                     <head>${previewHead.innerHTML}</head>
                     <body>
                         <style>
+                            html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+                            .reveal { width: 100%; height: 100%; }
+                            .reveal .slides { width: 100%; height: 100%; }
+                            .reveal section { box-sizing: border-box; overflow-wrap: anywhere; }
+                            .reveal img { max-width: 100%; height: auto; }
                             .editor-active-element {
                                 outline: 3px solid #ff79c6 !important;
                                 outline-offset: 5px;
                             }
+                            ${previewEditingEnabled ? '[data-editor-node] { cursor: pointer; } [data-editor-node]:hover { outline: 2px dashed rgba(255, 121, 198, 0.7); outline-offset: 3px; }' : ''}
                         </style>
                         <div class="reveal">
                             <div class="slides" style="display: block;">${previewSlide.outerHTML}</div>
                         </div>
                         ${scriptHTML}
                         <script>
+                            const previewEditingEnabled = ${previewEditingEnabled ? 'true' : 'false'};
                             const updateFragmentNavigation = () => {
                                 if (typeof Reveal === 'undefined') return;
                                 const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment');
-                                const fragmentIndex = Reveal.getIndices().f;
+                                const rawFragmentIndex = Reveal.getIndices().f;
+                                const fragmentIndex = Number.isInteger(rawFragmentIndex) ? rawFragmentIndex : -1;
+                                const slide = Reveal.getCurrentSlide();
+                                const slideBounds = slide?.getBoundingClientRect();
+                                const overflow = slideBounds && Array.from(slide.children).some((element) => {
+                                    const position = getComputedStyle(element).position;
+                                    if (position === 'absolute' || position === 'fixed' || element.matches('aside.notes')) return false;
+                                    const bounds = element.getBoundingClientRect();
+                                    if (bounds.width === 0 && bounds.height === 0) return false;
+                                    return bounds.left < slideBounds.left - 4 || bounds.right > slideBounds.right + 4 || bounds.top < slideBounds.top - 4 || bounds.bottom > slideBounds.bottom + 4;
+                                });
+                                const missingAssets = Array.from(document.images)
+                                    .filter((image) => !image.complete || image.naturalWidth === 0)
+                                    .map((image) => image.currentSrc || image.src);
                                 parent.postMessage({
                                     type: 'fragment-state',
                                     canPrevious: fragmentIndex >= 0,
                                     canNext: fragmentIndex < fragments.length - 1,
+                                    fragmentIndex,
+                                    overflow,
+                                    missingAssets,
                                 }, '*');
                             };
                             window.addEventListener('message', (event) => {
                                 if (event.data?.type === 'editor-selection') {
+                                    if (!previewEditingEnabled) return;
                                     document.querySelectorAll('.editor-active-element').forEach((element) => {
                                         element.classList.remove('editor-active-element');
                                     });
@@ -742,17 +2011,74 @@
                                     const selectedElement = document.querySelector('[data-editor-node="' + nodeIndex + '"]');
                                     selectedElement?.classList.add('editor-active-element');
                                 }
+                                if (event.data?.type === 'clear-editor-selection') {
+                                    document.querySelectorAll('.editor-active-element').forEach((element) => {
+                                        element.classList.remove('editor-active-element');
+                                    });
+                                }
                                 if (event.data?.type === 'preview-fragment' && typeof Reveal !== 'undefined') {
                                     if (event.data.direction === 'next') Reveal.next();
                                     if (event.data.direction === 'previous') Reveal.prev();
                                     window.setTimeout(updateFragmentNavigation, 0);
                                 }
+                                if (event.data?.type === 'reveal-layout' && typeof Reveal !== 'undefined') {
+                                    Reveal.layout();
+                                    updateFragmentNavigation();
+                                }
+                            });
+                            document.addEventListener('click', (event) => {
+                                if (!previewEditingEnabled) return;
+                                const selectedElement = event.target.closest?.('[data-editor-node]');
+                                if (!selectedElement || selectedElement.closest('aside.notes')) return;
+                                if (selectedElement.closest('a')) event.preventDefault();
+                                selectedElement.focus();
+                                const selection = window.getSelection();
+                                const range = document.createRange();
+                                range.selectNodeContents(selectedElement);
+                                range.collapse(false);
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                                parent.postMessage({
+                                    type: 'preview-element-selected',
+                                    nodeIndex: Number(selectedElement.dataset.editorNode),
+                                }, '*');
+                            });
+                            document.addEventListener('input', () => {
+                                if (!previewEditingEnabled) return;
+                                const selection = window.getSelection();
+                                const anchorElement = selection?.anchorNode?.nodeType === Node.ELEMENT_NODE
+                                    ? selection.anchorNode
+                                    : selection?.anchorNode?.parentElement;
+                                const editedElement = anchorElement?.closest?.('[data-editor-node]');
+                                if (!editedElement || editedElement.closest('aside.notes')) return;
+                                parent.postMessage({
+                                    type: 'preview-content-input',
+                                    nodeIndex: Number(editedElement.dataset.editorNode),
+                                    innerHTML: editedElement.innerHTML,
+                                }, '*');
                             });
                             if (typeof Reveal !== 'undefined') {
                                 const plugins = [];
                                 if (typeof RevealNotes !== 'undefined') plugins.push(RevealNotes);
                                 if (typeof RevealHighlight !== 'undefined') plugins.push(RevealHighlight);
-                                Reveal.initialize({ controls: false, progress: false, autoPlayMedia: false, plugins }).then(updateFragmentNavigation);
+                                Reveal.initialize({
+                                    controls: false,
+                                    progress: false,
+                                    autoPlayMedia: false,
+                                    embedded: true,
+                                    width: 960,
+                                    height: 700,
+                                    margin: 0.04,
+                                    minScale: 0.2,
+                                    maxScale: 2,
+                                    plugins,
+                                }).then(() => {
+                                    const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment');
+                                    const requestedFragment = ${Number.isInteger(initialFragmentIndex) ? initialFragmentIndex : -1};
+                                    const restoredFragment = Math.min(requestedFragment, fragments.length - 1);
+                                    if (restoredFragment >= 0) Reveal.slide(0, 0, restoredFragment);
+                                    updateFragmentNavigation();
+                                });
                                 Reveal.on('ready', updateFragmentNavigation);
                                 Reveal.on('fragmentshown', updateFragmentNavigation);
                                 Reveal.on('fragmenthidden', updateFragmentNavigation);
@@ -762,10 +2088,54 @@
                 </html>`;
             }
 
+            function buildThumbnailDoc(currentSlide, scale = 0.23) {
+                const thumbnailHead = presentationDoc.head.cloneNode(true);
+                thumbnailHead.querySelectorAll('script').forEach((script) => script.remove());
+                thumbnailHead.querySelectorAll('base').forEach((base) => base.remove());
+                const baseElement = presentationDoc.createElement('base');
+                baseElement.href = previewBaseUrl();
+                thumbnailHead.prepend(baseElement);
+
+                const thumbnailSlide = currentSlide.cloneNode(true);
+                thumbnailSlide.removeAttribute('contenteditable');
+                thumbnailSlide.removeAttribute('spellcheck');
+                thumbnailSlide.querySelectorAll('[contenteditable]').forEach((element) => element.removeAttribute('contenteditable'));
+                thumbnailSlide.querySelectorAll('aside.notes').forEach((element) => element.remove());
+                rewriteLocalAssetReferences(thumbnailHead);
+                rewriteLocalAssetReferences(thumbnailSlide);
+
+                return `<html style="background-color: #000;">
+                    <head>${thumbnailHead.innerHTML}</head>
+                    <body>
+                        <style>
+                            html, body { width: ${960 * scale}px; height: ${700 * scale}px; margin: 0; overflow: hidden; }
+                            .thumbnail-stage { width: 960px; height: 700px; overflow: hidden; transform: scale(${scale}); transform-origin: top left; }
+                            .reveal { width: 960px; height: 700px; font-size: 20px !important; }
+                            .reveal .slides { position: static !important; width: 960px !important; height: 700px !important; transform: none !important; }
+                            .reveal .slides > section,
+                            .reveal .slides > section.present { display: block !important; position: static !important; visibility: visible !important; opacity: 1 !important; transform: none !important; width: 960px !important; height: 700px !important; min-height: 700px !important; margin: 0 !important; padding: 5% !important; box-sizing: border-box !important; overflow: hidden !important; }
+                            .reveal h1 { font-size: 2.4em !important; line-height: 1.05 !important; margin: 0.15em 0 !important; }
+                            .reveal h2 { font-size: 1.8em !important; line-height: 1.08 !important; margin: 0.15em 0 !important; }
+                            .reveal h3, .reveal h4, .reveal h5, .reveal h6 { font-size: 1.35em !important; line-height: 1.1 !important; margin: 0.12em 0 !important; }
+                            .reveal p, .reveal li, .reveal td, .reveal th, .reveal blockquote { font-size: 0.78em !important; line-height: 1.15 !important; }
+                            .reveal ul, .reveal ol { margin: 0.25em 0 !important; padding-left: 1.1em !important; }
+                            .reveal img, .reveal svg, .reveal video { max-width: 46% !important; max-height: 42% !important; }
+                            .reveal table { font-size: 0.75em !important; }
+                            .reveal .fragment { visibility: visible !important; opacity: 1 !important; }
+                            .reveal aside.notes { display: none !important; }
+                        </style>
+                        <div class="thumbnail-stage"><div class="reveal"><div class="slides">${thumbnailSlide.outerHTML}</div></div></div>
+                    </body>
+                </html>`;
+            }
+
             function renderSlide(index) {
                 if (index < 0 || index >= slideElements.length) return;
+                captureEditorViewState();
                 currentSlideIndex = index;
                 clearTimeout(previewUpdateTimer);
+                previewUpdateTimer = null;
+                previewGeneration += 1;
 
                 // 1. Update editors
                 const currentSlide = slideElements[index];
@@ -773,18 +2143,19 @@
                 // To avoid showing the speaker notes in the main content editor, we'll build the content string manually.
                 let slideContent = '';
                 currentSlide.childNodes.forEach(child => {
-                    if (child.nodeName.toLowerCase() === 'aside' && child.classList.contains('notes')) {
+                    if (child.nodeType === Node.ELEMENT_NODE && child.matches('aside.notes')) {
                         // Skip notes
                     } else {
                         slideContent += child.outerHTML || child.textContent;
                     }
                 });
-                contentEditor.value = slideContent.trim();
+                contentEditor.value = slideContent;
 
-                const notesEl = currentSlide.querySelector('aside.notes');
-                notesEditor.value = notesEl ? notesEl.innerHTML.trim() : '';
+                const notesEl = directNotesElement(currentSlide);
+                notesEditor.value = notesEl ? notesEl.innerHTML : '';
 
                 updateHighlights();
+                restoreEditorViewState(currentSlide);
 
                 // 2. Update navigation
                 slideNavDisplay.textContent = `Slide ${index + 1} / ${slideElements.length}`;
@@ -794,93 +2165,170 @@
                 previewNextPageBtn.disabled = index === slideElements.length - 1;
                 previewPrevFragmentBtn.disabled = true;
                 previewNextFragmentBtn.disabled = true;
+                updateSlideOverviewSelection();
 
-                previewFrame.srcdoc = buildPreviewDoc(currentSlide);
+                setPreviewStatus('Loading preview…');
+                previewFrame.srcdoc = buildPreviewDoc(currentSlide, fragmentState.get(currentSlide) ?? -1);
+            }
+
+            function applyEditorValuesToSlide(currentSlide) {
+                const notesValue = notesEditor.value;
+                let notesEl = directNotesElement(currentSlide);
+                const childNodes = Array.from(currentSlide.childNodes);
+                const notesIndex = notesEl ? childNodes.indexOf(notesEl) : -1;
+                const firstContentIndex = childNodes.findIndex((node, index) => {
+                    if (index === notesIndex) return false;
+                    return node.nodeType === Node.ELEMENT_NODE || node.textContent.trim();
+                });
+                const notesWereFirst = notesIndex >= 0 && (firstContentIndex < 0 || notesIndex < firstContentIndex);
+
+                const template = presentationDoc.createElement('template');
+                template.innerHTML = contentEditor.value;
+                const contentNodes = Array.from(template.content.childNodes);
+
+                if (notesValue !== '') {
+                    if (!notesEl) {
+                        notesEl = presentationDoc.createElement('aside');
+                        notesEl.className = 'notes';
+                    }
+                    // Keep the exact text/HTML entered by the user. Trimming here
+                    // made whitespace edits appear to do nothing.
+                    notesEl.innerHTML = notesValue;
+                } else if (notesEl) {
+                    notesEl.remove();
+                    notesEl = null;
+                }
+
+                Array.from(currentSlide.childNodes).forEach((node) => {
+                    if (node !== notesEl) node.remove();
+                });
+
+                const insertContent = (referenceNode = null) => {
+                    contentNodes.forEach((node) => {
+                        const nextNode = node.cloneNode(true);
+                        if (referenceNode) currentSlide.insertBefore(nextNode, referenceNode);
+                        else currentSlide.appendChild(nextNode);
+                    });
+                };
+
+                if (notesEl && !notesWereFirst) insertContent(notesEl);
+                else insertContent();
             }
 
             function updateAndPreview({ previewImmediately = false } = {}) {
                 if (!presentationDoc || slideElements.length === 0) return;
 
                 const currentSlide = slideElements[currentSlideIndex];
-                const notesValue = notesEditor.value.trim();
-                let notesEl = currentSlide.querySelector('aside.notes');
-
-                // Reconstruct the slide's innerHTML from the two text areas
-                if (notesValue) {
-                    if (!notesEl) {
-                        notesEl = presentationDoc.createElement('aside');
-                        notesEl.className = 'notes';
-                    }
-                    notesEl.innerHTML = `\n                    ${notesValue}\n                `;
-                    currentSlide.innerHTML = contentEditor.value + notesEl.outerHTML;
-                } else {
-                    currentSlide.innerHTML = contentEditor.value;
-                    if (notesEl) notesEl.remove();
-                }
-
+                applyEditorValuesToSlide(currentSlide);
                 updateHighlights();
+                setDirty(true);
 
-                // Recreating an iframe on every keystroke is expensive and resets
-                // animations/media. Keep editing responsive and refresh on a pause.
+                // Refresh the iframe after editing pauses, but restore the current
+                // fragment state so the preview does not jump backward.
                 clearTimeout(previewUpdateTimer);
+                const generation = ++previewGeneration;
                 const renderPreview = () => {
-                    previewFrame.srcdoc = buildPreviewDoc(currentSlide);
+                    if (generation !== previewGeneration || currentSlide !== slideElements[currentSlideIndex]) return;
+                    previewFrame.srcdoc = buildPreviewDoc(currentSlide, fragmentState.get(currentSlide) ?? -1);
                     previewUpdateTimer = null;
+                    setPreviewStatus('Loading preview…');
+                    scheduleSlideOverviewRefresh();
                 };
-                if (previewImmediately) {
-                    renderPreview();
-                } else {
-                    previewUpdateTimer = setTimeout(renderPreview, 250);
+                if (previewImmediately) renderPreview();
+                else previewUpdateTimer = setTimeout(renderPreview, 250);
+            }
+
+            function refreshCurrentPreview() {
+                const currentSlide = slideElements[currentSlideIndex];
+                if (!currentSlide) return;
+                clearTimeout(previewUpdateTimer);
+                previewUpdateTimer = null;
+                previewGeneration += 1;
+                setPreviewStatus('Loading preview…');
+                previewFrame.srcdoc = buildPreviewDoc(currentSlide, fragmentState.get(currentSlide) ?? -1);
+                scheduleSlideOverviewRefresh();
+            }
+
+            function presentationBlob() {
+                updateAndPreview({ previewImmediately: true });
+                const fullHtml = '<!DOCTYPE html>\n' + presentationDoc.documentElement.outerHTML;
+                return new Blob([fullHtml], { type: 'text/html' });
+            }
+
+            async function writeToFileHandle(handle, blob) {
+                if (handle.requestPermission) {
+                    const permission = await handle.requestPermission({ mode: 'readwrite' });
+                    if (permission !== 'granted') throw new Error('Write permission was not granted.');
                 }
+                const writable = await handle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+            }
+
+            async function saveAs() {
+                if (!presentationDoc) return;
+                const blob = presentationBlob();
+
+                if ('showSaveFilePicker' in window) {
+                    const handle = await window.showSaveFilePicker({
+                        id: 'reveal-editor-save-html',
+                        suggestedName: originalFileName,
+                        startIn: currentFileHandle || 'downloads',
+                        types: [{
+                            description: 'HTML Files',
+                            accept: { 'text/html': ['.html'] },
+                        }],
+                    });
+                    await writeToFileHandle(handle, blob);
+                    currentFileHandle = handle;
+                    originalFileName = handle.name || originalFileName;
+                    fileNameDisplay.textContent = originalFileName;
+                } else {
+                    const link = document.createElement('a');
+                    const objectUrl = URL.createObjectURL(blob);
+                    link.href = objectUrl;
+                    link.download = `edited_${originalFileName}`;
+                    link.click();
+                    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+                }
+
+                setDirty(false);
+                setPreviewStatus('Saved');
             }
 
             saveBtn.addEventListener('click', async () => {
                 if (!presentationDoc) return;
-
-                // Ensure the latest edits are captured before saving.
-                updateAndPreview({ previewImmediately: true });
-
-                const fullHtml = '<!DOCTYPE html>\n' + presentationDoc.documentElement.outerHTML;
-                const blob = new Blob([fullHtml], { type: 'text/html' });
-
-                // Use the modern File System Access API if available (Chrome, Edge)
-                if ('showSaveFilePicker' in window) {
-                    try {
-                        const handle = await window.showSaveFilePicker({
-                            suggestedName: originalFileName,
-                            startIn: currentFileHandle || 'downloads', // Start in the same directory if handle is available
-                            types: [{
-                                description: 'HTML Files',
-                                accept: { 'text/html': ['.html'] },
-                            }],
-                        });
-                        const writable = await handle.createWritable();
-                        await writable.write(blob);
-                        await writable.close();
-
-                        // After successful save, automatically load the new file into the editor.
-                        // This makes "Save As" workflows feel natural.
-                        currentFileHandle = handle;
-                        const file = await handle.getFile();
-                        loadFile(file);
-                    } catch (err) {
-                        // Handle cases where the user cancels the save dialog
-                        if (err.name !== 'AbortError') {
-                            console.error('Error saving file:', err);
-                        }
+                try {
+                    if (currentFileHandle) {
+                        await writeToFileHandle(currentFileHandle, presentationBlob());
+                        setDirty(false);
+                        setPreviewStatus('Saved');
+                    } else {
+                        await saveAs();
                     }
-                } else {
-                    // Fallback for other browsers (Firefox, Safari)
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `edited_${originalFileName}`;
-                    link.click();
-                    URL.revokeObjectURL(link.href);
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        setPreviewStatus(`Save failed: ${error.message}`, 'error');
+                        console.error('Error saving file:', error);
+                    }
                 }
             });
 
-            contentEditor.addEventListener('input', updateAndPreview);
-            notesEditor.addEventListener('input', updateAndPreview);
+            saveAsBtn.addEventListener('click', async () => {
+                try {
+                    await saveAs();
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        setPreviewStatus(`Save failed: ${error.message}`, 'error');
+                        console.error('Error saving file:', error);
+                    }
+                }
+            });
+
+            contentEditor.addEventListener('input', () => updateAndPreview());
+            notesEditor.addEventListener('input', () => updateAndPreview());
+            refreshPreviewButton.addEventListener('click', refreshCurrentPreview);
+            assetBaseUrlInput.addEventListener('change', refreshCurrentPreview);
             contentEditor.addEventListener('click', showSelectedElementInPreview);
             contentEditor.addEventListener('keyup', showSelectedElementInPreview);
             contentEditor.addEventListener('select', showSelectedElementInPreview);
@@ -923,13 +2371,33 @@
             closeWritingResultsBtn.addEventListener('click', () => writingResults.style.display = 'none');
             writingResultsHandle.addEventListener('pointerdown', startWritingResultsDrag);
             document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 's') {
+                    e.preventDefault();
+                    saveBtn.click();
+                    return;
+                }
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 's') {
+                    e.preventDefault();
+                    saveAsBtn.click();
+                    return;
+                }
                 if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
                     e.preventDefault();
                     toggleFindPanel();
                 }
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
+                    e.preventDefault();
+                    toggleEditors();
+                }
                 if (e.key === 'Escape' && findPanel.style.display === 'block') {
                     findPanel.style.display = 'none';
                 }
+            });
+
+            window.addEventListener('beforeunload', (event) => {
+                if (!isDirty) return;
+                event.preventDefault();
+                event.returnValue = '';
             });
 
             function updateHighlights() {

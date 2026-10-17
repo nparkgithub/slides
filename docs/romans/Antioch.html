@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antioch — A New Family</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/dracula.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --r-main-font-size: 28px; --r-heading-font: "Inter", "Segoe UI", Arial, sans-serif; --r-body-font: "Inter", "Segoe UI", Arial, sans-serif; --r-heading-text-transform: none; --r-link-color: #8be9fd; }
+    .reveal { font-family: var(--r-body-font); }
+    .reveal section { text-align: left; }
+    .reveal h1 { font-family: "Playfair Display", Georgia, serif; font-size: 2.45em; letter-spacing: .01em; }
+    .reveal h2 { font-size: 1.55em; }
+    .reveal h3 { margin-top: 0; color: #bd93f9; font-size: 1.05em; }
+    .center { text-align: center !important; }
+    .small { font-size: .74em; }
+    .muted { color: #b9b6c8; }
+    .highlight { color: #50fa7b; font-weight: 700; }
+    .accent { color: #ff79c6; font-weight: 700; }
+    .eyebrow { color: #8be9fd; text-transform: uppercase; letter-spacing: .18em; font-size: .52em; font-weight: 700; }
+    .title-rule { width: 115px; height: 4px; margin: 30px auto; border: 0; background: #ff79c6; }
+    .title-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 270px); gap: 42px; align-items: center; max-width: 950px; margin: 0 auto; text-align: left; }
+    .title-copy { text-align: center; }
+    .route-map { margin: 0; }
+    .route-map img { display: block; width: 100%; max-height: 530px; object-fit: contain; border: 3px solid rgba(248,248,242,.78); border-radius: 3px; background: #f8f8f2; }
+    .route-map figcaption { margin-top: 8px; color: #b9b6c8; font-size: .44em; text-align: center; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { min-height: 145px; padding: 19px; border: 1px solid rgba(139,233,253,.35); border-radius: 10px; background: rgba(255,255,255,.035); }
+    .card p { font-size: .68em; line-height: 1.38; }
+    .place { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center; }
+    .route { padding: 25px; border: 1px solid rgba(189,147,249,.45); border-radius: 12px; background: linear-gradient(145deg, rgba(189,147,249,.16), rgba(80,250,123,.05)); }
+    .route div { padding: 13px 0; border-bottom: 1px solid rgba(248,248,242,.18); font-size: .79em; }
+    .route div:last-child { border-bottom: 0; }
+    .route strong { display: inline-block; width: 105px; color: #8be9fd; }
+    .wall { display: grid; grid-template-columns: 1fr 72px 1fr; gap: 18px; align-items: stretch; text-align: center; }
+    .wall-side { padding: 22px 16px; border-radius: 10px; background: rgba(255,255,255,.045); }
+    .wall-side p { margin: 11px 0 0; font-size: .65em; line-height: 1.42; }
+    .wall-divider { display: flex; align-items: center; justify-content: center; color: #ff79c6; font-size: 2.3em; font-weight: 700; }
+    .statement { margin: 23px 0 0; padding: 15px 20px; border-left: 5px solid #bd93f9; background: rgba(0,0,0,.13); font-size: .75em; line-height: 1.4; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 22px; }
+    .step { padding: 15px; border-top: 3px solid #50fa7b; background: rgba(255,255,255,.04); font-size: .61em; line-height: 1.36; }
+    .step strong { display: block; margin-bottom: 8px; color: #ffb86c; font-size: 1.16em; }
+    .takeaway { max-width: 860px; margin: 0 auto; text-align: center; }
+    .takeaway p { font-size: .85em; line-height: 1.45; }
+    .source { margin-top: 28px; color: #8b879d; font-size: .43em !important; }
+    #voice-controls { position: fixed; bottom: 20px; left: 20px; z-index: 1000; }
+    #play-notes-button { padding: 9px 13px; border: 1px solid rgba(139,233,253,.65); border-radius: 7px; background: rgba(40,35,63,.94); color: #f8f8f2; font: 600 14px/1 "Inter", sans-serif; cursor: pointer; }
+    #play-notes-button.is-speaking { border-color: #ff79c6; color: #ff79c6; }
+    #presenter-navigation { position: fixed; right: 18px; bottom: 62px; z-index: 1000; display: grid; grid-template-columns: repeat(3, 42px); grid-template-areas: ". up ." "left . right" ". down ."; gap: 6px; }
+    #presenter-navigation button { width: 42px; height: 42px; padding: 0; border: 1px solid rgba(40,35,63,.55); border-radius: 50%; background: #50fa7b; color: #282a36; font: 700 22px/1 Arial, sans-serif; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
+    #presenter-navigation button:hover:not(:disabled), #presenter-navigation button:focus-visible:not(:disabled) { background: #8be9fd; outline: 2px solid #f8f8f2; outline-offset: 2px; }
+    #presenter-navigation button:disabled { background: #6272a4; color: #c3c6d6; cursor: not-allowed; box-shadow: none; }
+    #presenter-left { grid-area: left; } #presenter-right { grid-area: right; } #presenter-up { grid-area: up; } #presenter-down { grid-area: down; }
+  </style>
+</head>
+<body>
+  <div id="voice-controls"><button id="play-notes-button" type="button" aria-pressed="false" title="Play or stop speaker notes (P)">▶ Play notes <span aria-hidden="true">(P)</span></button></div>
+  <nav id="presenter-navigation" aria-label="Presentation navigation">
+    <button id="presenter-left" type="button" aria-label="Previous slide" title="Previous slide">←</button><button id="presenter-right" type="button" aria-label="Next slide" title="Next slide">→</button><button id="presenter-up" type="button" aria-label="Hide previous fragment" title="Hide previous content">↑</button><button id="presenter-down" type="button" aria-label="Show next fragment" title="Show next content">↓</button>
+  </nav>
+  <div class="reveal"><div class="slides">
+    <section class="center" data-background-gradient="linear-gradient(135deg, #19162a 0%, #28233f 55%, #1d1b2c 100%)">
+      <div class="title-layout"><div class="title-copy"><p class="eyebrow">A turning point in Acts</p><h1>Antioch</h1><hr class="title-rule">
+        <p style="font-size:1.1em">Where a breached wall became<br>a <span class="highlight">new family</span>.</p>
+        <p class="muted small">Barnabas, Saul, and the question: Who belongs?</p></div>
+        <figure class="route-map"><img src="assets/tarsus-to-antioch-map.png" alt="Map showing the journeys between Jerusalem, Antioch, and Tarsus, with Cyprus and the Mediterranean Sea."><figcaption>Tarsus to Antioch</figcaption></figure></div>
+      <aside class="notes">Antioch is more than the setting for a mission trip. It is where the early Jesus movement had to decide what the good news of the crucified and risen Messiah meant for the boundary between Jew and non-Jew. Barnabas came from Jerusalem to investigate this startling development; he had already proved himself a trustworthy advocate for Saul after Saul’s conversion. The question was not merely whether Gentiles could hear about Jesus. The question was whether they could belong fully, as Gentiles, in one shared family. The decisions made here shaped Saul’s later teaching and the future of the movement.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The setting</p><h2>A city made for the question</h2>
+      <div class="place"><div><p>Syrian Antioch stood on the <span class="highlight">Orontes River</span>, roughly 250 miles north of Jerusalem: a commercial crossroads between east and west, north and south.</p><p class="fragment">Its streets brought together traders, travelers, temples, cultures, and a substantial Jewish community.</p><p class="fragment">With about a quarter-million people, it was one of the great cities of the eastern Roman world—a genuine <span class="accent">melting pot</span>.</p></div><div class="route"><div><strong>Jerusalem</strong>scriptural roots and the first Jesus community</div><div><strong>Antioch</strong>crowded crossroads where identities met</div><div><strong>Wider world</strong>the nations to whom the Messiah’s lordship was announced</div></div></div>
+      <aside class="notes">The text calls this Syrian Antioch to distinguish it from other ancient cities named Antioch. Its location matters: it was an international city, not an isolated village. It was the kind of place where questions of food, worship, ethnicity, and public allegiance could not stay theoretical. The city’s diversity made it likely that Jewish and non-Jewish followers of Jesus would meet, worship, and eat together. If Israel’s Messiah truly was Lord of the world, Antioch forced the community to ask whether that lordship was good news for Jews only or for everyone.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">The tension</p><h2>The wall between Jew and non-Jew</h2>
+      <div class="wall"><div class="wall-side"><h3>Jewish identity</h3><p>Food practices<br>Sabbath<br>Circumcision<br>Refusal of idols</p></div><div class="wall-divider">│</div><div class="wall-side"><h3>Gentile society</h3><p>Temple festivals<br>Local gods<br>Public sacrifices<br>Imperial culture</p></div></div>
+      <p class="statement fragment">These practices were not minor preferences. They made visible a deep question of <span class="accent">“us” and “them”</span>—and Gentile refusal to worship city gods could be seen as a threat to public life.</p>
+      <aside class="notes">The wall was the division between Jew and Gentile, described as deeper than other ancient distinctions such as slave and free or male and female. Food, Sabbath, and circumcision were visible signs of Jewish covenant identity. In the surrounding pagan culture, Jews were even accused of atheism because they did not worship the local gods or join temple festivals. That accusation had a public meaning: people feared that refusal to honor the gods endangered the city. Jewish faithfulness, however, was rooted in belief in the one Creator God who could not be represented by an image. The issue at Antioch is therefore not casual social mixing; it concerns identity, worship, holiness, and hope.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">Barnabas sees grace</p><h2>A new family takes shape</h2>
+      <div class="two-col"><div><p>Believers from Cyprus and Cyrene announced Jesus to non-Jews. Many left pagan allegiances and confessed <span class="highlight">Jesus as Lord</span>.</p><p class="fragment">Barnabas saw transformed lives, worship, love, and mutual support—and recognized the work of God’s grace.</p></div><div class="card"><h3><em>Pistis</em></h3><p>More than private belief: trust, faithfulness, and <span class="accent">believing allegiance</span> to Jesus.</p><p class="small muted">The vital marker of belonging was loyalty to the Lord, not genealogy.</p></div></div>
+      <div class="steps"><div class="step"><strong>Barnabas</strong>He refuses an instinctively negative reaction and rejoices in grace.</div><div class="step fragment"><strong>Saul</strong>Barnabas brings Saul from Tarsus to help teach the growing community for a year.</div><div class="step fragment"><strong>“Christians”</strong>At Antioch, outsiders first call them <em>Christianoi</em>: Messiah people.</div></div>
+      <aside class="notes">Barnabas’s discernment is the turning point. He does not deny what he sees because it disrupts familiar boundaries. He recognizes that Gentiles’ changed lives and loyal allegiance to Jesus are evidence of divine grace. The key word is pistis. It includes belief, but also the personal commitment, faithfulness, and allegiance owed to Jesus as Lord. This community is radically countercultural: a household where established ethnic and social walls are being removed. Barnabas knows that this requires sustained teaching, so he brings Saul from Tarsus. Together they teach for a year, rooting the community in Israel’s Scriptures and in the meaning of Jesus’s death and resurrection. The name Christianoi likely began as an outsider nickname, but it reveals the group’s new public identity: Messiah people.</aside>
+    </section>
+
+    <section>
+      <p class="eyebrow">A test of belonging</p><h2>Famine relief, fellowship, and Titus</h2>
+      <div class="three-col"><div class="card"><h3>Agabus’s warning</h3><p>A famine was coming. Antioch did not turn inward or stockpile; it prepared help for struggling believers in Jerusalem.</p></div><div class="card fragment"><h3><em>Koinonia</em></h3><p>The gift showed more than kindness: one translocal family with shared responsibilities across miles and cultures.</p></div><div class="card fragment"><h3>Titus</h3><p>This uncircumcised Greek became the concrete test case: could a Gentile be a full family member without becoming Jewish?</p></div></div>
+      <p class="statement fragment">Barnabas and Saul held firm: Jesus’s new Passover brings <span class="highlight">freedom</span> for Jew and Gentile alike. Titus was not compelled to be circumcised; James, Peter, and John affirmed the mission.</p>
+      <aside class="notes">Agabus’s famine warning produced a remarkable response. Antioch sent money to Jerusalem, probably through Barnabas and Saul. This action displays koinonia: fellowship, partnership, and family-like mutual responsibility. It was a translocal community, not simply a local congregation. On the visit to Jerusalem, Titus—a Greek believer—became the decisive test. Some insisted he must be circumcised and live as a full Jewish proselyte in order to be fully accepted. Barnabas and Saul saw this as a theological challenge to the freedom won in Jesus’s death and resurrection. Their position was that Gentiles could share fully in the new family without surrendering their Gentile identity. The central leaders, James, Peter, and John—the “pillars”—recognized this. The issue remained complex and contested, but Titus was spared.</aside>
+    </section>
+
+    <section class="center" data-background-gradient="radial-gradient(circle at 50% 35%, #3b3159 0%, #201c31 58%, #15121f 100%)"><div class="takeaway"><p class="eyebrow">What Antioch teaches</p><h2>One Lord. One family. A new way of being human.</h2><p class="fragment">The community’s identity was shaped by <span class="highlight">Jesus</span>, formed by Scripture, energized by the Spirit, and practiced through shared life.</p><p class="fragment">Antioch anticipates Paul’s later conviction: in the Messiah, God creates a people that crosses old walls without abandoning the story of Israel.</p><p class="source">Based on <em>Antioch by N.T Wright</em>; see Acts 11:19–30 and Galatians 2:1–10.</p></div><aside class="notes">
+                    Close by gathering the central themes. Antioch shows what happens when the announcement that Jesus is Lord is believed in a diverse city. The result is not the erasure of every difference, but a new primary identity and a shared family life across former barriers. Scripture, the Messiah’s death and resurrection, the Spirit’s leading, and concrete care for one another all belong together. This provides essential background for Paul’s later letters, including Romans, where the relationship of Jew and Gentile in God’s one people remains central. Invite the group to consider which visible markers, fears, or social boundaries still make it difficult for Christians to recognize grace in people unlike themselves.
+                </aside></section>
+  </div></div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+  <script>
+    const revealReady = Reveal.initialize({ hash: true, slideNumber: 'c/t', controls: false, progress: true, center: true, transition: 'fade', plugins: [RevealNotes] });
+    const buttons = { left: document.getElementById('presenter-left'), right: document.getElementById('presenter-right'), up: document.getElementById('presenter-up'), down: document.getElementById('presenter-down') };
+    const updateNavigation = () => { const { h, f } = Reveal.getIndices(); const fragments = Reveal.getCurrentSlide().querySelectorAll('.fragment'); const index = Number.isInteger(f) ? f : -1; buttons.left.disabled = h === 0; buttons.right.disabled = h >= document.querySelectorAll('.slides > section').length - 1; buttons.up.disabled = index < 0; buttons.down.disabled = index >= fragments.length - 1; };
+    buttons.left.addEventListener('click', () => { const { h } = Reveal.getIndices(); if (!buttons.left.disabled) Reveal.slide(h - 1, 0, -1); });
+    buttons.right.addEventListener('click', () => { const { h } = Reveal.getIndices(); if (!buttons.right.disabled) Reveal.slide(h + 1, 0, -1); });
+    buttons.up.addEventListener('click', () => { if (!buttons.up.disabled) Reveal.prev(); });
+    buttons.down.addEventListener('click', () => { if (!buttons.down.disabled) Reveal.next(); });
+    revealReady.then(updateNavigation); Reveal.on('slidechanged', updateNavigation); Reveal.on('fragmentshown', updateNavigation); Reveal.on('fragmenthidden', updateNavigation);
+    const playButton = document.getElementById('play-notes-button');
+    if ('speechSynthesis' in window) { const reset = () => { playButton.classList.remove('is-speaking'); playButton.setAttribute('aria-pressed', 'false'); playButton.innerHTML = '▶ Play notes <span aria-hidden="true">(P)</span>'; }; const speak = () => { if (speechSynthesis.speaking) { speechSynthesis.cancel(); reset(); return; } const notes = Reveal.getSlideNotes(); if (!notes) return; const utterance = new SpeechSynthesisUtterance(notes.trim()); utterance.rate = 1; utterance.onend = reset; utterance.onerror = reset; playButton.classList.add('is-speaking'); playButton.setAttribute('aria-pressed', 'true'); playButton.innerHTML = '■ Stop notes <span aria-hidden="true">(P)</span>'; speechSynthesis.speak(utterance); }; playButton.addEventListener('click', speak); Reveal.addKeyBinding({ keyCode: 80, key: 'P', description: 'Play or stop speaker notes audio' }, speak); Reveal.on('slidechanged', () => { speechSynthesis.cancel(); reset(); }); } else { document.getElementById('voice-controls').hidden = true; }
+  </script>
+
+
+</body></html>
