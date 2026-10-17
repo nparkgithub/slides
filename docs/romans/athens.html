@@ -48,6 +48,14 @@
     .route-step { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid rgba(139,233,253,.28); border-radius: 10px; background: rgba(255,255,255,.04); font-size: .63em; line-height: 1.32; }
     .route-step span { display: flex; width: 42px; height: 42px; align-items: center; justify-content: center; border-radius: 50%; background: #28233f; color: #50fa7b; border: 2px solid #50fa7b; font-weight: 700; }
     .route-step strong { display: block; color: #8be9fd; margin-bottom: 3px; }
+    .places-layout { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: center; }
+    .places-map { width: 100%; border-radius: 14px; border: 1px solid rgba(255,184,108,.45); box-shadow: 0 16px 35px rgba(0,0,0,.2); }
+    .place-key { display: grid; gap: 9px; }
+    .place-item { padding: 10px 13px; border-left: 4px solid #8be9fd; background: rgba(255,255,255,.045); font-size: .58em; line-height: 1.3; }
+    .place-item:nth-child(2) { border-left-color: #ffb86c; }
+    .place-item:nth-child(3) { border-left-color: #50fa7b; }
+    .place-item:nth-child(4) { border-left-color: #ff79c6; }
+    .place-item strong { display: block; margin-bottom: 3px; color: #8be9fd; font-size: 1.08em; }
     .philosophy { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .school { padding: 18px; border-radius: 12px; background: rgba(255,255,255,.045); border: 1px solid rgba(139,233,253,.32); }
     .school.epicurean { border-top: 5px solid #ffb86c; }
@@ -106,7 +114,7 @@
     #presenter-navigation button:hover:not(:disabled), #presenter-navigation button:focus-visible:not(:disabled) { background: #8be9fd; outline: 2px solid #f8f8f2; outline-offset: 2px; }
     #presenter-navigation button:disabled { background: #6272a4; color: #c3c6d6; cursor: not-allowed; box-shadow: none; }
     #presenter-left { grid-area: left; } #presenter-right { grid-area: right; } #presenter-up { grid-area: up; } #presenter-down { grid-area: down; }
-    @media (max-width: 900px) { .title-layout, .city-grid, .route-wrap, .resurrection { grid-template-columns: 1fr; } .title-copy { order: 1; } .hero-art { max-height: 280px; object-fit: cover; } }
+    @media (max-width: 900px) { .title-layout, .city-grid, .route-wrap, .places-layout, .resurrection { grid-template-columns: 1fr; } .title-copy { order: 1; } .hero-art { max-height: 280px; object-fit: cover; } }
     @media (max-width: 760px) { .two-col, .three-col, .four-col, .philosophy, .contrast-cards, .takeaway .pillars { grid-template-columns: 1fr 1fr; } .method { grid-template-columns: repeat(3, 1fr); } .argument-grid { grid-template-columns: 1fr 1fr; } .creator-layout { grid-template-columns: 1fr; } .creator-divider { display: none; } }
     @media (max-width: 520px) { .two-col, .three-col, .four-col, .philosophy, .contrast-cards, .takeaway .pillars, .method, .argument-grid, .people-row { grid-template-columns: 1fr; } .stat-row { grid-template-columns: 1fr; } #voice-controls { left: 8px; bottom: 8px; } #presenter-navigation { right: 8px; bottom: 50px; transform: scale(.82); transform-origin: right bottom; } }
   </style>
@@ -130,10 +138,10 @@
       <aside class="notes">Athens was located in Attica on mainland Greece, near the Aegean Sea, with its harbor at Piraeus connecting it to the wider Mediterranean. In Paul’s time it was a Greek city under Roman imperial rule, not an independent modern nation-state. Even under Rome, it remained one of the most respected intellectual and educational centers. The Acropolis and Parthenon represented the city’s religious and artistic identity, while the Agora was a place for commerce, public discussion, and teachers. Wright’s important emphasis is that Paul is addressing people with serious beliefs and sophisticated accounts of the world, not a population that is simply secular or uninformed.</aside>
     </section>
 
-    <section><p class="eyebrow">Places and people</p><h2>The world behind Paul’s conversation</h2>
-      <div class="four-col"><div class="card"><h3>Acropolis</h3><p>The high center of Athens, filled with major temples.</p></div><div class="card fragment"><h3>Parthenon</h3><p>Temple dedicated to Athena, the city’s patron goddess.</p></div><div class="card fragment"><h3>Agora</h3><p>Marketplace and public center for meeting, teaching, and debate.</p></div><div class="card fragment"><h3>Areopagus</h3><p>Rocky hill and respected council linked with authority and judgment.</p></div></div>
+    <section><p class="eyebrow">Places and people</p><h2>Athens in one view</h2>
+      <div class="places-layout"><img class="places-map" src="assets/athens-places-map.svg" alt="Schematic map of central Athens locating the Agora, Areopagus, Acropolis, and Parthenon"><div class="place-key"><div class="place-item"><strong>Acropolis</strong>High religious center with major temples.</div><div class="place-item fragment"><strong>Parthenon</strong>Temple dedicated to Athena, the city’s patron goddess.</div><div class="place-item fragment"><strong>Agora</strong>Marketplace and public center for meeting, teaching, and debate.</div><div class="place-item fragment"><strong>Areopagus</strong>Rocky hill and respected council linked with authority and judgment.</div></div></div>
       <div class="people-row"><div class="person"><strong>Socrates · Plato · Aristotle</strong> The remembered teachers of questions about truth, justice, virtue, knowledge, and reality.</div><div class="person fragment"><strong>Epicurus · Zeno</strong> Later schools offering rival accounts of the gods, nature, death, and the good life.</div></div>
-      <aside class="notes">The Acropolis was the high center of Athens and contained important temples, especially the Parthenon, dedicated to Athena. The Agora was more than a market: it was a public center where citizens met and teachers encountered audiences. The Areopagus referred both to a rocky hill and to the council associated with it, which retained civic and intellectual prestige in the Roman period. Socrates, Plato, and Aristotle lived centuries before Paul, but their traditions shaped how Athens understood knowledge, virtue, and reality. Epicureanism and Stoicism were later movements that also became important in the city.</aside>
+      <aside class="notes">This schematic map locates the four places that frame Paul’s conversation. The Acropolis was the high center of Athens and contained important temples, especially the Parthenon, dedicated to Athena. The Agora was more than a market: it was a public center where citizens met and teachers encountered audiences. The Areopagus referred both to a rocky hill and to the council associated with it, which retained civic and intellectual prestige in the Roman period. The map is illustrative rather than to scale. Socrates, Plato, and Aristotle lived centuries before Paul, but their traditions shaped how Athens understood knowledge, virtue, and reality. Epicureanism and Stoicism were later movements that also became important in the city.</aside>
     </section>
 
     <section><p class="eyebrow">Why Athens? Acts 17:14–15</p><h2>Paul was sent there for safety</h2>

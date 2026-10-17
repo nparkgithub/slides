@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Schematic map of central Athens</title>
+  <desc id="desc">A simplified map locating the Agora, Areopagus, Acropolis, and Parthenon in central Athens.</desc>
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7de"/>
+      <stop offset="1" stop-color="#f0dfad"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#5f4e2b" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="560" rx="28" fill="url(#ground)"/>
+  <path d="M0 420 C180 376 250 452 390 420 C550 382 690 454 1000 390 L1000 560 L0 560 Z" fill="#d8ecdf"/>
+  <path d="M0 420 C180 376 250 452 390 420 C550 382 690 454 1000 390" fill="none" stroke="#83b9aa" stroke-width="5"/>
+  <g fill="none" stroke="#d3bd80" stroke-width="10" stroke-linecap="round" opacity=".7">
+    <path d="M112 118 L296 164 L450 118 L640 168 L838 110"/>
+    <path d="M84 292 L286 260 L482 322 L700 270 L900 322"/>
+    <path d="M170 80 L220 400"/>
+    <path d="M392 72 L420 420"/>
+    <path d="M760 72 L700 420"/>
+  </g>
+  <g fill="#e8d7a8" stroke="#cdb679" stroke-width="2" opacity=".72">
+    <path d="M90 166 L246 198 L220 244 L72 220 Z"/>
+    <path d="M278 116 L420 92 L448 142 L296 170 Z"/>
+    <path d="M514 112 L682 142 L650 190 L494 160 Z"/>
+    <path d="M748 160 L914 132 L930 210 L766 228 Z"/>
+    <path d="M90 300 L246 278 L270 334 L102 356 Z"/>
+    <path d="M744 286 L908 260 L936 330 L770 354 Z"/>
+  </g>
+  <path d="M392 208 C458 198 504 214 558 248 C604 276 648 278 714 252" fill="none" stroke="#8d4566" stroke-width="7" stroke-dasharray="12 13" opacity=".72"/>
+  <path d="M424 224 C492 290 534 310 620 296" fill="none" stroke="#8d4566" stroke-width="5" stroke-dasharray="8 12" opacity=".55"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="366" cy="188" rx="116" ry="63" fill="#c8d9b9" stroke="#6d8b68" stroke-width="5"/>
+    <path d="M504 300 L610 228 L728 256 L694 356 L558 376 Z" fill="#bda56d" stroke="#806d42" stroke-width="6"/>
+    <path d="M566 274 L645 244 L694 266 L658 326 L588 336 Z" fill="#927a4e" stroke="#6f5b39" stroke-width="4"/>
+    <rect x="605" y="270" width="80" height="38" rx="5" fill="#f7edcf" stroke="#6f5b39" stroke-width="4"/>
+    <path d="M617 270 L625 250 L633 270 M641 270 L649 250 L657 270 M665 270 L673 250 L681 270" fill="none" stroke="#6f5b39" stroke-width="5"/>
+    <path d="M468 300 L510 260 L550 286 L532 332 L488 338 Z" fill="#a8b5bb" stroke="#53636c" stroke-width="5"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" fill="#28233f">
+    <text x="54" y="52" font-size="19" font-weight="700" letter-spacing="2" fill="#8d4566">CENTRAL ATHENS</text>
+    <text x="54" y="78" font-size="16" fill="#6d6659">Schematic map • not to scale</text>
+    <text x="294" y="184" font-size="24" font-weight="700">Agora</text>
+    <text x="282" y="214" font-size="15" fill="#6d6659">market and public debate</text>
+    <text x="438" y="292" font-size="22" font-weight="700">Areopagus</text>
+    <text x="438" y="316" font-size="15" fill="#6d6659">hill and council</text>
+    <text x="580" y="394" font-size="25" font-weight="700">Acropolis</text>
+    <text x="592" y="425" font-size="15" fill="#6d6659">high religious center</text>
+    <text x="603" y="296" font-size="16" font-weight="700" fill="#28233f">Parthenon</text>
+    <text x="862" y="82" font-size="18" font-weight="700">N</text>
+    <path d="M870 96 L870 144" stroke="#28233f" stroke-width="4"/>
+    <path d="M870 96 L860 111 L880 111 Z" fill="#28233f"/>
+    <text x="850" y="476" font-size="14" fill="#6d6659">Athens • Attica</text>
+  </g>
+  <g fill="#ff79c6" stroke="#f7edcf" stroke-width="5">
+    <circle cx="260" cy="188" r="12"/>
+    <circle cx="486" cy="338" r="12"/>
+    <circle cx="620" cy="310" r="12"/>
+    <circle cx="716" cy="266" r="9"/>
+  </g>
+</svg>
